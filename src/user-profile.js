@@ -71,7 +71,7 @@ export default function UserProfile() {
     <div className="grid grid-cols-2 gap-5">
       <div
         id="infoFeed"
-        className="font-serif  col-span-1 border-r-slate-300 border-r-2 ml-4 p-4"
+        className="font-serif  col-span-1 border-r-2 ml-4 p-4"
       >
         <p className="text-3xl font-semibold">{user.name}</p>
         <p>
