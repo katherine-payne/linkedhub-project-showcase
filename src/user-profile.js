@@ -1,3 +1,5 @@
+import ProjectCard from "./project-card";
+import ProjectCardSpotlight from "./project-card-spotlight";
 import UserProfileHeading from "./user-profile-heading";
 import UserProfileLabeledEntry from "./user-profile-labeled-entry";
 
@@ -51,6 +53,11 @@ export default function UserProfile() {
     ],
   };
 
+  const projects = [{name: "Cool Project", hearts: 100}, {name: "My First Project", hearts: 1}];
+  const projectDescription = "This is my project!\nYou should check it out.\nIt's awesome!\n";
+  const languageTags = ["HTML", "CSS", "JavaScript", "Python"];
+  const topicTags = ["My Stuff", "Cool Projects", "Design", "Startup"];
+
   function formatDescription (description) {
     if (description.includes("\n")) {
       return (
@@ -68,7 +75,7 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-5">
+    <div className="grid grid-cols-3 gap-5">
       <div
         id="infoFeed"
         className="font-serif  col-span-1 border-r-2 ml-4 p-4"
@@ -115,9 +122,12 @@ export default function UserProfile() {
         <p className="mb-4">{user.skills.join(", ")}</p>
       </div>
 
-      <div id="projectFeed" className="col-span-1">
-        {[...Array(10)].map((x, i) => (
-          <p>Project</p>
+      <div id="projectFeed" className="col-span-2">
+        {projects.map((p, i) => (
+          <>
+            <ProjectCardSpotlight name={p.name} hearts={p.hearts} languageTags={languageTags} topicTags={topicTags} description={projectDescription}/>
+            <ProjectCard name={p.name} hearts={p.hearts} languageTags={languageTags} topicTags={topicTags} description={projectDescription}/>
+          </>
         ))}
       </div>
     </div>
