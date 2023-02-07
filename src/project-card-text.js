@@ -1,5 +1,6 @@
 import LanguageTag from "./language-tag";
 import TopicTag from "./topic-tag";
+import formatDescription from "./Utils";
 
 export default function ProjectCardText({name, languageTags, topicTags, description}) {
     return (
@@ -15,6 +16,6 @@ export default function ProjectCardText({name, languageTags, topicTags, descript
                     <TopicTag text={x}/>
                 ))}
             </div>
-            <p className="whitespace-pre-wrap pt-2">{description}</p>
+            <p className="whitespace-pre-wrap pt-2">{formatDescription(description)}</p>
         </div>);
   }

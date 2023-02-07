@@ -51,7 +51,7 @@ export default function examplesFrank() {
         name: "Cool Project",
         hearts: 100,
         description:
-          "This is my project!\nYou should check it out.\nIt's awesome!\n",
+          "This is my project!\nYou should check it out.\nIt's awesome!",
         languages: ["HTML", "CSS", "JavaScript", "Python"],
         tags: ["My Stuff", "Cool Projects", "Design", "Startup"],
       },
@@ -59,7 +59,7 @@ export default function examplesFrank() {
         name: "My First Project",
         hearts: 100,
         description:
-          "This is my project!\nYou should check it out.\nIt's awesome!\n",
+          "This is my project!\nYou should check it out.\nIt's awesome!",
         languages: ["HTML", "CSS", "JavaScript", "Python"],
         tags: ["My Stuff", "Cool Projects", "Design", "Startup"],
       },
