@@ -1,10 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
+import UserProfile from './user-profile';
+import Toolbar from './toolbar';
 
 export default function App() {
-  return (
-    <h1 className="text-2xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+    return (
+        <div>
+            <Toolbar />
+            <UserProfile />
+        </div>
+    )
 }
