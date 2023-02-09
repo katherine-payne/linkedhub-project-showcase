@@ -1,9 +1,8 @@
-import examplesFrank from "./examples";
-import ProjectCard from "./project-card";
-import ProjectCardSpotlight from "./project-card-spotlight";
+import { examplesFrank } from "./examples";
 import UserProfileHeading from "./user-profile-heading";
 import UserProfileLabeledEntry from "./user-profile-labeled-entry";
 import formatDescription from "./Utils";
+import ProjectFeed from "./ProjectFeed";
 
 export default function UserProfile() {
   const user = examplesFrank();
@@ -62,28 +61,7 @@ export default function UserProfile() {
         <p className="mb-4">{user.skills.join(", ")}</p>
       </div>
 
-      <div id="projectFeed" className="flex justify-center">
-        <div className="max-w-none md:max-w-xl">
-          {user.projects.map((p, i) => (
-            <>
-              <ProjectCardSpotlight
-                name={p.name}
-                hearts={p.hearts}
-                languageTags={p.languages}
-                topicTags={p.tags}
-                description={p.description}
-              />
-              <ProjectCard
-                name={p.name}
-                hearts={p.hearts}
-                languageTags={p.languages}
-                topicTags={p.tags}
-                description={p.description}
-              />
-            </>
-          ))}
-        </div>
-      </div>
+      <ProjectFeed projects={examplesFrank}/>
     </div>
   );
 }
