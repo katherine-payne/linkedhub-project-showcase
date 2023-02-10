@@ -1,28 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import searchFor from "./GithubApiSearch";
 
-export default function SearchFeed() {
-  const [result, setResult] = useState(["test"]);
+export default function SearchFeed({ query }) {
+  const [result, setResult] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const r = await searchFor(query);
+      setResult(r);
+    }
+    fetchData();
+  }, [query]);
 
   return (
     <>
-      <button
-        onClick={async () => {
-          const r = await searchFor("test");
-          setResult(r);
-        }}
-      >
-        Click Me
-      </button>
-
       {result.map((r) => {
         return (
-          <div>
-            <p className="font-bold font-mono text-lg">{r.name}</p>
-            <ul className="list-disc ml-5">
-              <li>{r.username}</li>
-              <li>{r.language}</li>
-            </ul>
+          <div className="mb-4 bg-slate-50 p-6 outline-dotted outline-sky-600 mx-2 rounded-lg">
+            <p><span className="font-bold font-mono text-lg">
+              {r.name}</span> <span> by {r.username}</span>
+            </p>
+            <p>{r.language}</p>
           </div>
         );
       })}
