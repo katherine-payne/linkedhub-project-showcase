@@ -6,7 +6,14 @@ export default function App() {
     return (
         <div>
             <Toolbar />
+<<<<<<< Updated upstream
             <UserProfile />
+=======
+
+            <div>
+            <SearchFeed query={"tuiter-react-web-app"} />
+            </div>
+>>>>>>> Stashed changes
         </div>
     )
 }
