@@ -10,7 +10,10 @@ export default function UserProfile() {
 
   return (
     <div className="flex md:flex-row flex-col justify-center">
-      <div id="infoFeed" className="font-serif max-w-none md:max-w-xl border-r-2 ml-4 p-4">
+      <div
+        id="infoFeed"
+        className="font-serif max-w-none md:max-w-xl border-r-2 ml-4 p-4"
+      >
         <p className="text-3xl font-semibold">{user.name}</p>
         <p>
           <a href={"mailto:" + user.contact_info.email}>
