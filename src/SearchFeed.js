@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import searchFor from "./GithubApiSearch";
 import SearchResult from "./SearchResult";
 
-export default function SearchFeed({ query }) {
+export default function SearchFeed() {
+  let { query } = useParams();
   const [result, setResult] = useState([]);
 
   useEffect(() => {
