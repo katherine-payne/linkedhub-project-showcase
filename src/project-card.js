@@ -10,7 +10,7 @@ export default function ProjectCard({
   description,
 }) {
   return (
-    <div className="flex content-center border border-gray-30 p-2 m-4 rounded-lg">
+    <div className="flex content-center bg-white border border-gray-30 p-2 m-4 rounded-lg">
       <ProjectCardText
         className="w-3/5"
         name={name}
