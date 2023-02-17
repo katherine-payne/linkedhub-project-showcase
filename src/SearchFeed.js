@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import searchFor from "./GithubApiSearch";
+import SearchResult from "./SearchResult";
 
 export default function SearchFeed({ query }) {
   const [result, setResult] = useState([]);
@@ -13,17 +14,17 @@ export default function SearchFeed({ query }) {
   }, [query]);
 
   return (
-    <>
+    <div className="max-w-none md:max-w-2xl m-auto">
       {result.map((r) => {
         return (
-          <div className="mb-4 bg-slate-50 p-6 outline-dotted outline-sky-600 mx-2 rounded-lg">
-            <p><span className="font-bold font-mono text-lg">
-              {r.name}</span> <span> by {r.username}</span>
-            </p>
-            <p>{r.language}</p>
-          </div>
+          <SearchResult
+            repoName={r.name}
+            username={r.username}
+            language={r.language}
+            key={r.key}
+          />
         );
       })}
-    </>
+    </div>
   );
 }
