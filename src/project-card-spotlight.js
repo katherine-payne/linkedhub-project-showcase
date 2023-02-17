@@ -18,6 +18,7 @@ export default function ProjectCardSpotlight({
       <div className="flex justify-start content-center border border-t-0 border-gray-30 p-2 rounded-b-lg">
         <ProjectCardText
           name={name}
+          username={""}
           languageTags={languageTags}
           topicTags={topicTags}
           description={description}

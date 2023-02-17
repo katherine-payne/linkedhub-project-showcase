@@ -1,12 +1,12 @@
 import "./App.css";
-import UserProfile from "./user-profile";
 import Toolbar from "./toolbar";
+import SearchFeed from "./SearchFeed";
 
 export default function App() {
   return (
-    <div>
+    <div className="bg-slate-50">
       <Toolbar />
-      <UserProfile />
+      <SearchFeed query={"tuiter-react-web-app"} />
     </div>
   );
 }

@@ -9,7 +9,7 @@ import {
 export default function Toolbar() {
   return (
     <>
-      <ul className="flex items-center justify-between mx-2 mt-2 mb-4 p-4 border-b-2">
+      <ul className="flex items-center justify-between mt-2 mb-4 p-4 border-b-2 bg-white">
         <li className="flex justify-between items-center">
           <button className="group transition-all flex items-center justify-center text-sm text-gray-500 hover:text-gray-700 border border-gray-30 hover:shadow hover:bg-gray-100 rounded-lg mr-4 p-2">
             <span className=" transition-all text-gray-500 group-hover:text-gray-700 p-2">
@@ -18,10 +18,10 @@ export default function Toolbar() {
           </button>
 
           <label
-            for="search"
+            htmlFor="search"
             className="transition-all group flex items-center justify-center text-sm text-gray-500 hover:text-gray-700 border border-gray-30 rounded-lg mr-8 p-2 cursor-text hover:bg-gray-100 hover:shadow"
           >
-            <label for="search" className="p-2 cursor-text ">
+            <label htmlFor="search" className="p-2 cursor-text ">
               <FaSearch />
             </label>
             <input

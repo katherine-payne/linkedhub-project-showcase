@@ -14,6 +14,7 @@ export default function ProjectCard({
       <ProjectCardText
         className="w-3/5"
         name={name}
+        username={""}
         languageTags={languageTags}
         topicTags={topicTags}
         description={description}
