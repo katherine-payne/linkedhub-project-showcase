@@ -1,14 +1,22 @@
-import './App.css';
-import UserProfile from './user-profile';
-import MainFeed from './MainFeed';
-import Toolbar from './toolbar';
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router";
+import "./App.css";
+import MainFeed from "./MainFeed";
+import Toolbar from "./toolbar";
+import SearchFeed from "./SearchFeed";
+import UserProfile from "./user-profile";
 
 export default function App() {
-    return (
-        <div>
-            <Toolbar />
-            <MainFeed /> {/* We should get navigation set up; I think we need to wait for Node/Express/Next.js before we do that */}
-            {/* <UserProfile /> */}
-        </div>
-    )
+  return (
+    <div className="bg-slate-50">
+      <BrowserRouter>
+        <Toolbar />
+        <Routes>
+          <Route index element={<MainFeed />} />
+          <Route path="/search/:query" element={<SearchFeed />} />
+          <Route path="/profile" element={<UserProfile />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
