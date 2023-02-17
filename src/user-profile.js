@@ -5,7 +5,7 @@ import formatDescription from "./Utils";
 import ProjectFeed from "./ProjectFeed";
 
 export default function UserProfile() {
-  const user = examplesFrank();
+  const user = examplesFrank;
 
   return (
     <div className="flex md:flex-row flex-col justify-center">
@@ -64,7 +64,7 @@ export default function UserProfile() {
         <p className="mb-4">{user.skills.join(", ")}</p>
       </div>
 
-      <ProjectFeed projects={examplesFrank}/>
+      <ProjectFeed projects={examplesFrank.projects}/>
     </div>
   );
 }

@@ -23,28 +23,13 @@ export default function Toolbar() {
           </button>
         </Link>
 
-<<<<<<< HEAD
-          <label
-            htmlFor="search"
-            className="transition-all group flex items-center justify-center text-sm text-gray-500 hover:text-gray-700 border border-gray-30 rounded-lg mr-8 p-2 cursor-text hover:bg-gray-100 hover:shadow"
-          >
-            <label htmlFor="search" className="p-2 cursor-text ">
-              <FaSearch />
-            </label>
-            <input
-              type="search"
-              id="search"
-              className=" transition-all block w-full p-2 text-sm text-gray-900 bg-opacity-0 border rounded-lg outline-none border-none group-hover:bg-gray-100"
-              placeholder="Search"
-              required
-            />
-          </label>
-        </li>
-=======
         <label
           htmlFor="search"
           className="transition-all group flex items-center justify-center text-sm text-gray-500 hover:text-gray-700 border border-gray-30 rounded-lg mr-2 xs:mr-4 sm:mr-8 p-2 cursor-text hover:bg-gray-100 hover:shadow"
         >
+          <label htmlFor="search" className="p-2 cursor-text ">
+            <FaSearch />
+          </label>
           <input
             type="search"
             id="search"
@@ -62,7 +47,6 @@ export default function Toolbar() {
           />
         </label>
       </li>
->>>>>>> main
 
       <li className="flex items-center justify-center">
         <button className="group transition-all flex items-center justify-center text-sm text-gray-500 hover:text-gray-700 border border-gray-30 hover:shadow hover:bg-gray-100 rounded-lg mr-2 xs:mr-4 sm:mr-8 p-2">
