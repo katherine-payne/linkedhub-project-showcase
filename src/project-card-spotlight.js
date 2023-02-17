@@ -10,7 +10,7 @@ export default function ProjectCardSpotlight({
   description,
 }) {
   return (
-    <div className="m-4">
+    <div className="bg-white m-4">
       <img
         src="https://picsum.photos/600"
         className="w-full h-80 rounded-t-lg"
