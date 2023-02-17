@@ -27,6 +27,9 @@ export default function Toolbar() {
           htmlFor="search"
           className="transition-all group flex items-center justify-center text-sm text-gray-500 hover:text-gray-700 border border-gray-30 rounded-lg mr-2 xs:mr-4 sm:mr-8 p-2 cursor-text hover:bg-gray-100 hover:shadow"
         >
+          <label htmlFor="search" className="p-2 cursor-text ">
+            <FaSearch />
+          </label>
           <input
             type="search"
             id="search"
