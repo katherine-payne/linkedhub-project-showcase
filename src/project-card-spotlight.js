@@ -15,7 +15,7 @@ export default function ProjectCardSpotlight({
         src="https://picsum.photos/600"
         className="w-full h-80 rounded-t-lg"
       ></img>
-      <div className="flex justify-start content-center border border-t-0 border-gray-30 p-2 rounded-b-lg">
+      <div className="flex justify-start content-center shadow-md border border-t-0 border-gray-30 p-2 rounded-b-lg">
         <ProjectCardText
           name={name}
           username={""}
