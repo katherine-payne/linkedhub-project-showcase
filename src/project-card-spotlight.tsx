@@ -1,7 +1,7 @@
 import React from "react";
 import { FaHeart } from "react-icons/fa";
 
-import ProjectCardText from "./project-card-text.js";
+import ProjectCardText from "./project-card-text";
 
 type Props = {
   name: string,
