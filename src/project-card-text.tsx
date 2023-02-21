@@ -7,11 +7,11 @@ import formatDescription from "./Utils";
 type Props = {
   name: string;
   username: string;
-  languageTags: [string];
-  topicTags: [string];
+  languageTags: Array<string> | [];
+  topicTags: Array<string> | [];
   description: string;
-  nameStyle: string | null;
-  usernameStyle: string | null;
+  nameStyle: string;
+  usernameStyle: string;
 };
 
 export default function ProjectCardText({
@@ -20,8 +20,8 @@ export default function ProjectCardText({
   languageTags,
   topicTags,
   description,
-  nameStyle,
-  usernameStyle,
+  nameStyle = "",
+  usernameStyle = "",
 }: Props) {
   return (
     <div>
@@ -35,7 +35,7 @@ export default function ProjectCardText({
         ))}
       </div>
       <div className="flex flex-wrap">
-        {topicTags.map((x, i) => (
+        {(topicTags).map((x, i) => (
           <TopicTag text={x} key={i} />
         ))}
       </div>

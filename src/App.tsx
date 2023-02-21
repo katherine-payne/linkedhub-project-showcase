@@ -5,6 +5,7 @@ import MainFeed from "./MainFeed";
 import Toolbar from "./toolbar";
 import SearchFeed from "./SearchFeed";
 import UserProfile from "./user-profile";
+import React from "react";
 
 export default function App() {
   return (

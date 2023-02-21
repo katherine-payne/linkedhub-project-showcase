@@ -1,7 +1,15 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import searchFor from "./GithubApiSearch";
 import SearchResult from "./SearchResult";
+
+type SearchResult = {
+  name: string,
+  username: string,
+  language: string,
+  key: number
+}
 
 export default function SearchFeed() {
   let { query } = useParams();
@@ -9,20 +17,22 @@ export default function SearchFeed() {
 
   useEffect(() => {
     async function fetchData() {
-      const r = await searchFor(query);
-      setResult(r);
+      if (query) {
+        const r = await searchFor(query);
+        setResult(r);
+      }
     }
     fetchData();
   }, [query]);
 
   return (
     <div className="max-w-none md:max-w-2xl m-auto">
-      {result.map((r) => {
+      {result.map((r: SearchResult) => {
         return (
           <SearchResult
             repoName={r.name}
             username={r.username}
-            language={r.language}
+            language={[r.language]}
             key={r.key}
           />
         );

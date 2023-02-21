@@ -6,8 +6,8 @@ import ProjectCardText from "./project-card-text.js";
 type Props = {
   name: string,
   hearts: number,
-  languageTags: [string],
-  topicTags: [string],
+  languageTags: Array<string>,
+  topicTags: Array<string>,
   description: string
 }
 

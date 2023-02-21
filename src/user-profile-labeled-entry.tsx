@@ -2,7 +2,7 @@ import React from "react";
 
 type Props = {
   label: String,
-  entry: String
+  entry: String | number
 }
 
 export default function UserProfileLabeledEntry({ label, entry }: Props) {
