@@ -1,6 +1,18 @@
+import React from "react";
+
 import LanguageTag from "./language-tag";
 import TopicTag from "./topic-tag";
 import formatDescription from "./Utils";
+
+type Props = {
+  name: string;
+  username: string;
+  languageTags: [string];
+  topicTags: [string];
+  description: string;
+  nameStyle: string;
+  usernameStyle: string;
+};
 
 export default function ProjectCardText({
   name,
@@ -10,7 +22,7 @@ export default function ProjectCardText({
   description,
   nameStyle = "",
   usernameStyle = "",
-}) {
+}: Props) {
   return (
     <div>
       <p className={`text-2xl font-bold ${nameStyle}`}>{name}</p>

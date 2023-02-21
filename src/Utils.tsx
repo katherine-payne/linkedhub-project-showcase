@@ -1,4 +1,6 @@
-export default function formatDescription(description) {
+import React from "react";
+
+export default function formatDescription(description: string) {
   if (description.includes("\n")) {
     return (
       <ul className="list-disc ml-6">
