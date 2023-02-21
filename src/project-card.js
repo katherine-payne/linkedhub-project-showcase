@@ -22,7 +22,7 @@ export default function ProjectCard({
       <div className="w-2/5 m-2 ml-auto">
         <img
           src="https://picsum.photos/600"
-          className="w-full h-36 rounded-lg"
+          className="w-full h-36 rounded-lg object-cover"
         ></img>
         <div className="flex text-pink-500 text-xl mt-2">
           <FaHeart className="mt-1 mr-1 ml-auto" />
