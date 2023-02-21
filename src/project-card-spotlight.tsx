@@ -1,6 +1,15 @@
+import React from "react";
 import { FaHeart } from "react-icons/fa";
 
 import ProjectCardText from "./project-card-text.js";
+
+type Props = {
+  name: string,
+  hearts: number,
+  languageTags: [string],
+  topicTags: [string],
+  description: string
+}
 
 export default function ProjectCardSpotlight({
   name,
@@ -8,7 +17,7 @@ export default function ProjectCardSpotlight({
   languageTags,
   topicTags,
   description,
-}) {
+}: Props) {
   return (
     <div className="bg-white m-4">
       <img
@@ -21,8 +30,7 @@ export default function ProjectCardSpotlight({
           username={""}
           languageTags={languageTags}
           topicTags={topicTags}
-          description={description}
-        />
+          description={description} nameStyle={""} usernameStyle={""}        />
         <div className="flex text-pink-500 text-xl ml-auto">
           <FaHeart className="mt-1 mr-1" />
           {hearts}

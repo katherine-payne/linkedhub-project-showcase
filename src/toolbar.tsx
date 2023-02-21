@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import {
   FaSearch,
@@ -40,7 +41,11 @@ export default function Toolbar() {
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 navigate(`/search/${searchQuery}`);
-                e.target.blur();
+
+                // remove focus from search bar
+                if (document.activeElement instanceof HTMLElement) {
+                  document.activeElement.blur();
+                }
               }
             }}
             required

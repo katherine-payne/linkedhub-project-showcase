@@ -10,8 +10,8 @@ type Props = {
   languageTags: [string];
   topicTags: [string];
   description: string;
-  nameStyle: string;
-  usernameStyle: string;
+  nameStyle: string | null;
+  usernameStyle: string | null;
 };
 
 export default function ProjectCardText({
@@ -20,13 +20,13 @@ export default function ProjectCardText({
   languageTags,
   topicTags,
   description,
-  nameStyle = "",
-  usernameStyle = "",
+  nameStyle,
+  usernameStyle,
 }: Props) {
   return (
     <div>
-      <p className={`text-2xl font-bold ${nameStyle}`}>{name}</p>
-      <p className={`text-xl ${usernameStyle}`}>
+      <p className={`text-2xl font-bold ${nameStyle ?? ""}`}>{name}</p>
+      <p className={`text-xl ${usernameStyle ?? ""}`}>
         {username ? `@${username}` : ``}
       </p>
       <div className="flex flex-wrap">

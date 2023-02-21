@@ -1,3 +1,4 @@
+import React from "react";
 import { examplesFrank } from "./examples";
 import UserProfileHeading from "./user-profile-heading";
 import UserProfileLabeledEntry from "./user-profile-labeled-entry";
