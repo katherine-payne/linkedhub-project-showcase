@@ -1,9 +1,14 @@
 
+import React from "react";
+import { Project } from "./examples";
 import ProjectCard from "./project-card";
 import ProjectCardSpotlight from "./project-card-spotlight";
 
+type Props = {
+  projects: Array<Project>
+}
 
-export default function ProjectFeed({projects}) {
+export default function ProjectFeed({projects}: Props) {
    return (
       <div id="projectFeed" className="flex justify-center">
         <div className="max-w-none md:max-w-xl">
