@@ -12,7 +12,7 @@ export default function ProjectCardText({
   usernameStyle = "",
 }) {
   return (
-    <div>
+    <div className="text-primary">
       <p className={`text-2xl font-bold ${nameStyle}`}>{name}</p>
       <p className={`text-xl ${usernameStyle}`}>
         {username ? `@${username}` : ``}

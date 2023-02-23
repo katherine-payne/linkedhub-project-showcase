@@ -10,7 +10,7 @@ export default function ProjectCard({
   description,
 }) {
   return (
-    <div className="flex content-center bg-white shadow-md border border-gray-30 p-2 m-4 rounded-lg">
+    <div className="flex content-center bg-white text-primary shadow-md border border-border-neutral p-2 m-4 rounded-lg">
       <ProjectCardText
         className="w-3/5"
         name={name}
@@ -24,7 +24,7 @@ export default function ProjectCard({
           src="https://picsum.photos/600"
           className="w-full h-36 rounded-lg"
         ></img>
-        <div className="flex text-pink-500 text-xl mt-2">
+        <div className="flex text-heart text-xl mt-2">
           <FaHeart className="mt-1 mr-1 ml-auto" />
           {hearts}
         </div>

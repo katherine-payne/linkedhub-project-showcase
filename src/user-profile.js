@@ -11,7 +11,7 @@ export default function UserProfile() {
     <div className="flex md:flex-row flex-col justify-center">
       <div
         id="infoFeed"
-        className="font-serif max-w-none md:max-w-xl border-r-2 ml-4 p-4"
+        className="font-serif text-primary max-w-none md:max-w-xl border-r-2 ml-4 p-4"
       >
         <p className="text-3xl font-semibold">{user.name}</p>
         <p>
@@ -64,7 +64,7 @@ export default function UserProfile() {
         <p className="mb-4">{user.skills.join(", ")}</p>
       </div>
 
-      <ProjectFeed projects={examplesFrank.projects}/>
+      <ProjectFeed projects={examplesFrank.projects} />
     </div>
   );
 }

@@ -8,7 +8,7 @@ import UserProfile from "./user-profile";
 
 export default function App() {
   return (
-    <div className="bg-slate-50">
+    <div className="bg-background-neutral">
       <BrowserRouter>
         <Toolbar />
         <Routes>
