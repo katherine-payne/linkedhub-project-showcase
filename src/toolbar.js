@@ -73,7 +73,7 @@ export default function Toolbar() {
 
           <Link to="/profile">
             <img
-              className="relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all lh-profile-image"
+              className="relative object-cover group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all lh-profile-image"
               src="https://picsum.photos/400"
               alt="Rounded avatar"
             />
