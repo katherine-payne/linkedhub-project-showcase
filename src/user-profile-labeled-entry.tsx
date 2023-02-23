@@ -8,7 +8,7 @@ type Props = {
 export default function UserProfileLabeledEntry({ label, entry }: Props) {
   return (
     <p>
-      <span className="text-slate-500">{label}: </span>
+      <span className="text-secondary">{label}: </span>
       {entry}
     </p>
   );

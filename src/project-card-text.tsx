@@ -24,9 +24,9 @@ export default function ProjectCardText({
   usernameStyle = "",
 }: Props) {
   return (
-    <div>
-      <p className={`text-2xl font-bold ${nameStyle ?? ""}`}>{name}</p>
-      <p className={`text-xl ${usernameStyle ?? ""}`}>
+    <div className="text-primary">
+      <p className={`text-2xl font-bold ${nameStyle}`}>{name}</p>
+      <p className={`text-xl ${usernameStyle}`}>
         {username ? `@${username}` : ``}
       </p>
       <div className="flex flex-wrap">
