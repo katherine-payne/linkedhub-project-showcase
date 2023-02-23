@@ -13,7 +13,7 @@ export default function ProjectCardSpotlight({
     <div className="bg-white m-4">
       <img
         src="https://picsum.photos/600"
-        className="w-full h-80 rounded-t-lg object-cover"
+        className="w-full h-80 rounded-t-lg"
       ></img>
       <div className="flex justify-start content-center shadow-md border border-t-0 border-gray-30 p-2 rounded-b-lg">
         <ProjectCardText
