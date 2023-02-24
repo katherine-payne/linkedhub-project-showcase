@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Project } from "./examples";
+import { Project } from "../Examples/example-profile";
 import ProjectCard from "./project-card";
 import ProjectCardSpotlight from "./project-card-spotlight";
 

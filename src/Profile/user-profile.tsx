@@ -1,9 +1,9 @@
 import React from "react";
-import { examplesFrank } from "./examples";
+import { examplesFrank } from "../Examples/example-profile";
 import UserProfileHeading from "./user-profile-heading";
 import UserProfileLabeledEntry from "./user-profile-labeled-entry";
-import formatDescription from "./Utils";
-import ProjectFeed from "./ProjectFeed";
+import ProjectFeed from "../Components/ProjectFeed";
+import formatDescription from "../Utils";
 
 export default function UserProfile() {
   const user = examplesFrank;

@@ -4,12 +4,12 @@ import { FaHeart } from "react-icons/fa";
 import ProjectCardText from "./project-card-text";
 
 type Props = {
-  name: string,
-  hearts: number,
-  languageTags: Array<string>,
-  topicTags: Array<string>,
-  description: string
-}
+  name: string;
+  hearts: number;
+  languageTags: Array<string>;
+  topicTags: Array<string>;
+  description: string;
+};
 
 export default function ProjectCardSpotlight({
   name,
@@ -31,6 +31,8 @@ export default function ProjectCardSpotlight({
           languageTags={languageTags}
           topicTags={topicTags}
           description={description}
+          nameStyle={""}
+          usernameStyle={""}
         />
         <div className="flex text-heart text-xl ml-auto">
           <FaHeart className="mt-1 mr-1" />

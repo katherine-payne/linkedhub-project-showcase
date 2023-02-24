@@ -2,7 +2,7 @@ import React from "react";
 
 import LanguageTag from "./language-tag";
 import TopicTag from "./topic-tag";
-import formatDescription from "./Utils";
+import formatDescription from "../Utils";
 
 type Props = {
   name: string;
