@@ -1,13 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import searchFor from "./GithubApiSearch";
+import searchFor from "./github-api-search";
 import SearchResult from "./SearchResult";
 
-type SearchResult = {
+type Result = {
   name: string,
   username: string,
-  language: string,
+  language: string | undefined,
   key: number
 }
 
@@ -27,14 +27,13 @@ export default function SearchFeed() {
 
   return (
     <div className="max-w-none md:max-w-2xl m-auto">
-      {result.map((r: SearchResult) => {
+      {result.map((r: Result) => {
         return (
           <SearchResult
             repoName={r.name}
             username={r.username}
-            language={[r.language]}
-            key={r.key}
-          />
+            language={r.language}
+            key={r.key} />
         );
       })}
     </div>

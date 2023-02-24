@@ -1,5 +1,5 @@
-import ProjectFeed from "./ProjectFeed";
-import { examplesFrank } from "./examples";
+import ProjectFeed from "../Components/ProjectFeed";
+import { examplesFrank } from "../Examples/example-profile";
 import React from "react";
 
 export default function MainFeed() {

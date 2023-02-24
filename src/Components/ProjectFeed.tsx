@@ -1,8 +1,8 @@
 
 import React from "react";
-import { Project } from "./examples";
-import ProjectCard from "./project-card";
-import ProjectCardSpotlight from "./project-card-spotlight";
+import { Project } from "../Examples/example-profile";
+import ProjectCard from "./ProjectCard";
+import ProjectCardSpotlight from "./ProjectCardSpotlight";
 
 type Props = {
   projects: Array<Project>

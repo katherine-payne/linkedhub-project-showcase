@@ -1,9 +1,9 @@
 import React from "react";
-import { examplesFrank } from "./examples";
-import UserProfileHeading from "./user-profile-heading";
-import UserProfileLabeledEntry from "./user-profile-labeled-entry";
-import formatDescription from "./Utils";
-import ProjectFeed from "./ProjectFeed";
+import { examplesFrank } from "../Examples/example-profile";
+import UserProfileHeading from "./UserProfileHeading";
+import UserProfileLabeledEntry from "./UserProfileLabeledEntry";
+import ProjectFeed from "../Components/ProjectFeed";
+import FormattedDescription from "../Components/FormattedDescription";
 
 export default function UserProfile() {
   const user = examplesFrank;
@@ -39,13 +39,13 @@ export default function UserProfile() {
                 entry={job.start + " - " + (job.end ?? "Present")}
               />
               <p className="whitespace-pre-wrap">
-                {formatDescription(job.description)}
+                <FormattedDescription description={job.description} />
               </p>
             </div>
           );
         })}
 
-        <UserProfileHeading title={"Education"} />
+        <UserProfileHeading title="Education" />
         {user.education.map((edu) => {
           return (
             <div className="mb-4">
@@ -61,7 +61,7 @@ export default function UserProfile() {
           );
         })}
 
-        <UserProfileHeading title={"Skills"} />
+        <UserProfileHeading title="Skills" />
         <p className="mb-4">{user.skills.join(", ")}</p>
       </div>
 
