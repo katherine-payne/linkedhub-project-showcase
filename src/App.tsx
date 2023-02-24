@@ -2,7 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import "./App.css";
 import MainFeed from "./Home/MainFeed";
-import Toolbar from "./Toolbar/Toolbar";
+import Toolbar from "./NavigationBar/NavigationBar";
 import SearchFeed from "./Search/SearchFeed";
 import UserProfile from "./Profile/UserProfile";
 import React from "react";

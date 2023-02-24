@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Toolbar() {
+export default function NavigationBar() {
   let [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
