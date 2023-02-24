@@ -203,7 +203,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
 
       <p
         id="helper-text-explanation"
-        className="mt-2 text-sm text-secondary mx-3"
+        className="my-2 text-sm text-secondary mx-3"
       >
         Paste the URL to your GitHub Repository to connect your project and fill
         the details automatically.
