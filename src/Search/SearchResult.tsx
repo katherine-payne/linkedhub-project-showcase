@@ -1,10 +1,10 @@
 import React from "react";
-import ProjectCardText from "../Components/project-card-text";
+import ProjectCardText from "../Components/ProjectCardText";
 
 type Props = {
   repoName: string,
   username: string,
-  language: string,
+  language: string | undefined
 }
 
 export default function SearchResult({ repoName, username, language }: Props) {

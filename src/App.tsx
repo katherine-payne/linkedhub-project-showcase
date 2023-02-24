@@ -2,9 +2,9 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import "./App.css";
 import MainFeed from "./Home/MainFeed";
-import Toolbar from "./Toolbar/toolbar";
+import Toolbar from "./Toolbar/Toolbar";
 import SearchFeed from "./Search/SearchFeed";
-import UserProfile from "./Profile/user-profile";
+import UserProfile from "./Profile/UserProfile";
 import React from "react";
 
 export default function App() {

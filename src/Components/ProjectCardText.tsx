@@ -1,8 +1,8 @@
 import React from "react";
 
-import LanguageTag from "./language-tag";
-import TopicTag from "./topic-tag";
-import formatDescription from "../Utils";
+import LanguageTag from "./LanguageTag";
+import TopicTag from "./TopicTag";
+import FormattedDescription from "./FormattedDescription";
 
 type Props = {
   name: string;
@@ -40,7 +40,7 @@ export default function ProjectCardText({
         ))}
       </div>
       <p className="whitespace-pre-wrap pt-2">
-        {formatDescription(description)}
+        <FormattedDescription description={description} />
       </p>
     </div>
   );
