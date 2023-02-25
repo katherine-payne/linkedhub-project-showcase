@@ -6,6 +6,7 @@ import Toolbar from "./NavigationBar/NavigationBar";
 import SearchFeed from "./Search/SearchFeed";
 import UserProfile from "./Profile/UserProfile";
 import React from "react";
+import AddProject from "./AddProject/AddProject";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route index element={<MainFeed />} />
           <Route path="/search/:query" element={<SearchFeed />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/add-project" element={<AddProject />} />
         </Routes>
       </BrowserRouter>
     </div>

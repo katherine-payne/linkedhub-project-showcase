@@ -54,12 +54,14 @@ export default function NavigationBar() {
       </li>
 
       <li className="flex items-center justify-center">
-        <button className="group transition-all flex items-center justify-center text-sm text-secondary hover:text-secondary-hover border border-border-neutral hover:shadow hover:bg-gray-100 rounded-lg mr-2 xs:mr-4 sm:mr-8 p-2">
-          <span className=" transition-all text-secondary group-hover:text-secondary-hover p-2">
-            <FaPlus />
-          </span>
-          <span className="hidden sm:block">Add Project</span>
-        </button>
+        <Link to="/add-project">
+          <button className="group transition-all flex items-center justify-center text-sm text-secondary hover:text-secondary-hover border border-border-neutral hover:shadow hover:bg-gray-100 rounded-lg mr-2 xs:mr-4 sm:mr-8 p-2">
+            <span className=" transition-all text-secondary group-hover:text-secondary-hover p-2">
+              <FaPlus />
+            </span>
+            <span className="hidden sm:block">Add Project</span>
+          </button>
+        </Link>
         <div className="group">
           <div className="absolute w-auto min-w-max right-4 scale-0 group-hover:scale-100 transition-all duration-100 bg-slate-100 rounded-lg mt-10 mr-10 shadow flex flex-col p-2 gap-2">
             <button className="group transition-all flex items-center pr-6 text-sm text-secondary hover:text-secondary-hover border border-border-neutral hover:shadow hover:bg-gray-100 rounded-lg p-2 bg-white">
