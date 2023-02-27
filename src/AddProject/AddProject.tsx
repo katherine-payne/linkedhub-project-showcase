@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import RepoSelector from "./RepoSelector";
-import { Repository } from "./Repository";
-import { Language } from "./Language";
+import { Repository } from "../Types/Repository";
+import { Language } from "../Types/Language";
 
 export default function AddProject() {
   const [link, setLink] = useState<string>("");

@@ -7,8 +7,9 @@ import {
   BsGithub,
   BsFillFilterCircleFill,
 } from "react-icons/bs";
-import { Language } from "./Language";
-import { Repository } from "./Repository";
+import { Language } from "../Types/Language";
+import { Repository } from "../Types/Repository";
+import { SearchStatus } from "../Types/SearchStatus";
 
 type Props = {
   getLink: string;
@@ -16,13 +17,6 @@ type Props = {
   getRepo: any;
   setRepo: React.Dispatch<React.SetStateAction<any>>;
 };
-
-enum SearchStatus {
-  Waiting,
-  Loading,
-  Failed,
-  Success,
-}
 
 export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
   // convert the given url to a full url which we can make an api call with
@@ -183,7 +177,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
     <div className="w-full px-4">
       <label
         htmlFor="helper-text"
-        className="block mb-2 text-sm font-medium text-primary dark:text-white px-3"
+        className="block mb-2 text-sm font-medium text-primary px-3"
       >
         Repository URL
       </label>
@@ -191,7 +185,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
       <input
         type="url"
         id="helper-text"
-        className="border border-border text-primary text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="border border-border text-primary text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
         placeholder="github.com/your-username/repository-name"
         value={getLink}
         onChange={(e) => {
