@@ -34,7 +34,7 @@ export default function NavigationBar() {
           <input
             type="search"
             id="search"
-            className=" transition-all block w-full p-2 text-sm text-gray-900 bg-opacity-0 border rounded-lg outline-none border-none group-hover:bg-gray-100"
+            className="transition-all block w-full p-2 text-sm text-gray-900 bg-opacity-0 border rounded-lg outline-none border-none group-hover:bg-gray-100"
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
