@@ -70,7 +70,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
   //  - fail: show red x
   //  - success: show green x, populate content of page
   async function searchWithURL() {
-    if (link) {
+    if (link && searchStatus == SearchStatus.Waiting) {
       setSearchStatus(SearchStatus.Loading);
 
       const { owner, repo }: { owner: string; repo: string } =
@@ -122,7 +122,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
         return found;
       }
     }
-    setSearchStatus(SearchStatus.Failed);
+    setSearchStatus(searchStatus == SearchStatus.Success ? SearchStatus.Success : SearchStatus.Failed);
   }
 
   const enterHandler = (e?: React.KeyboardEvent<HTMLInputElement>) => {
@@ -211,7 +211,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
 
       <button
         className="transition-all flex items-center justify-center text-secondary hover:text-secondary-hover border border-border-neutral hover:shadow hover:bg-gray-100 disabled:cursor-not-allowed rounded-lg p-2 w-44 h-10"
-        disabled={!link}
+        disabled={!link || searchStatus != SearchStatus.Waiting}
         onClick={() => {
           searchWithURL();
         }}
