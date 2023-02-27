@@ -7,8 +7,9 @@ import {
   BsGithub,
   BsFillFilterCircleFill,
 } from "react-icons/bs";
-import { Language } from "./Language";
-import { Repository } from "./Repository";
+import { Language } from "../Types/Language";
+import { Repository } from "../Types/Repository";
+import { SearchStatus } from "../Types/SearchStatus";
 
 type Props = {
   getLink: string;
@@ -16,13 +17,6 @@ type Props = {
   getRepo: any;
   setRepo: React.Dispatch<React.SetStateAction<any>>;
 };
-
-enum SearchStatus {
-  Waiting,
-  Loading,
-  Failed,
-  Success,
-}
 
 export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
   // convert the given url to a full url which we can make an api call with
