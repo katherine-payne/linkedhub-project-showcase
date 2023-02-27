@@ -28,12 +28,9 @@ export default function ProjectCardSpotlight({
       <div className="flex justify-start content-center shadow-md border border-t-0 border-border-neutral p-2 rounded-b-lg">
         <ProjectCardText
           name={name}
-          username={""}
           languageTags={languageTags}
           topicTags={topicTags}
           description={description}
-          nameStyle={""}
-          usernameStyle={""}
         />
         <div className="flex text-heart text-xl ml-auto">
           <FaHeart className="mt-1 mr-1" />

@@ -15,7 +15,6 @@ export default function SearchResult({ repoName, username, language }: Props) {
         username={username}
         languageTags={language ? [language] : []}
         topicTags={[]}
-        description={""}
         nameStyle={"text-accent"}
         usernameStyle={"text-secondary"}
       />

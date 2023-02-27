@@ -23,12 +23,9 @@ export default function ProjectCard({
       <div className="w-3/5">
         <ProjectCardText
           name={name}
-          username={""}
           languageTags={languageTags}
           topicTags={topicTags}
           description={description}
-          nameStyle={""}
-          usernameStyle={""}
         />
       </div>
       <div className="w-2/5 m-2 ml-auto">
