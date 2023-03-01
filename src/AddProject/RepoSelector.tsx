@@ -7,6 +7,8 @@ import {
   BsGithub,
   BsFillFilterCircleFill,
 } from "react-icons/bs";
+import InputField from "src/Components/Inputs/InputField";
+import LabeledInputField from "src/Components/Inputs/LabeledInputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import { Language } from "../Types/Language";
 import { Repository } from "../Types/Repository";
@@ -117,7 +119,11 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
         return found;
       }
     }
-    setSearchStatus(searchStatus == SearchStatus.Success ? SearchStatus.Success : SearchStatus.Failed);
+    setSearchStatus(
+      searchStatus == SearchStatus.Success
+        ? SearchStatus.Success
+        : SearchStatus.Failed
+    );
   }
 
   const enterHandler = (e?: React.KeyboardEvent<HTMLInputElement>) => {
@@ -176,37 +182,38 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
 
   return (
     <div className="w-full px-4">
-      <label
-        htmlFor="helper-text"
-        className="block mb-2 text-sm font-medium text-primary px-3"
-      >
-        Repository URL
-      </label>
-
-      <input
-        type="url"
-        id="helper-text"
-        className="border border-border text-primary text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
-        placeholder="github.com/your-username/repository-name"
-        value={getLink}
-        onChange={(e) => {
-          setLink(e.target.value);
-          setSearchStatus(SearchStatus.Waiting);
-        }}
-        onKeyDown={(e) => enterHandler(e)}
+      <LabeledInputField
+        innerSpacing={2}
+        title="Repository URL"
+        inputField={
+          <InputField
+            type="url"
+            id="helper-text"
+            placeholder="github.com/your-username/repository-name"
+            value={getLink}
+            onChange={(e) => {
+              setLink(e.target.value);
+              setSearchStatus(SearchStatus.Waiting);
+            }}
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement> | undefined) =>
+              enterHandler(e)
+            }
+          />
+        }
+        details={
+          "Paste the URL to your GitHub Repository to connect your project and fill the details automatically."
+        }
+        id={"git-link"}
       />
 
-      <p
-        id="helper-text-explanation"
-        className="my-2 text-sm text-secondary mx-3"
-      >
-        Paste the URL to your GitHub Repository to connect your project and fill
-        the details automatically.
-      </p>
-
-      <PrimaryButton bgClass="disabled:cursor-not-allowed" disabled={() => !link || searchStatus != SearchStatus.Waiting} onClick={() => {
+      <PrimaryButton
+        bgClass="disabled:cursor-not-allowed"
+        disabled={() => !link || searchStatus != SearchStatus.Waiting}
+        onClick={() => {
           searchWithURL();
-        }} text={renderSearchStatus()} />
+        }}
+        text={renderSearchStatus()}
+      />
     </div>
   );
 }
