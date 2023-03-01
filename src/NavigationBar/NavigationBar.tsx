@@ -8,6 +8,7 @@ import {
   FaDoorOpen,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 
 export default function NavigationBar() {
@@ -55,12 +56,13 @@ export default function NavigationBar() {
             icon={<FaSearch />}
           />
 
-          <input
+          <InputField 
             type="search"
             id="search"
-            ref={inputRef}
-            className="transition-all block w-full p-2 text-sm text-gray-900 bg-opacity-0 border rounded-lg outline-none border-none group-hover:bg-gray-100"
+            border="none"
             placeholder="Search"
+            classAdditions="group-hover:bg-gray-100"
+            background="bg-opacity-0"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => {
@@ -68,7 +70,9 @@ export default function NavigationBar() {
                 handleSearch();
               }
             }}
-            required
+            focus={false}
+            ref={inputRef}
+            required={true}
           />
         </label>
       </li>
