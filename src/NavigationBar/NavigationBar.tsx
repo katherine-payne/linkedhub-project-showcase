@@ -55,23 +55,6 @@ export default function NavigationBar() {
             icon={<FaSearch />}
           />
 
-          {/* <button
-            className={`p-2 ${
-              searchQuery === "" ? "cursor-text" : "cursor-pointer"
-            }`}
-            onClick={() => {
-              if (searchQuery === "") {
-                // focus on search label
-                if (inputRef.current !== null) {
-                  inputRef.current.focus();
-                }
-              } else {
-                handleSearch();
-              }
-            }}
-          >
-            <FaSearch />
-          </button> */}
           <input
             type="search"
             id="search"
