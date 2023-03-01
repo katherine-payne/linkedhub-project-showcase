@@ -1,34 +1,51 @@
 import React from "react";
 
-export const buttonBgAttributes = "group transition-all flex items-center justify-center text-sm text-secondary hover:text-secondary-hover border border-border-neutral hover:shadow bg-white hover:bg-gray-100 rounded-lg p-2"
-export const buttonTextAttributes = "transition-all text-secondary group-hover:text-secondary-hover p-2"
-
 export default function PrimaryButton({
   text,
   icon,
   bgClass,
   textClass,
   iconClass,
-  action,
+  onClick,
+  disabled,
+  buttonBgHoverColor,
+  buttonBgColor,
+  buttonBorderColor,
+  shadow,
+  hoverShadow,
 }: {
   text?: string | React.ReactNode;
   icon?: React.ReactNode;
   bgClass?: string;
   textClass?: string;
   iconClass?: string;
-  action: () => void;
+  onClick: () => void;
+  disabled?: () => boolean;
+  buttonBgHoverColor?: string;
+  buttonBgColor?: string;
+  buttonBorderColor?: string;
+  shadow?: string;
+  hoverShadow?: string;
 }) {
-   
-  const buttonAttributes = buttonBgAttributes;
-  const textAttributes = buttonTextAttributes;
+  const buttonAttributes = `group transition-all flex items-center justify-center text-sm text-secondary hover:text-secondary-hover ${buttonBorderColor == "" || buttonBorderColor == "none" ? "" : "border" + " " + buttonBorderColor ?? "border border-border-neutral"} ${shadow ?? ""} ${hoverShadow ?? "hover:shadow"} ${buttonBgColor ?? "bg-white"} hover:${buttonBgHoverColor ?? "bg-gray-100"} rounded-lg p-2`;
+  const textAttributes = "transition-all text-secondary group-hover:text-secondary-hover p-2";
 
   return (
     <button
+      disabled={(disabled ?? (() => {return false}))()}
       className={`${buttonAttributes} ${bgClass ?? ""}`}
-      onClick={action}
+      onClick={onClick}
     >
-      {icon ? <span className={`${textAttributes} ${iconClass}`}>{icon}</span> : <></>}
-      {text ? <span className={`${textAttributes} ${textClass}`}>{text}</span> : <></>}
+      {icon ? (
+        <span className={`${textAttributes} ${iconClass}`}>{icon}</span>
+      ) : (
+        <></>
+      )}
+      {text ? (
+        <span className={`${textAttributes} ${textClass}`}>{text}</span>
+      ) : (
+        <></>
+      )}
     </button>
   );
 }

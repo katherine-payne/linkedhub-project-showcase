@@ -27,13 +27,35 @@ export default function NavigationBar() {
   return (
     <ul className="flex items-center justify-between px-4 pt-4 mb-4 sticky z-50 top-0 bg-white w-full p-4 shadow-md">
       <li className="flex justify-between items-center">
-        <PrimaryButton bgClass="mr-4" icon={<FaHome />} action={() => navigate("/")} />
-       
+        <PrimaryButton
+          bgClass="mr-4"
+          icon={<FaHome />}
+          onClick={() => navigate("/")}
+        />
+
         <label
           htmlFor="search"
           className="transition-all group flex items-center justify-center text-sm text-secondary hover:text-secondary-hover border border-border-neutral rounded-lg mr-2 xs:mr-4 sm:mr-8 p-2 cursor-text hover:bg-gray-100 hover:shadow"
         >
-          <button
+          <PrimaryButton
+            hoverShadow=""
+            buttonBorderColor={""}
+            buttonBgColor={""}
+            bgClass={`${searchQuery === "" ? "cursor-text" : "cursor-pointer"}`}
+            onClick={() => {
+              if (searchQuery === "") {
+                // focus on search label
+                if (inputRef.current !== null) {
+                  inputRef.current.focus();
+                }
+              } else {
+                handleSearch();
+              }
+            }}
+            icon={<FaSearch />}
+          />
+
+          {/* <button
             className={`p-2 ${
               searchQuery === "" ? "cursor-text" : "cursor-pointer"
             }`}
@@ -49,7 +71,7 @@ export default function NavigationBar() {
             }}
           >
             <FaSearch />
-          </button>
+          </button> */}
           <input
             type="search"
             id="search"
@@ -69,19 +91,27 @@ export default function NavigationBar() {
       </li>
 
       <li className="flex items-center justify-center">
-        <PrimaryButton bgClass="mx-4" text={"Add Project"} textClass={"hidden sm:block"} icon={<FaPlus />} action={() => {navigate("/add")}} />
-        
+        <PrimaryButton
+          bgClass="mx-4"
+          text={"Add Project"}
+          textClass={"hidden sm:block"}
+          icon={<FaPlus />}
+          onClick={() => {
+            navigate("/add");
+          }}
+        />
+
         <div className="group">
           <div className="absolute w-auto min-w-max right-4 scale-0 group-hover:scale-100 transition-all duration-100 bg-slate-100 rounded-lg mt-10 mr-10 shadow flex flex-col p-2 gap-2">
             <PrimaryButton
               text={"Edit Profile"}
               icon={<FaPencilRuler />}
-              action={() => {}}
+              onClick={() => {}}
             />
             <PrimaryButton
               text={"Log Out"}
               icon={<FaDoorOpen />}
-              action={() => {}}
+              onClick={() => {}}
             />
           </div>
 

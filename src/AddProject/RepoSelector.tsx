@@ -7,6 +7,7 @@ import {
   BsGithub,
   BsFillFilterCircleFill,
 } from "react-icons/bs";
+import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import { Language } from "../Types/Language";
 import { Repository } from "../Types/Repository";
 import { SearchStatus } from "../Types/SearchStatus";
@@ -203,15 +204,9 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
         the details automatically.
       </p>
 
-      <button
-        className="transition-all flex items-center justify-center text-secondary hover:text-secondary-hover border border-border-neutral hover:shadow hover:bg-gray-100 disabled:cursor-not-allowed rounded-lg p-2 w-44 h-10"
-        disabled={!link || searchStatus != SearchStatus.Waiting}
-        onClick={() => {
+      <PrimaryButton bgClass="disabled:cursor-not-allowed" disabled={() => !link || searchStatus != SearchStatus.Waiting} onClick={() => {
           searchWithURL();
-        }}
-      >
-        {renderSearchStatus()}
-      </button>
+        }} text={renderSearchStatus()} />
     </div>
   );
 }
