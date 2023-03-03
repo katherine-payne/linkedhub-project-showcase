@@ -23,17 +23,14 @@ export default function ProjectCardSpotlight({
       <img
         src="https://picsum.photos/600"
         alt="project interface screenshot"
-        className="w-full h-80 rounded-t-lg"
+        className="w-full h-80 rounded-t-lg object-cover"
       ></img>
       <div className="flex justify-start content-center shadow-md border border-t-0 border-border-neutral p-2 rounded-b-lg">
         <ProjectCardText
           name={name}
-          username={""}
           languageTags={languageTags}
           topicTags={topicTags}
           description={description}
-          nameStyle={""}
-          usernameStyle={""}
         />
         <div className="flex text-heart text-xl ml-auto">
           <FaHeart className="mt-1 mr-1" />

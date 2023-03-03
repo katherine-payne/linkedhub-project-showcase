@@ -6,12 +6,12 @@ import FormattedDescription from "./FormattedDescription";
 
 type Props = {
   name: string;
-  username: string;
+  username?: string;
   languageTags: Array<string> | [];
   topicTags: Array<string> | [];
-  description: string;
-  nameStyle: string;
-  usernameStyle: string;
+  description?: string;
+  nameStyle?: string;
+  usernameStyle?: string;
 };
 
 export default function ProjectCardText({
@@ -20,14 +20,14 @@ export default function ProjectCardText({
   languageTags,
   topicTags,
   description,
-  nameStyle = "",
-  usernameStyle = "",
+  nameStyle,
+  usernameStyle,
 }: Props) {
   return (
     <div className="text-primary">
-      <p className={`text-2xl font-bold ${nameStyle}`}>{name}</p>
-      <p className={`text-xl ${usernameStyle}`}>
-        {username ? `@${username}` : ``}
+      <p className={`text-2xl font-bold ${nameStyle ?? ""}`}>{name}</p>
+      <p className={`text-xl ${usernameStyle ?? ""}`}>
+        {username ? `@${username ?? ""}` : ``}
       </p>
       <div className="flex flex-wrap">
         {languageTags.map((x, i) => (
@@ -40,7 +40,7 @@ export default function ProjectCardText({
         ))}
       </div>
       <p className="whitespace-pre-wrap pt-2">
-        <FormattedDescription description={description} />
+        <FormattedDescription description={description ?? ""} />
       </p>
     </div>
   );

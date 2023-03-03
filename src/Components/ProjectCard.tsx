@@ -23,19 +23,16 @@ export default function ProjectCard({
       <div className="w-3/5">
         <ProjectCardText
           name={name}
-          username={""}
           languageTags={languageTags}
           topicTags={topicTags}
           description={description}
-          nameStyle={""}
-          usernameStyle={""}
         />
       </div>
       <div className="w-2/5 m-2 ml-auto">
         <img
           src="https://picsum.photos/600"
           alt="project interface screenshot"
-          className="w-full h-36 rounded-lg"
+          className="w-full h-36 rounded-lg object-cover"
         ></img>
         <div className="flex text-heart text-xl mt-2">
           <FaHeart className="mt-1 mr-1 ml-auto" />

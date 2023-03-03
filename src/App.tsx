@@ -7,6 +7,8 @@ import SearchFeed from "./Search/SearchFeed";
 import UserProfile from "./Profile/UserProfile";
 import React from "react";
 import AddProject from "./AddProject/AddProject";
+import PrimaryButton from "./Components/Inputs/PrimaryButton";
+import { BsAlarm, BsAlarmFill } from "react-icons/bs";
 
 export default function App() {
   return (
@@ -17,7 +19,7 @@ export default function App() {
           <Route index element={<MainFeed />} />
           <Route path="/search/:query" element={<SearchFeed />} />
           <Route path="/profile" element={<UserProfile />} />
-          <Route path="/add-project" element={<AddProject />} />
+          <Route path="/add" element={<AddProject />} />
         </Routes>
       </BrowserRouter>
     </div>
