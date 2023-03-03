@@ -1,7 +1,6 @@
 import React from "react";
 
 import LabeledInputField from "src/Components/Inputs/LabeledInputField";
-import InputField from "src/Components/Inputs/InputField";
 import FormattedDescription from "src/Components/FormattedDescription";
 
 type Props = {
