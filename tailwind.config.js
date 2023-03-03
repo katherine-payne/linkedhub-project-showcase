@@ -6,7 +6,9 @@ module.exports = {
       colors: {
         accent: "#0ea5e9", // sky-500
         contrast: "#4ade80", // green-400
+        "contrast-hover": "#16a34a", // green-600
         neutral: "#9ca3af", // gray-400
+        "neutral-hover": "#4b5563", // gray-600
         primary: "#000000", // black
         secondary: "#6b7280", // gray-500
         "secondary-hover": "#374151", // gray-700

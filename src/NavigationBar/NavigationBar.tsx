@@ -56,7 +56,7 @@ export default function NavigationBar() {
             icon={<FaSearch />}
           />
 
-          <InputField 
+          <InputField
             type="search"
             id="search"
             border="none"

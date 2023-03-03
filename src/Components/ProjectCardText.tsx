@@ -31,12 +31,12 @@ export default function ProjectCardText({
       </p>
       <div className="flex flex-wrap">
         {languageTags.map((x, i) => (
-          <LanguageTag text={x} key={i} />
+          <LanguageTag text={x} canDelete={false} onDelete={() => {}} key={i} />
         ))}
       </div>
       <div className="flex flex-wrap">
-        {(topicTags).map((x, i) => (
-          <TopicTag text={x} key={i} />
+        {topicTags.map((x, i) => (
+          <TopicTag text={x} canDelete={false} onDelete={() => {}} key={i} />
         ))}
       </div>
       <p className="whitespace-pre-wrap pt-2">

@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import InputField from "./InputField";
 
 export default function LabeledInputField({
   title,
@@ -9,25 +8,30 @@ export default function LabeledInputField({
   id,
 }: {
   title: string;
-  innerSpacing: number
+  innerSpacing: number;
   inputField: ReactNode;
   details: string;
   id: string;
 }) {
   return (
-    <>
+    <div>
       <label
         htmlFor={id}
-        className={`block my-${innerSpacing} text-sm font-medium text-primary px-3`}
+        className={`block my-${innerSpacing} text-xl font-medium text-primary px-1`}
       >
         {title}
       </label>
 
       {inputField}
 
-      <label htmlFor={id} className={`block my-${innerSpacing} text-sm text-secondary mx-3`}>
-        {details}
-      </label>
-    </>
+      {details && (
+        <label
+          htmlFor={id}
+          className={`block my-${innerSpacing} text-sm text-secondary mx-3`}
+        >
+          {details}
+        </label>
+      )}
+    </div>
   );
 }

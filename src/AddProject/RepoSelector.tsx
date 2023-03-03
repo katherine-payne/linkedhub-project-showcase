@@ -181,7 +181,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
   const link = convertToFullURL(getLink);
 
   return (
-    <div className="w-full px-4">
+    <div className="w-full">
       <LabeledInputField
         innerSpacing={2}
         title="Repository URL"
