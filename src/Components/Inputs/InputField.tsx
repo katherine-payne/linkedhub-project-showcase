@@ -1,19 +1,6 @@
 import React from "react";
 
-export default function InputField({
-  type,
-  id,
-  placeholder,
-  value,
-  onChange,
-  onKeyDown,
-  border,
-  focus,
-  required,
-  ref,
-  background,
-  classAdditions,
-}: {
+const InputField = (props: {
   type?: React.HTMLInputTypeAttribute | undefined;
   id?: string;
   placeholder?: string;
@@ -23,10 +10,23 @@ export default function InputField({
   border?: string;
   focus?: boolean;
   required?: boolean;
-  ref?: React.LegacyRef<HTMLInputElement> | undefined;
   background?: string;
   classAdditions?: string;
-}) {
+}) => {
+  const {
+    type,
+    id,
+    placeholder,
+    value,
+    onChange,
+    onKeyDown,
+    border,
+    focus,
+    required,
+    background,
+    classAdditions,
+  } = props;
+
   const className: string = `transition-all text-gray-900 ${background ?? ""} ${
     border == "" || border == "none"
       ? ""
@@ -34,8 +34,6 @@ export default function InputField({
   } text-primary text-sm rounded-lg ${
     focus ? "focus:ring-blue-500 focus:border-blue-500" : "outline-none"
   } block w-full p-3 ${classAdditions}`;
-
-  // transition-all block w-full p-2 text-sm text-gray-900 **bg-opacity-0** border rounded-lg outline-none border-none group-hover:bg-gray-100
 
   return (
     <input
@@ -47,7 +45,8 @@ export default function InputField({
       onChange={onChange}
       onKeyDown={onKeyDown}
       required={required}
-      ref={ref}
     />
   );
-}
+};
+
+export default InputField;
