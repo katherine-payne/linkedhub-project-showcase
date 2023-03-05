@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useState } from "react";
 import {
   FaSearch,
@@ -14,7 +14,6 @@ import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 export default function NavigationBar() {
   let [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = () => {
     navigate(`/search/${searchQuery}`);
@@ -44,12 +43,7 @@ export default function NavigationBar() {
             buttonBgColor={""}
             bgClass={`${searchQuery === "" ? "cursor-text" : "cursor-pointer"}`}
             onClick={() => {
-              if (searchQuery === "") {
-                // focus on search label
-                if (inputRef.current !== null) {
-                  inputRef.current.focus();
-                }
-              } else {
+              if (searchQuery !== "") {
                 handleSearch();
               }
             }}
@@ -71,7 +65,6 @@ export default function NavigationBar() {
               }
             }}
             focus={false}
-            ref={inputRef}
             required={true}
           />
         </label>
