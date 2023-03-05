@@ -27,9 +27,9 @@ export default function UserProfile() {
         </p>
 
         <UserProfileHeading title="Experience" />
-        {user.experience.map((job) => {
+        {user.experience.map((job, index) => {
           return (
-            <div className="mb-4">
+            <div className="mb-4" key={index}>
               <p className="font-bold">{job.role}</p>
 
               <UserProfileLabeledEntry label="Company" entry={job.company} />
@@ -38,17 +38,17 @@ export default function UserProfile() {
                 label="Duration"
                 entry={job.start + " - " + (job.end ?? "Present")}
               />
-              <p className="whitespace-pre-wrap">
+              <div className="whitespace-pre-wrap">
                 <FormattedDescription description={job.description} />
-              </p>
+              </div>
             </div>
           );
         })}
 
         <UserProfileHeading title="Education" />
-        {user.education.map((edu) => {
+        {user.education.map((edu, index) => {
           return (
-            <div className="mb-4">
+            <div className="mb-4" key={index}>
               <p className="font-bold">{edu.university}</p>
               <UserProfileLabeledEntry label="Degree" entry={edu.degree} />
               <UserProfileLabeledEntry label="Major" entry={edu.major} />
