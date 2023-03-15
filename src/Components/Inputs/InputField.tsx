@@ -13,6 +13,8 @@ const InputField = (props: {
   required?: boolean;
   background?: string;
   classAdditions?: string;
+  multiple?: boolean;
+  accept?: string;
 }) => {
   const {
     type,
@@ -27,6 +29,8 @@ const InputField = (props: {
     required,
     background,
     classAdditions,
+    multiple,
+    accept,
   } = props;
 
   const className: string = `transition-all text-gray-900 ${background ?? ""} ${
@@ -48,6 +52,8 @@ const InputField = (props: {
       onChange={onChange}
       onKeyDown={onKeyDown}
       required={required}
+      multiple={multiple}
+      accept={accept}
     />
   );
 };
