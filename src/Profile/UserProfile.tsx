@@ -113,9 +113,9 @@ export default function UserProfile({
         </p>
 
         <UserProfileHeading title="Experience" />
-        {user.experience.map((job) => {
+        {user.experience.map((job, index) => {
           return (
-            <div className="mb-4">
+            <div className="mb-4" key={index}>
               <div className="flex items-center justify-between">
                 <p className="font-bold">{job.role}</p>
                 {editProfile && !isEditingExperience(job) && (
@@ -190,9 +190,9 @@ export default function UserProfile({
         )}
 
         <UserProfileHeading title="Education" />
-        {user.education.map((edu) => {
+        {user.education.map((edu, index) => {
           return (
-            <div className="mb-4">
+            <div className="mb-4" key={index}>
               <div className="flex items-center justify-between">
                 <p className="font-bold">{edu.university}</p>
                 {editProfile && !isEditingEducation(edu) && (

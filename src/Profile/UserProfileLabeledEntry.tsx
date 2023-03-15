@@ -7,9 +7,9 @@ type Props = {
 
 export default function UserProfileLabeledEntry({ label, entry }: Props) {
   return (
-    <p>
+    <div className="block">
       <span className="text-secondary">{label}: </span>
       {entry}
-    </p>
+    </div>
   );
 }

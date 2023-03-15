@@ -39,9 +39,9 @@ export default function ProjectCardText({
           <TopicTag text={x} canDelete={false} onDelete={() => {}} key={i} />
         ))}
       </div>
-      <p className="whitespace-pre-wrap pt-2">
+      <div className="whitespace-pre-wrap pt-2">
         <FormattedDescription description={description ?? ""} />
-      </p>
+      </div>
     </div>
   );
 }
