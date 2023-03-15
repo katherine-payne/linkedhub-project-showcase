@@ -6,22 +6,25 @@ import FormattedDescription from "src/Components/FormattedDescription";
 type Props = {
   description: string;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
+  titleSize: string;
 };
 
 export default function DescriptionInput({
   description,
   setDescription,
+  titleSize,
 }: Props) {
   return (
     <div>
       <LabeledInputField
         innerSpacing={2}
         title="Description"
+        titleSize={titleSize}
         inputField={
           <textarea
             className="text-primary text-sm border border-border rounded-lg w-full p-3"
             id="title"
-            placeholder="Project Description"
+            placeholder="Description"
             value={description}
             onChange={(e) => {
               setDescription(e.target.value);

@@ -2,6 +2,7 @@ import React from "react";
 
 export default function InputField({
   type,
+  step,
   id,
   placeholder,
   value,
@@ -15,6 +16,7 @@ export default function InputField({
   classAdditions,
 }: {
   type?: React.HTMLInputTypeAttribute | undefined;
+  step?: number | undefined;
   id?: string;
   placeholder?: string;
   value?: string | number | readonly string[] | undefined;

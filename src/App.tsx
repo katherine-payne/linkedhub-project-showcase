@@ -17,6 +17,10 @@ export default function App() {
           <Route index element={<MainFeed />} />
           <Route path="/search/:query" element={<SearchFeed />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route
+            path="/profile/edit"
+            element={<UserProfile editProfile={true} />}
+          />
           <Route path="/add" element={<AddProject />} />
         </Routes>
       </BrowserRouter>
