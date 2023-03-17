@@ -1,4 +1,4 @@
-export type SearchQueryResult = {
+type SearchQueryResult = {
   name: string;
   username: string;
   language: string | undefined;
@@ -13,3 +13,5 @@ export function makeSQR(
 ): SearchQueryResult {
   return { name: name, username: username, language: language, key: key };
 }
+
+export default SearchQueryResult

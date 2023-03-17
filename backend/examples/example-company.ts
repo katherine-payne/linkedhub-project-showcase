@@ -1,3 +1,5 @@
+import Recruiter from "../../frontend/src/Types/Recruiter"
+
 export const examplesRecruiters: Array<Recruiter> = [
   {
     _id: 0,

@@ -7,3 +7,5 @@ type Recruiter = {
    email_shown: boolean;
    summary: string;
 }
+
+export default Recruiter

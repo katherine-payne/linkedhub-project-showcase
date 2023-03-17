@@ -1,4 +1,4 @@
-import { User } from "src/Types/User";
+import { User } from "../../frontend/src/Types/User";
 
 export const examplesFrank: User = {
   name: "Frank Anderson",
