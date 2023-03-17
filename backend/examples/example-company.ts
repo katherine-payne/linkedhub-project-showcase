@@ -1,4 +1,5 @@
 import Recruiter from "../../frontend/src/Types/Recruiter"
+import Company from '../../frontend/src/Types/Company'
 
 export const examplesRecruiters: Array<Recruiter> = [
   {
