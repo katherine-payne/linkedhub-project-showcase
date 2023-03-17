@@ -7,6 +7,7 @@ import SearchFeed from "./Search/SearchFeed";
 import UserProfile from "./Profile/UserProfile";
 import React from "react";
 import AddProject from "./AddProject/AddProject";
+import ProjectDetails from "./ProjectDetails/ProjectDetails";
 
 export default function App() {
   return (
@@ -20,6 +21,10 @@ export default function App() {
           <Route
             path="/profile/edit"
             element={<UserProfile editProfile={true} />}
+          />
+          <Route
+            path="/details"
+            element={<ProjectDetails projectLink={""} />}
           />
           <Route path="/add" element={<AddProject />} />
         </Routes>
