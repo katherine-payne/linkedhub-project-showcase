@@ -1,14 +1,14 @@
 import express from "express"
 
-import CompanyController from "./controllers/company-controller"
-import RecruiterController from "./controllers/recruiter-controller"
-import LoginController from "./controllers/login-controller"
-import ProjectController from "./controllers/project-controller"
-import TagController from "./controllers/tag-controller"
-import LanguageController from "./controllers/language-controller"
-import SearchController from "./controllers/search-controller"
-import UserController from "./controllers/user-controller"
-import HomeController from "./controllers/home-controller"
+import CompanyController from "./controllers/company/company-controller.js"
+import RecruiterController from "./controllers/recruiter-controller.js"
+import LoginController from "./controllers/login-controller.js"
+import ProjectController from "./controllers/project-controller.js"
+import TagController from "./controllers/tag-controller.js"
+import LanguageController from "./controllers/language-controller.js"
+import SearchController from "./controllers/search-controller.js"
+import UserController from "./controllers/user-controller.js"
+import HomeController from "./controllers/home-controller.js"
 
 const app = express()
 

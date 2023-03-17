@@ -1,4 +1,4 @@
-const recruiters = [
+export const examplesRecruiters = [
    {
      _id: 0,
      name: "Ervin Imaculada",
@@ -40,9 +40,3 @@ const recruiters = [
        "Reprehenderit aute culpa in Lorem incididunt. Occaecat laborum in incididunt do ex labore labore eiusmod et quis. Consectetur esse sit et exercitation cupidatat esse ad consequat nulla officia proident amet.",
    },
  ];
-
-const RecruiterController = (app) => {
-
-}
-
-export default RecruiterController
