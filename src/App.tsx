@@ -20,6 +20,10 @@ export default function App() {
           <Route index element={<MainFeed />} />
           <Route path="/search/:query" element={<SearchFeed />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route
+            path="/profile/edit"
+            element={<UserProfile editProfile={true} />}
+          />
           <Route path="/add" element={<AddProject />} />
           <Route path="/company" element={<CompanyPage company={examplesBCG} />} />
           <Route path="/recruiter" element={<RecruiterPage recruiter={examplesRecruiters[1]} />} />

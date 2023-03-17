@@ -36,6 +36,7 @@ export default function AddProject() {
       <LabeledInputField
         innerSpacing={2}
         title="Title"
+        titleSize="text-xl"
         inputField={
           <InputField
             type="text"
@@ -60,6 +61,7 @@ export default function AddProject() {
       <DescriptionInput
         description={description}
         setDescription={setDescription}
+        titleSize="text-xl"
       />
       <ImageSelector />
       <div className="m-auto mb-10">

@@ -185,6 +185,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
       <LabeledInputField
         innerSpacing={2}
         title="Repository URL"
+        titleSize="text-xl"
         inputField={
           <InputField
             type="url"

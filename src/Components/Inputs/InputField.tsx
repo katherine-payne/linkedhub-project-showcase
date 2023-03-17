@@ -2,6 +2,7 @@ import React from "react";
 
 const InputField = (props: {
   type?: React.HTMLInputTypeAttribute | undefined;
+  step?: number | undefined;
   id?: string;
   placeholder?: string;
   value?: string | number | readonly string[] | undefined;
@@ -15,6 +16,7 @@ const InputField = (props: {
 }) => {
   const {
     type,
+    step,
     id,
     placeholder,
     value,
@@ -38,6 +40,7 @@ const InputField = (props: {
   return (
     <input
       type={type}
+      step={step}
       id={id}
       className={className}
       placeholder={placeholder}
