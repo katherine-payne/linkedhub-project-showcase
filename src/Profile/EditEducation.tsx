@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Education } from "../Examples/example-profile";
+import { Education } from "src/Types/User";
 import InputField from "src/Components/Inputs/InputField";
 import LabeledInputField from "src/Components/Inputs/LabeledInputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";

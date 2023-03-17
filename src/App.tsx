@@ -5,9 +5,12 @@ import MainFeed from "./Home/MainFeed";
 import Toolbar from "./NavigationBar/NavigationBar";
 import SearchFeed from "./Search/SearchFeed";
 import UserProfile from "./Profile/UserProfile";
-import React from "react";
+import React, { useState } from "react";
 import AddProject from "./AddProject/AddProject";
 import ProjectDetails from "./ProjectDetails/ProjectDetails";
+import CompanyPage from "./Company/CompanyPage";
+import RecruiterPage from "./Recruiter/RecruiterPage";
+import { examplesBCG, examplesRecruiters } from "./Examples/example-company";
 
 export default function App() {
   return (
@@ -27,6 +30,14 @@ export default function App() {
             element={<ProjectDetails projectLink={""} />}
           />
           <Route path="/add" element={<AddProject />} />
+          <Route
+            path="/company"
+            element={<CompanyPage company={examplesBCG} />}
+          />
+          <Route
+            path="/recruiter"
+            element={<RecruiterPage recruiter={examplesRecruiters[1]} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
