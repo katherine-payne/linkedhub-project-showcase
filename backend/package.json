@@ -1,10 +1,12 @@
 {
+  "type": "module",
   "name": "backend",
   "version": "1.0.0",
   "description": "Node server for LinkedHub Project Showcase App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/katherine-payne/linkedhub-project-showcase/issues"
   },
-  "homepage": "https://github.com/katherine-payne/linkedhub-project-showcase#readme"
+  "homepage": "https://github.com/katherine-payne/linkedhub-project-showcase#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
