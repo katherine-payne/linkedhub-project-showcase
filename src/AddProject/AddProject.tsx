@@ -62,7 +62,7 @@ export default function AddProject() {
         setDescription={setDescription}
       />
       <ImageSelector />
-      <div className="m-auto">
+      <div className="m-auto mb-10">
         <PrimaryButton text="Add" onClick={() => {}} />
       </div>
     </div>
