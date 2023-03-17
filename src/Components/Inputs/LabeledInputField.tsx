@@ -2,12 +2,14 @@ import React, { ReactNode } from "react";
 
 export default function LabeledInputField({
   title,
+  titleSize,
   innerSpacing,
   inputField,
   details,
   id,
 }: {
   title: string;
+  titleSize: string;
   innerSpacing: number;
   inputField: ReactNode;
   details: string;
@@ -17,7 +19,7 @@ export default function LabeledInputField({
     <div>
       <label
         htmlFor={id}
-        className={`block my-${innerSpacing} text-xl font-medium text-primary px-1`}
+        className={`block my-${innerSpacing} ${titleSize} font-medium text-primary px-1`}
       >
         {title}
       </label>
