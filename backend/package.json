@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Node server for LinkedHub Project Showcase App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katherine-payne/linkedhub-project-showcase.git"
+  },
+  "keywords": [
+    "Node",
+    "REST",
+    "Server",
+    "HTTP"
+  ],
+  "author": "Frank Anderson & Katherine Payne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/katherine-payne/linkedhub-project-showcase/issues"
+  },
+  "homepage": "https://github.com/katherine-payne/linkedhub-project-showcase#readme"
+}
