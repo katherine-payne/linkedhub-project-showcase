@@ -1,5 +1,5 @@
 import express from "express"
-import CompanyController from "./controllers/comapny-controller"
+import CompanyController from "./controllers/company-controller"
 import ProjectController from "./controllers/project-controller"
 import UserController from "./controllers/user-controller"
 
