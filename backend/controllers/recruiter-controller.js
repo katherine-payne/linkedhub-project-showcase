@@ -1,48 +1,40 @@
-const recruiters = [
-   {
-     _id: 0,
-     name: "Ervin Imaculada",
-     company_name: "Boston Consulting Group",
-     email: "ervin.imaculada@bcg.com",
-     email_shown: false,
-     image_url: "https://picsum.photos/400",
-     summary:
-       "Reprehenderit aute culpa in Lorem incididunt. Occaecat laborum in incididunt do ex labore labore eiusmod et quis. Consectetur esse sit et exercitation cupidatat esse ad consequat nulla officia proident amet.",
-   },
-   {
-     _id: 1,
-     name: "Prema Matte",
-     company_name: "Boston Consulting Group",
-     email: "prema.matte@bcg.com",
-     email_shown: true,
-     image_url: "https://picsum.photos/400",
-     summary:
-       "Reprehenderit aute culpa in Lorem incididunt. Occaecat laborum in incididunt do ex labore labore eiusmod et quis. Consectetur esse sit et exercitation cupidatat esse ad consequat nulla officia proident amet.",
-   },
-   {
-     _id: 2,
-     name: "Zuriel Felicia",
-     company_name: "Boston Consulting Group",
-     email: "zuriel.felicia@bcg.com",
-     email_shown: true,
-     image_url: "https://picsum.photos/400",
-     summary:
-       "Reprehenderit aute culpa in Lorem incididunt. Occaecat laborum in incididunt do ex labore labore eiusmod et quis. Consectetur esse sit et exercitation cupidatat esse ad consequat nulla officia proident amet.",
-   },
-   {
-     _id: 3,
-     name: "Abdul Ansel",
-     company_name: "Boston Consulting Group",
-     email: "abdul.ansel@bcg.com",
-     email_shown: false,
-     image_url: "https://picsum.photos/400",
-     summary:
-       "Reprehenderit aute culpa in Lorem incididunt. Occaecat laborum in incididunt do ex labore labore eiusmod et quis. Consectetur esse sit et exercitation cupidatat esse ad consequat nulla officia proident amet.",
-   },
- ];
+import { examplesRecruiters } from "../Examples/examples-recruiters.js";
+
+const recruiters = examplesRecruiters;
 
 const RecruiterController = (app) => {
+  app.get("/api/recruiter/:rid", find);
+  app.post("/api/recruiter", add);
+  app.put("api/recruiter/:rid", edit);
+  app.delete("api/recruiter/:rid", remove);
+};
 
-}
+const find = (req, res) => {
+  const rid = req.params.rid;
+  const recruiter = recruiters.find((r) => r._id === rid);
+  res.json(recruiter);
+};
 
-export default RecruiterController
+const add = (req, res) => {
+  const newRecruiter = req.body;
+  newRecruiter._id = new Date().getTime() + "";
+  recruiters.push(newRecruiter);
+  res.json(newRecruiter);
+};
+
+const edit = (req, res) => {
+  const rid = req.params["rid"];
+  const updates = req.body;
+  recruiters = recruiters.map((r) => {
+    Recruiter._id === rid ? { ...r, updates } : r;
+  });
+  res.sendStatus(200);
+};
+
+const remove = (req, res) => {
+  const rid = req.params["rid"];
+  recruiters = recruiters.filter((r) => r._id !== rid);
+  res.sendStatus(200);
+};
+
+export default RecruiterController;
