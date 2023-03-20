@@ -1,6 +1,6 @@
 import express from "express"
 
-import CompanyController from "./controllers/company/company-controller.js"
+import CompanyController from "./controllers/company-controller.js"
 import RecruiterController from "./controllers/recruiter-controller.js"
 import LoginController from "./controllers/login-controller.js"
 import ProjectController from "./controllers/project-controller.js"
