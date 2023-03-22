@@ -10,9 +10,9 @@ import {
 import InputField from "src/Components/Inputs/InputField";
 import LabeledInputField from "src/Components/Inputs/LabeledInputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
-import { Language } from "../Types/Language";
-import { Repository } from "../Types/Repository";
-import { SearchStatus } from "../Types/SearchStatus";
+import Language from "../Types/Language";
+import Repository from "../Types/Repository";
+import SearchStatus from "../Types/SearchStatus";
 
 type Props = {
   getLink: string;

@@ -1,4 +1,5 @@
 import React from "react";
+import Company from "src/Types/Company";
 
 export default function CompanyDetailsCard({ company }: { company: Company }) {
   return (
@@ -9,7 +10,9 @@ export default function CompanyDetailsCard({ company }: { company: Company }) {
         src={company.image_url}
       />
       <div className="flex flex-col">
-        <p className="text-2xl text-primary font-semibold pb-3">{company.name}</p>
+        <p className="text-2xl text-primary font-semibold pb-3">
+          {company.name}
+        </p>
         <p className="text-secondary">{company.summary}</p>
       </div>
     </div>

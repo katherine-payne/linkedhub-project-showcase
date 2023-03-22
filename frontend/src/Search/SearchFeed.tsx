@@ -1,9 +1,15 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { BsCheckCircleFill, BsClockFill, BsFillExclamationCircleFill, BsFillFilterCircleFill, BsGithub } from "react-icons/bs";
+import {
+  BsCheckCircleFill,
+  BsClockFill,
+  BsFillExclamationCircleFill,
+  BsFillFilterCircleFill,
+  BsGithub,
+} from "react-icons/bs";
 import { useParams } from "react-router-dom";
-import { SearchQueryResult } from "../Types/SearchQueryResult";
-import { SearchStatus } from "../Types/SearchStatus";
+import SearchQueryResult from "../Types/SearchQueryResult";
+import SearchStatus from "../Types/SearchStatus";
 import searchFor from "./github-api-search";
 import SearchResult from "./SearchResult";
 
@@ -46,15 +52,19 @@ export default function SearchFeed() {
           </div>
         );
       default:
-        return (
-          <></>
-        );
+        return <></>;
     }
   };
 
   return (
     <div className="relative">
-      <div className={`transition-all ease-in-out delay-500 fixed capsule mx-4 bg-gray-100 ${status == SearchStatus.Success || status == SearchStatus.Waiting ? "opacity-0" : "opacity-90"} border-border-neutral p-3 rounded-lg shadow-lg`}>
+      <div
+        className={`transition-all ease-in-out delay-500 fixed capsule mx-4 bg-gray-100 ${
+          status == SearchStatus.Success || status == SearchStatus.Waiting
+            ? "opacity-0"
+            : "opacity-90"
+        } border-border-neutral p-3 rounded-lg shadow-lg`}
+      >
         <div>{statusDisplay()}</div>
       </div>
       <div className="max-w-none md:max-w-2xl m-auto">

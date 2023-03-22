@@ -2,11 +2,12 @@ import React from "react";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import CompanyDetailsCard from "../Components/CompanyDetailsCard";
 import { BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
+import Company from "src/Types/Company";
+import Recruiter from "src/Types/Recruiter";
 
 /* eslint-disable */
 
-export default function CompanyPage({company} : {company: Company}) {
-
+export default function CompanyPage({ company }: { company: Company }) {
   return (
     <div className="flex flex-row gap-4 justify-center items-start mx-4">
       <div className="max-w-xl bg-white shadow-md border border-border-neutral p-4 rounded-lg">

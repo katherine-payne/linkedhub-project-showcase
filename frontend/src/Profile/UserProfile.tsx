@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { FaPencilAlt, FaPlus, FaTimes } from "react-icons/fa";
 import { examplesFrank } from "../Examples/example-profile";
-import { Education, Experience } from "src/Types/User";
+import Education from "src/Types/Education";
+import Experience from "src/Types/Experience";
 import UserProfileHeading from "./UserProfileHeading";
 import UserProfileLabeledEntry from "./UserProfileLabeledEntry";
 import ProjectFeed from "../Components/ProjectFeed";
