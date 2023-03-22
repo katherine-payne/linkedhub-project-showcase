@@ -1,13 +1,12 @@
+import { examplesFrank } from "../Examples/example-profile.js";
 
-import { examplesFrank } from "../Examples/example-profile";
-
-const users = [examplesFrank]
+const users = [examplesFrank];
 
 const UserController = (app) => {
-  app.get("/api/user/:uid", find);
-  app.post("/api/user", add);
-  app.put("api/user/:uid", edit);
-  app.delete("api/user/:uid", remove);
+  app.get("/api/users/:uid", find);
+  app.post("/api/users", add);
+  app.put("/api/users/:uid", edit);
+  app.delete("/api/users/:uid", remove);
 };
 
 const find = (req, res) => {

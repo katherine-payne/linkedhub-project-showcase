@@ -3,10 +3,10 @@ import { examplesRecruiters } from "../Examples/examples-recruiters.js";
 const recruiters = examplesRecruiters;
 
 const RecruiterController = (app) => {
-  app.get("/api/recruiter/:rid", find);
-  app.post("/api/recruiter", add);
-  app.put("api/recruiter/:rid", edit);
-  app.delete("api/recruiter/:rid", remove);
+  app.get("/api/recruiters/:rid", find);
+  app.post("/api/recruiters", add);
+  app.put("/api/recruiters/:rid", edit);
+  app.delete("/api/recruiters/:rid", remove);
 };
 
 const find = (req, res) => {

@@ -3,10 +3,10 @@ import { examplesBCG } from "../Examples/example-company.js";
 const companies = [examplesBCG];
 
 const CompanyController = (app) => {
-  app.get("/api/company/:cid", find);
-  app.post("/api/company", add);
-  app.put("api/company/:cid", edit);
-  app.delete("api/company/:cid", remove);
+  app.get("/api/companies/:cid", find);
+  app.post("/api/companies", add);
+  app.put("/api/companies/:cid", edit);
+  app.delete("/api/companies/:cid", remove);
 };
 
 const find = (req, res) => {
