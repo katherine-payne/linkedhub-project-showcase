@@ -26,7 +26,7 @@ const edit = (req, res) => {
   const cid = req.params["cid"];
   const updates = req.body;
   companies = companies.map((c) => {
-    company._id === cid ? { ...c, updates } : c;
+    c._id === cid ? { ...c, updates } : c;
   });
   res.sendStatus(200);
 };

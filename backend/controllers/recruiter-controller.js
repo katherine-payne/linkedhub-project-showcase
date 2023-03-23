@@ -26,7 +26,7 @@ const edit = (req, res) => {
   const rid = req.params["rid"];
   const updates = req.body;
   recruiters = recruiters.map((r) => {
-    Recruiter._id === rid ? { ...r, updates } : r;
+    r._id === rid ? { ...r, updates } : r;
   });
   res.sendStatus(200);
 };

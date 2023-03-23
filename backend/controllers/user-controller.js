@@ -26,7 +26,7 @@ const edit = (req, res) => {
   const uid = req.params["uid"];
   const updates = req.body;
   users = users.map((u) => {
-    User._id === uid ? { ...u, updates } : u;
+    u._id === uid ? { ...u, updates } : u;
   });
   res.sendStatus(200);
 };
