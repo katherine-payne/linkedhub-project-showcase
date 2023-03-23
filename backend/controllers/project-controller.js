@@ -1,6 +1,6 @@
 import { examplesFrank } from "../Examples/example-profile.js";
 
-const projects = examplesFrank.projects;
+let projects = examplesFrank.projects;
 
 const ProjectController = (app) => {
   app.get("/api/projects/:pid", find);
@@ -16,13 +16,62 @@ const find = (req, res) => {
   res.json(project);
 };
 
-const findGithub = (req, res) => {
+async function searchGithub(owner, repo) {
+  const url = `https://api.github.com/repos/${owner}/${repo}`;
+
+  const response = await fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then((r) => r)
+    .catch(() => {
+      return null;
+    });
+
+  if (response) {
+    const found = response;
+
+    found.languages = await fetch(found.languages_url)
+      .then((response) => response.json())
+      .then((json) => {
+        let out = [];
+
+        Object.keys(json).forEach((key) => {
+          const next = { name: key, lines: json[key] };
+          out.push(next);
+        });
+
+        return out;
+      });
+
+    found.name = found.name
+      .split("-")
+      .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
+      .join(" ");
+
+    found.link = "https://github.com/" + owner + repo;
+
+    return found;
+  }
+}
+
+const findGithub = async (req, res) => {
   const username = req.params.user;
   const repo = req.params.repo;
-  const project = projects.find(
+  const localProjects = projects.filter(
     (p) => p.username === username && p.repo === repo
   );
-  res.json(project);
+  if (localProjects.length > 0) {
+    res.json(localProjects);
+  } else {
+    const githubProject = await searchGithub(username, repo);
+    if (githubProject) {
+      res.json(githubProject);
+    }
+  }
+  res.sendStatus(404);
 };
 
 const add = (req, res) => {
@@ -35,9 +84,7 @@ const add = (req, res) => {
 const edit = (req, res) => {
   const pid = req.params.pid;
   const updates = req.body;
-  projects = projects.map((p) => {
-    p._id === pid ? { ...p, updates } : p;
-  });
+  projects = projects.map((p) => (p._id === pid ? { ...p, ...updates } : p));
   res.sendStatus(200);
 };
 

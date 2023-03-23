@@ -9,7 +9,7 @@ const HomeController = (app) => {
 const find = (req, res) => {
   res.json(
     projects.sort((p1, p2) => {
-      p2.hearts - p1.hearts;
+      return p2.hearts - p1.hearts;
     })
   );
 };
