@@ -1,6 +1,6 @@
 import { examplesRecruiters } from "../Examples/examples-recruiters.js";
 
-const recruiters = examplesRecruiters;
+let recruiters = examplesRecruiters;
 
 const RecruiterController = (app) => {
   app.get("/api/recruiters/:rid", find);

@@ -1,6 +1,6 @@
 import { examplesFrank } from "../Examples/example-profile.js";
 
-const projects = examplesFrank.projects;
+let projects = examplesFrank.projects;
 
 const HomeController = (app) => {
   app.get("/api/home", find);

@@ -1,6 +1,6 @@
 import { examplesBCG } from "../Examples/example-company.js";
 
-const companies = [examplesBCG];
+let companies = [examplesBCG];
 
 const CompanyController = (app) => {
   app.get("/api/companies/:cid", find);

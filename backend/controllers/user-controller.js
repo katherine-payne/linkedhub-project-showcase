@@ -1,6 +1,6 @@
 import { examplesFrank } from "../Examples/example-profile.js";
 
-const users = [examplesFrank];
+let users = [examplesFrank];
 
 const UserController = (app) => {
   app.get("/api/users/:uid", find);
