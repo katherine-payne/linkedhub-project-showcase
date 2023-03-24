@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 
 import CompanyController from "./controllers/company-controller.js";
 import RecruiterController from "./controllers/recruiter-controller.js";
@@ -11,6 +12,7 @@ import UserController from "./controllers/user-controller.js";
 import HomeController from "./controllers/home-controller.js";
 
 const app = express();
+app.use(cors())
 app.use(express.json());
 
 CompanyController(app);

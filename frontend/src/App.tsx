@@ -32,8 +32,8 @@ export default function App() {
           />
           <Route path="/add" element={<AddProject />} />
           <Route
-            path="/company"
-            element={<CompanyPage company={examplesBCG} />}
+            path="/company/:cid"
+            element={<CompanyPage />}
           />
           <Route
             path="/recruiter"

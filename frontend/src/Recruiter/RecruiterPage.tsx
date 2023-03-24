@@ -9,7 +9,7 @@ export default function RecruiterPage({ recruiter }: { recruiter: Recruiter }) {
       <div className="flex flex-col gap-4 max-w-xl font-serif">
         <div className="flex flex-row items-center gap-4">
           <img
-            className="w-16 h-16 rounded-full object-cover shadow-md"
+            className="w-16 h-16 rounded-full object-cover shadow-md aspect-square"
             alt="Rounded avatar"
             src={recruiter.image_url}
           />

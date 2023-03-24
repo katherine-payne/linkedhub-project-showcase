@@ -99,7 +99,7 @@ export default function NavigationBar() {
 
           <Link to="/profile">
             <img
-              className="relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all lh-profile-image object-cover"
+              className="relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all lh-profile-image object-cover aspect-square"
               src="https://picsum.photos/400"
               alt="Rounded avatar"
             />

@@ -1,6 +1,7 @@
 import {examplesRecruiters} from "./examples-recruiters.js";
 
 export const examplesBCG = {
+  _id: "c0",
   name: "Boston Consulting Group",
   summary:
     "Boston Consulting Group, Inc. (BCG) is an American global management consulting firm founded in 1963 and headquartered in Boston, Massachusetts.",

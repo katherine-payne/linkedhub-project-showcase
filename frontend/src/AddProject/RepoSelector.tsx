@@ -209,7 +209,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
 
       <PrimaryButton
         bgClass="disabled:cursor-not-allowed"
-        disabled={() => !link || searchStatus != SearchStatus.Waiting}
+        disabled={!link || searchStatus != SearchStatus.Waiting}
         onClick={() => {
           searchWithURL();
         }}

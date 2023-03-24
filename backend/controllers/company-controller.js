@@ -25,10 +25,10 @@ const add = (req, res) => {
 const edit = (req, res) => {
   const cid = req.params["cid"];
   const updates = req.body;
-  companies = companies.map((c) => {
-    c._id === cid ? { ...c, updates } : c;
-  });
-  res.sendStatus(200);
+  companies = companies.map((c) => (c._id === cid ? { ...c, ...updates } : c));
+  const updated = companies.find((c) => c._id === cid);
+  // console.log(updated)
+  res.json(updated);
 };
 
 const remove = (req, res) => {

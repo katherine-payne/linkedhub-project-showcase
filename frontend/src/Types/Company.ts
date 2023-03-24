@@ -1,7 +1,8 @@
 import Recruiter from "./Recruiter";
 
 type Company = {
-   name: string; // unique
+   _id: string;
+   name: string;
    summary: string; // limit to 150 characters
    image_url: string;
    recruiters: Array<Recruiter>
