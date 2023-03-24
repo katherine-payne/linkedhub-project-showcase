@@ -14,19 +14,8 @@ export default function ProjectFeed({ projects }: Props) {
         {projects.map((p, index) => (
           <div key={index}>
             <ProjectCardSpotlight
-              name={p.name}
-              hearts={p.hearts}
-              languageTags={p.languages}
-              topicTags={p.tags}
-              description={p.description}
-            />
-            <ProjectCard
-              name={p.name}
-              hearts={p.hearts}
-              languageTags={p.languages}
-              topicTags={p.tags}
-              description={p.description}
-            />
+              p={p} />
+            <ProjectCard p={p} />
           </div>
         ))}
       </div>

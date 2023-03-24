@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { FaHeart } from "react-icons/fa";
 import { examplesFrank } from "../Examples/example-profile";
 import FormattedDescription from "../Components/FormattedDescription";
 import LanguageTag from "src/Components/LanguageTag";
 import TopicTag from "src/Components/TopicTag";
-import PrimaryButton from "src/Components/Inputs/PrimaryButton";
+import HeartButton from "src/Components/Inputs/HeartButton";
 
 export default function ProjectDetails({
   projectLink,
@@ -27,19 +26,11 @@ export default function ProjectDetails({
           />
           <p className="text-3xl font-semibold p-2">{user.name}</p>
         </div>
-        <div className="flex justify-between">
-          <PrimaryButton
-            text="Email"
-            onClick={() => {
-              window.open(`mailto:${user.contact_info.email}`);
-            }}
-          />
-          <FaHeart
-            className={`${
-              hearted ? "text-heart" : "text-neutral"
-            } text-3xl mt-2 mr-1`}
-            onClick={() => setHearted(!hearted)}
-          />
+        <div className="flex justify-between items-center">
+          <a href={`mailto:${user.contact_info.email}`} className="italic text-accent hover:underline">
+            {user.contact_info.email}
+          </a>
+          <HeartButton hearted={hearted} setHearted={setHearted} project={project} setProject={setProject} />
         </div>
       </div>
 

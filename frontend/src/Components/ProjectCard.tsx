@@ -1,31 +1,26 @@
-import React from "react";
-import { FaHeart } from "react-icons/fa";
+import React, { useState } from "react";
+import Project from "src/Types/Project";
+import HeartButton from "./Inputs/HeartButton";
 
 import ProjectCardText from "./ProjectCardText";
 
 type Props = {
-  name: string;
-  hearts: number;
-  languageTags: Array<string>;
-  topicTags: Array<string>;
-  description: string;
+  p: Project;
 };
 
-export default function ProjectCard({
-  name,
-  hearts,
-  languageTags,
-  topicTags,
-  description,
-}: Props) {
+export default function ProjectCard({p}: Props) {
+
+  const [hearted, setHearted] = useState(false);
+  const [project, setProject] = useState(p)
+
   return (
     <div className="flex content-center bg-white text-primary shadow-md border border-border-neutral p-2 m-4 rounded-lg">
       <div className="w-3/5">
         <ProjectCardText
-          name={name}
-          languageTags={languageTags}
-          topicTags={topicTags}
-          description={description}
+          name={p.name}
+          languageTags={p.languages}
+          topicTags={p.tags}
+          description={p.description}
         />
       </div>
       <div className="w-2/5 m-2 ml-auto">
@@ -34,10 +29,7 @@ export default function ProjectCard({
           alt="project interface screenshot"
           className="w-full h-36 rounded-lg object-cover"
         ></img>
-        <div className="flex text-heart text-xl mt-2">
-          <FaHeart className="mt-1 mr-1 ml-auto" />
-          {hearts}
-        </div>
+        <HeartButton hearted={hearted} setHearted={setHearted} project={project} setProject={setProject} />
       </div>
     </div>
   );
