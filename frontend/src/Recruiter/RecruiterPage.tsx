@@ -1,6 +1,7 @@
 import React from "react";
 import CompanyDetailsCard from "src/Components/CompanyDetailsCard";
-import { examplesBCG } from "src/Examples/example-company";
+import Recruiter from "src/Types/Recruiter";
+import examplesBCG from "src/Examples/example-company";
 
 export default function RecruiterPage({ recruiter }: { recruiter: Recruiter }) {
   return (

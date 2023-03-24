@@ -1,6 +1,4 @@
-import User from "src/Types/User";
-
-export const examplesFrank: User = {
+export const examplesFrank = {
   name: "Frank Anderson",
   contact_info: {
     email: "anderson.f@northeastern.edu",
@@ -49,20 +47,26 @@ export const examplesFrank: User = {
   ],
   projects: [
     {
+      _id: "0",
       name: "Cool Project",
       hearts: 100,
       description:
         "This is my project!\nYou should check it out.\nIt's awesome!",
       languages: ["HTML", "CSS", "JavaScript", "Python"],
       tags: ["My Stuff", "Cool Projects", "Design", "Startup"],
+      username: "githubUser",
+      repo: "cool-project",
     },
     {
+      _id: "1",
       name: "My First Project",
       hearts: 100,
       description:
         "This is my project!\nYou should check it out.\nIt's awesome!",
       languages: ["HTML", "CSS", "JavaScript", "Python"],
       tags: ["My Stuff", "Cool Projects", "Design", "Startup"],
+      username: "githubUser",
+      repo: "first-project",
     },
   ],
 };

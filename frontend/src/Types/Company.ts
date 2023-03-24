@@ -1,3 +1,5 @@
+import Recruiter from "./Recruiter";
+
 type Company = {
    name: string; // unique
    summary: string; // limit to 150 characters
@@ -5,3 +7,5 @@ type Company = {
    recruiters: Array<Recruiter>
    requests: Array<Recruiter>
 }
+
+export default Company

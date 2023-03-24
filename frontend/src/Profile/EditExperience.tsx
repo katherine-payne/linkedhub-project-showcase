@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Experience } from "src/Types/User";
+import Experience from "src/Types/Experience";
 import InputField from "src/Components/Inputs/InputField";
 import LabeledInputField from "src/Components/Inputs/LabeledInputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";

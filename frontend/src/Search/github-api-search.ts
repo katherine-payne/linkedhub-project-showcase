@@ -1,5 +1,5 @@
-import { makeSQR, SearchQueryResult } from "../Types/SearchQueryResult";
-import { SearchStatus } from "../Types/SearchStatus";
+import SearchQueryResult, { makeSQR } from "../Types/SearchQueryResult";
+import SearchStatus from "../Types/SearchStatus";
 
 type GitAPIReturn = {
   id: number;
@@ -28,8 +28,8 @@ export default async function searchFor(
       if (response.ok) {
         return response.json();
       } else {
-        console.log(response.statusText)
-        console.log(response.status)
+        console.log(response.statusText);
+        console.log(response.status);
       }
     })
     .then((json) =>

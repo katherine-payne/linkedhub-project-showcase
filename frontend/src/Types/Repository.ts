@@ -1,6 +1,6 @@
-import { Language } from "./Language";
+import Language from "./Language";
 
-export type Repository = {
+type Repository = {
   name: string;
   id: number;
   description: string;
@@ -10,3 +10,5 @@ export type Repository = {
   languages: Array<Language>;
   topics: Array<string>;
 };
+
+export default Repository

@@ -7,7 +7,7 @@ import ImageSelector from "./ImageSelector";
 import LabeledInputField from "src/Components/Inputs/LabeledInputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import InputField from "src/Components/Inputs/InputField";
-import { Repository } from "../Types/Repository";
+import Repository from "../Types/Repository";
 
 export default function AddProject() {
   const [link, setLink] = useState<string>("");

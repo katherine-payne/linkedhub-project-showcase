@@ -5,12 +5,13 @@ import MainFeed from "./Home/MainFeed";
 import Toolbar from "./NavigationBar/NavigationBar";
 import SearchFeed from "./Search/SearchFeed";
 import UserProfile from "./Profile/UserProfile";
-import React, { useState } from "react";
+import React from "react";
 import AddProject from "./AddProject/AddProject";
 import ProjectDetails from "./ProjectDetails/ProjectDetails";
 import CompanyPage from "./Company/CompanyPage";
 import RecruiterPage from "./Recruiter/RecruiterPage";
-import { examplesBCG, examplesRecruiters } from "./Examples/example-company";
+import examplesBCG from "./Examples/example-company";
+import examplesRecruiters from "./Examples/examples-recruiters";
 
 export default function App() {
   return (

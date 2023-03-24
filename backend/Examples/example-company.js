@@ -1,7 +1,6 @@
-import Company from "src/Types/Company";
-import examplesRecruiters from "./examples-recruiters";
+import {examplesRecruiters} from "./examples-recruiters.js";
 
-const examplesBCG: Company = {
+export const examplesBCG = {
   name: "Boston Consulting Group",
   summary:
     "Boston Consulting Group, Inc. (BCG) is an American global management consulting firm founded in 1963 and headquartered in Boston, Massachusetts.",
@@ -9,6 +8,3 @@ const examplesBCG: Company = {
   recruiters: [examplesRecruiters[0], examplesRecruiters[1]],
   requests: [examplesRecruiters[2], examplesRecruiters[3]],
 };
-
-
-export default examplesBCG
