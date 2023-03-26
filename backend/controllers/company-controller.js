@@ -27,7 +27,6 @@ const edit = (req, res) => {
   const updates = req.body;
   companies = companies.map((c) => (c._id === cid ? { ...c, ...updates } : c));
   const updated = companies.find((c) => c._id === cid);
-  // console.log(updated)
   res.json(updated);
 };
 

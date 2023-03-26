@@ -27,7 +27,7 @@ export default function HeartButton({
         } else {
           updatedProject.hearts += 1;
         }
-        const p: Project = await updateProject(updatedProject);
+        await updateProject(updatedProject);
         setProject(updatedProject);
         setHearted(!hearted);
       }}

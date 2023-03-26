@@ -9,8 +9,6 @@ type Props = {
 };
 
 export default function TopicTag({ text, canDelete, onDelete }: Props) {
-console.log(canDelete)
-
   return (
     <span
       className={`rounded-full text-sm text-white flex shrink-0 bg-contrast px-2 py-1 mr-1 my-1 group ${

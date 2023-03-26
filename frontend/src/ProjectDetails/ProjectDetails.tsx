@@ -11,7 +11,7 @@ export default function ProjectDetails({
   projectLink: string;
 }) {
   //   const [repo, setRepo] = useState();
-  const [user, setUser] = useState(examplesFrank);
+  const user = examplesFrank;
   const [project, setProject] = useState(examplesFrank.projects[0]);
   const [hearted, setHearted] = useState(false);
 

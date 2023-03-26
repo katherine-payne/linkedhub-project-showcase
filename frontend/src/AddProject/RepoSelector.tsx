@@ -67,7 +67,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
   //  - fail: show red x
   //  - success: show green x, populate content of page
   async function searchWithURL() {
-    if (link && searchStatus == SearchStatus.Waiting) {
+    if (link && searchStatus === SearchStatus.Waiting) {
       setSearchStatus(SearchStatus.Loading);
 
       const { owner, repo }: { owner: string; repo: string } =
@@ -120,7 +120,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
       }
     }
     setSearchStatus(
-      searchStatus == SearchStatus.Success
+      searchStatus === SearchStatus.Success
         ? SearchStatus.Success
         : SearchStatus.Failed
     );
