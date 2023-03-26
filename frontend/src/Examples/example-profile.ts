@@ -1,6 +1,7 @@
 import User from "src/Types/User";
 
 export const examplesFrank: User = {
+  _id: "u0",
   name: "Frank Anderson",
   contact_info: {
     email: "anderson.f@northeastern.edu",

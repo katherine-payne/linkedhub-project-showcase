@@ -11,6 +11,7 @@ import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import EditEducation from "./EditEducation";
 import EditExperience from "./EditExperience";
+import { updateUser } from "src/services/user-service";
 
 export default function UserProfile({
   user = examplesFrank,
@@ -225,8 +226,11 @@ export default function UserProfile({
               {editProfile && isEditingEducation(edu) && (
                 <EditEducation
                   education={edu}
-                  onSave={(ex) => {
+                  onSave={async (ex) => {
                     /* Save to database */
+                    const updatedUser = user // TODO: need to update user based on new information
+                    await updateUser(updatedUser)
+                    updateEditingEducation(edu, false);
                   }}
                   onCancel={() => {
                     updateEditingEducation(edu, false);
