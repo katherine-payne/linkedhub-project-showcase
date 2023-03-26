@@ -37,7 +37,7 @@ const InputField = (props: {
     border == "" || border == "none"
       ? ""
       : `border ${border ?? "border-border"}`
-  } text-primary text-sm rounded-lg ${
+  } bg-white text-primary text-sm rounded-lg ${
     focus ? "focus:ring-blue-500 focus:border-blue-500" : "outline-none"
   } block w-full p-3 ${classAdditions}`;
 

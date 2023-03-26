@@ -65,7 +65,16 @@ export default function AddProject() {
       />
       <ImageSelector />
       <div className="m-auto mb-10">
-        <PrimaryButton text="Add" onClick={() => {}} />
+        <PrimaryButton text="Add" onClick={() => {
+          const newProject = {
+            name: title,
+            link: link,
+            hearts: 0,
+            description: description,
+            languages: languages,
+            tags: tags,
+        } // TODO
+        }} />
       </div>
     </div>
   );

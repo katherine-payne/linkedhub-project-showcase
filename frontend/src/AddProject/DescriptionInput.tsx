@@ -22,7 +22,7 @@ export default function DescriptionInput({
         titleSize={titleSize}
         inputField={
           <textarea
-            className="text-primary text-sm border border-border rounded-lg w-full p-3"
+            className="text-primary text-sm border border-border outline-none rounded-lg w-full p-3"
             id="title"
             placeholder="Description"
             value={description}
