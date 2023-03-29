@@ -25,10 +25,11 @@ const add = (req, res) => {
 const edit = (req, res) => {
   const rid = req.params["rid"];
   const updates = req.body;
-  recruiters = recruiters.map((r) => {
-    r._id === rid ? { ...r, updates } : r;
-  });
-  res.sendStatus(200);
+  recruiters = recruiters.map((r) =>
+    r._id === rid ? { ...r, ...updates } : r
+  );
+  const updated = recruiters.find((r) => r._id === rid);
+  res.json(updated);
 };
 
 const remove = (req, res) => {
