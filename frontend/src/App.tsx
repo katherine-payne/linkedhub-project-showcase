@@ -10,7 +10,6 @@ import AddProject from "./AddProject/AddProject";
 import ProjectDetails from "./ProjectDetails/ProjectDetails";
 import CompanyPage from "./Company/CompanyPage";
 import RecruiterPage from "./Recruiter/RecruiterPage";
-import examplesBCG from "./Examples/example-company";
 import examplesRecruiters from "./Examples/examples-recruiters";
 
 export default function App() {
@@ -31,10 +30,7 @@ export default function App() {
             element={<ProjectDetails projectLink={""} />}
           />
           <Route path="/add" element={<AddProject />} />
-          <Route
-            path="/company/:cid"
-            element={<CompanyPage />}
-          />
+          <Route path="/company/:cid" element={<CompanyPage />} />
           <Route
             path="/recruiter"
             element={<RecruiterPage recruiter={examplesRecruiters[1]} />}

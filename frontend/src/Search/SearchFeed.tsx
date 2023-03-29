@@ -1,10 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import {
-  BsCheckCircleFill,
-  BsClockFill,
-  BsFillExclamationCircleFill,
-} from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import statusDisplay from "src/Components/StatusDisplay";
 import SearchQueryResult from "../Types/SearchQueryResult";

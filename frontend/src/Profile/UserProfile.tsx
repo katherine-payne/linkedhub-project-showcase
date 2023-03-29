@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { FaPencilAlt, FaPlus, FaTimes } from "react-icons/fa";
-import { examplesFrank } from "../Examples/example-profile";
 import Education from "src/Types/Education";
 import Experience from "src/Types/Experience";
 import UserProfileHeading from "./UserProfileHeading";
@@ -11,299 +11,381 @@ import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import EditEducation from "./EditEducation";
 import EditExperience from "./EditExperience";
-import { updateUser } from "src/services/user-service";
+import { getUser, updateUser } from "src/services/user-service";
+import User from "src/Types/User";
 
-export default function UserProfile({
-  user = examplesFrank,
-  editProfile = false,
-}) {
+export default function UserProfile({ editProfile = false }) {
+  const { uid } = useParams();
+
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const r = await getUser(uid ?? "u0"); // TODO: Replace with logged in user id after login is implemented
+      setUser(r);
+
+      setNewPhone(r.contact_info.phone);
+      setEditingEducation(
+        r.education.map((edu: Education) => {
+          return { education: edu, editing: false };
+        })
+      );
+      setEditingExperience(
+        r.experience.map((job: Experience) => {
+          return { experience: job, editing: false };
+        })
+      );
+      setNewSkills(r.skills);
+    }
+    fetchData();
+  }, [uid]);
+
   const [editingPhone, setEditingPhone] = useState(false);
-  const [newPhone, setNewPhone] = useState(user.contact_info.phone);
+  const [newPhone, setNewPhone] = useState(
+    user?.contact_info.phone ?? undefined
+  );
   const [addingEducation, setAddingEducation] = useState(false);
   const [editingEducation, setEditingEducation] = useState(
-    user.education.map((edu) => {
+    user?.education.map((edu) => {
       return { education: edu, editing: false };
-    })
+    }) ?? undefined
   );
   const [addingExperience, setAddingExperience] = useState(false);
   const [editingExperience, setEditingExperience] = useState(
-    user.experience.map((job) => {
+    user?.experience.map((job) => {
       return { experience: job, editing: false };
-    })
+    }) ?? undefined
   );
   const [editingSkills, setEditingSkills] = useState(false);
-  const [newSkills, setNewSkills] = useState(user.skills);
+  const [newSkills, setNewSkills] = useState(user?.skills ?? undefined);
 
   const isEditingExperience = (job: Experience) => {
-    return editingExperience.find((exp) => exp.experience === job)?.editing;
+    return editingExperience?.find((exp) => exp.experience === job)?.editing;
   };
   const updateEditingExperience = (job: Experience, editing: boolean) => {
-    setEditingExperience(
-      editingExperience.map((exp) => {
-        return exp.experience === job
-          ? { experience: job, editing: editing }
-          : exp;
-      })
-    );
+    const currentExp = editingExperience?.find((ex) => ex.experience === job);
+    currentExp
+      ? setEditingExperience(
+          editingExperience?.map((exp) => {
+            return exp.experience === job
+              ? { experience: job, editing: editing }
+              : exp;
+          })
+        )
+      : setEditingExperience([
+          ...(editingExperience ?? []),
+          { experience: job, editing: editing },
+        ]);
   };
 
   const isEditingEducation = (edu: Education) => {
-    return editingEducation.find((ed) => ed.education === edu)?.editing;
+    return editingEducation?.find((ed) => ed.education === edu)?.editing;
   };
   const updateEditingEducation = (edu: Education, editing: boolean) => {
-    setEditingEducation(
-      editingEducation.map((ed) => {
-        return ed.education === edu ? { education: edu, editing: editing } : ed;
-      })
-    );
+    const currentEdu = editingEducation?.find((ex) => ex.education === edu);
+    currentEdu
+      ? setEditingEducation(
+          editingEducation?.map((ed) => {
+            return ed.education === edu
+              ? { education: edu, editing: editing }
+              : ed;
+          })
+        )
+      : setEditingEducation([
+          ...(editingEducation ?? []),
+          { education: edu, editing: editing },
+        ]);
   };
 
   return (
     <div className="flex md:flex-row flex-col justify-center">
-      <div
-        id="infoFeed"
-        className="font-serif text-primary max-w-none md:max-w-xl border-r-2 ml-4 p-4"
-      >
-        <p className="text-3xl font-semibold">{user.name}</p>
-        <p>
-          <a href={"mailto:" + user.contact_info.email}>
-            {user.contact_info.email}
-          </a>
-        </p>
-        <p className="flex items-center gap-1">
-          {(!editProfile || (editProfile && !editingPhone)) && (
-            <a href={"tel:" + user.contact_info.phone}>
-              {user.contact_info.phone}
+      {user && (
+        <div
+          id="infoFeed"
+          className="font-serif text-primary max-w-none md:max-w-xl border-r-2 ml-4 p-4"
+        >
+          <p className="text-3xl font-semibold">{user.name}</p>
+          <p>
+            <a href={"mailto:" + user.contact_info.email}>
+              {user.contact_info.email}
             </a>
-          )}
-          {editProfile && !editingPhone && (
+          </p>
+          <p className="flex items-center gap-1">
+            {(!editProfile || (editProfile && !editingPhone)) && (
+              <a href={"tel:" + user.contact_info.phone}>
+                {user.contact_info.phone}
+              </a>
+            )}
+            {editProfile && !editingPhone && (
+              <PrimaryButton
+                icon={<FaPencilAlt />}
+                onClick={() => {
+                  setEditingPhone(true);
+                }}
+              />
+            )}
+            {editProfile && editingPhone && (
+              <>
+                <InputField
+                  type="tel"
+                  id="phone"
+                  placeholder="Phone Number"
+                  value={newPhone}
+                  onChange={(e) => setNewPhone(e.target.value)}
+                />
+                <PrimaryButton
+                  text="Save"
+                  onClick={async () => {
+                    const updatedUser = {
+                      ...user,
+                      contact_info: {
+                        ...user.contact_info,
+                        phone: newPhone ?? "",
+                      },
+                    };
+                    const newUser = await updateUser(updatedUser);
+                    setEditingPhone(false);
+                    setUser(newUser);
+                  }}
+                />
+                <PrimaryButton
+                  text="Cancel"
+                  onClick={() => {
+                    setNewPhone(user.contact_info.phone);
+                    setEditingPhone(false);
+                  }}
+                />
+              </>
+            )}
+          </p>
+
+          <UserProfileHeading title="Experience" />
+          {user.experience.map((job, index) => {
+            return (
+              <div className="mb-4" key={index}>
+                <div className="flex items-center justify-between">
+                  <p className="font-bold">{job.role}</p>
+                  {editProfile && !isEditingExperience(job) && (
+                    <div className="flex gap-1">
+                      <PrimaryButton
+                        icon={<FaPencilAlt />}
+                        onClick={() => {
+                          updateEditingExperience(job, true);
+                        }}
+                      />
+                      <PrimaryButton
+                        icon={<FaTimes />}
+                        onClick={async () => {
+                          const updatedUser = user;
+                          updatedUser.experience =
+                            updatedUser.experience.filter((ex) => ex !== job);
+                          const newUser = await updateUser(updatedUser);
+                          updateEditingExperience(job, false);
+                          setUser(newUser);
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {(!editProfile || !isEditingExperience(job)) && (
+                  <>
+                    <UserProfileLabeledEntry
+                      label="Company"
+                      entry={job.company}
+                    />
+                    <UserProfileLabeledEntry
+                      label="Location"
+                      entry={job.location}
+                    />
+                    <UserProfileLabeledEntry
+                      label="Duration"
+                      entry={
+                        job.start + " - " + (job.end ? job.end : "Present")
+                      }
+                    />
+                    <p className="whitespace-pre-wrap">
+                      <FormattedDescription description={job.description} />
+                    </p>
+                  </>
+                )}
+                {editProfile && isEditingExperience(job) && (
+                  <EditExperience
+                    experience={job}
+                    onSave={async (ex) => {
+                      const updatedUser = user;
+                      updatedUser.experience = updatedUser.experience.map((e) =>
+                        e === job ? ex : e
+                      );
+                      const newUser = await updateUser(updatedUser);
+                      updateEditingExperience(job, false);
+                      setUser(newUser);
+                    }}
+                    onCancel={() => {
+                      updateEditingExperience(job, false);
+                    }}
+                  />
+                )}
+              </div>
+            );
+          })}
+          {editProfile && !addingExperience && (
             <PrimaryButton
-              icon={<FaPencilAlt />}
+              icon={<FaPlus />}
               onClick={() => {
-                setEditingPhone(true);
+                setAddingExperience(true);
               }}
             />
           )}
-          {editProfile && editingPhone && (
-            <>
-              <InputField
-                type="tel"
-                id="phone"
-                placeholder="Phone Number"
-                value={newPhone}
-                onChange={(e) => setNewPhone(e.target.value)}
-              />
-              <PrimaryButton
-                text="Save"
-                onClick={() => {
-                  /* Save to database */
-                  setEditingPhone(false);
-                }}
-              />
-              <PrimaryButton
-                text="Cancel"
-                onClick={() => {
-                  setNewPhone(user.contact_info.phone);
-                  setEditingPhone(false);
-                }}
-              />
-            </>
-          )}
-        </p>
-
-        <UserProfileHeading title="Experience" />
-        {user.experience.map((job, index) => {
-          return (
-            <div className="mb-4" key={index}>
-              <div className="flex items-center justify-between">
-                <p className="font-bold">{job.role}</p>
-                {editProfile && !isEditingExperience(job) && (
-                  <div className="flex gap-1">
-                    <PrimaryButton
-                      icon={<FaPencilAlt />}
-                      onClick={() => {
-                        updateEditingExperience(job, true);
-                      }}
-                    />
-                    <PrimaryButton
-                      icon={<FaTimes />}
-                      onClick={() => {
-                        /* Send deletion to database */
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-
-              {(!editProfile || !isEditingExperience(job)) && (
-                <>
-                  <UserProfileLabeledEntry
-                    label="Company"
-                    entry={job.company}
-                  />
-                  <UserProfileLabeledEntry
-                    label="Location"
-                    entry={job.location}
-                  />
-                  <UserProfileLabeledEntry
-                    label="Duration"
-                    entry={job.start + " - " + (job.end ?? "Present")}
-                  />
-                  <p className="whitespace-pre-wrap">
-                    <FormattedDescription description={job.description} />
-                  </p>
-                </>
-              )}
-              {editProfile && isEditingExperience(job) && (
-                <EditExperience
-                  experience={job}
-                  onSave={(ex) => {
-                    /* Save to database */
-                  }}
-                  onCancel={() => {
-                    updateEditingExperience(job, false);
-                  }}
-                />
-              )}
-            </div>
-          );
-        })}
-        {editProfile && !addingExperience && (
-          <PrimaryButton
-            icon={<FaPlus />}
-            onClick={() => {
-              setAddingExperience(true);
-            }}
-          />
-        )}
-        {editProfile && addingExperience && (
-          <EditExperience
-            onSave={() => {
-              /* Save to database */
-              setAddingExperience(false);
-            }}
-            onCancel={() => {
-              setAddingExperience(false);
-            }}
-          />
-        )}
-
-        <UserProfileHeading title="Education" />
-        {user.education.map((edu, index) => {
-          return (
-            <div className="mb-4" key={index}>
-              <div className="flex items-center justify-between">
-                <p className="font-bold">{edu.university}</p>
-                {editProfile && !isEditingEducation(edu) && (
-                  <div className="flex gap-1">
-                    <PrimaryButton
-                      icon={<FaPencilAlt />}
-                      onClick={() => {
-                        updateEditingEducation(edu, true);
-                      }}
-                    />
-                    <PrimaryButton
-                      icon={<FaTimes />}
-                      onClick={() => {
-                        /* Send deletion to database */
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-
-              {(!editProfile || !isEditingEducation(edu)) && (
-                <>
-                  <UserProfileLabeledEntry label="Degree" entry={edu.degree} />
-                  <UserProfileLabeledEntry label="Major" entry={edu.major} />
-                  <UserProfileLabeledEntry
-                    label="Duration"
-                    entry={edu.start + " - " + edu.end}
-                  />
-                  <UserProfileLabeledEntry label="Grade" entry={edu.gpa} />
-                </>
-              )}
-              {editProfile && isEditingEducation(edu) && (
-                <EditEducation
-                  education={edu}
-                  onSave={async (ex) => {
-                    /* Save to database */
-                    const updatedUser = user // TODO: need to update user based on new information
-                    await updateUser(updatedUser)
-                    updateEditingEducation(edu, false);
-                  }}
-                  onCancel={() => {
-                    updateEditingEducation(edu, false);
-                  }}
-                />
-              )}
-            </div>
-          );
-        })}
-        {editProfile && !addingEducation && (
-          <PrimaryButton
-            icon={<FaPlus />}
-            onClick={() => {
-              setAddingEducation(true);
-            }}
-          />
-        )}
-        {editProfile && addingEducation && (
-          <EditEducation
-            onSave={() => {
-              /* Save to database */
-              setAddingEducation(false);
-            }}
-            onCancel={() => {
-              setAddingEducation(false);
-            }}
-          />
-        )}
-
-        <UserProfileHeading title="Skills" />
-        <div className="flex items-center gap-1">
-          {(!editProfile || (editProfile && !editingSkills)) && (
-            <p>{user.skills.join(", ")}</p>
-          )}
-          {editProfile && !editingSkills && (
-            <PrimaryButton
-              icon={<FaPencilAlt />}
-              onClick={() => {
-                setEditingSkills(true);
+          {editProfile && addingExperience && (
+            <EditExperience
+              onSave={async (ex) => {
+                const updatedUser = { ...user };
+                updatedUser.experience.push(ex);
+                const newUser = await updateUser(updatedUser);
+                setAddingExperience(false);
+                setUser(newUser);
+              }}
+              onCancel={() => {
+                setAddingExperience(false);
               }}
             />
           )}
-          {editProfile && editingSkills && (
-            <>
-              <textarea
-                className="text-primary text-sm border border-border rounded-lg w-full p-3"
-                id="skills"
-                placeholder="Skills"
-                value={newSkills.join(", ")}
-                onChange={(e) => {
-                  setNewSkills(e.target.value.split(", "));
-                }}
-              />
-              <PrimaryButton
-                text="Save"
-                onClick={() => {
-                  /* Save to database */
-                  setEditingSkills(false);
-                }}
-              />
-              <PrimaryButton
-                text="Cancel"
-                onClick={() => {
-                  setNewSkills(user.skills);
-                  setEditingSkills(false);
-                }}
-              />
-            </>
+
+          <UserProfileHeading title="Education" />
+          {user.education.map((edu, index) => {
+            return (
+              <div className="mb-4" key={index}>
+                <div className="flex items-center justify-between">
+                  <p className="font-bold">{edu.university}</p>
+                  {editProfile && !isEditingEducation(edu) && (
+                    <div className="flex gap-1">
+                      <PrimaryButton
+                        icon={<FaPencilAlt />}
+                        onClick={() => {
+                          updateEditingEducation(edu, true);
+                        }}
+                      />
+                      <PrimaryButton
+                        icon={<FaTimes />}
+                        onClick={async () => {
+                          const updatedUser = user;
+                          updatedUser.education = updatedUser.education.filter(
+                            (ex) => ex !== edu
+                          );
+                          const newUser = await updateUser(updatedUser);
+                          updateEditingEducation(edu, false);
+                          setUser(newUser);
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {(!editProfile || !isEditingEducation(edu)) && (
+                  <>
+                    <UserProfileLabeledEntry
+                      label="Degree"
+                      entry={edu.degree}
+                    />
+                    <UserProfileLabeledEntry label="Major" entry={edu.major} />
+                    <UserProfileLabeledEntry
+                      label="Duration"
+                      entry={edu.start + " - " + edu.end}
+                    />
+                    <UserProfileLabeledEntry label="Grade" entry={edu.gpa} />
+                  </>
+                )}
+                {editProfile && isEditingEducation(edu) && (
+                  <EditEducation
+                    education={edu}
+                    onSave={async (ed) => {
+                      const updatedUser = user;
+                      updatedUser.education = updatedUser.education.map((e) =>
+                        e === edu ? ed : e
+                      );
+                      const newUser = await updateUser(updatedUser);
+                      updateEditingEducation(edu, false);
+                      setUser(newUser);
+                    }}
+                    onCancel={() => {
+                      updateEditingEducation(edu, false);
+                    }}
+                  />
+                )}
+              </div>
+            );
+          })}
+          {editProfile && !addingEducation && (
+            <PrimaryButton
+              icon={<FaPlus />}
+              onClick={() => {
+                setAddingEducation(true);
+              }}
+            />
           )}
+          {editProfile && addingEducation && (
+            <EditEducation
+              onSave={async (ed) => {
+                const updatedUser = { ...user };
+                updatedUser.education.push(ed);
+                const newUser = await updateUser(updatedUser);
+                setAddingEducation(false);
+                setUser(newUser);
+              }}
+              onCancel={() => {
+                setAddingEducation(false);
+              }}
+            />
+          )}
+
+          <UserProfileHeading title="Skills" />
+          <div className="flex items-center gap-1">
+            {(!editProfile || (editProfile && !editingSkills)) && (
+              <p>{user.skills.join(", ")}</p>
+            )}
+            {editProfile && !editingSkills && (
+              <PrimaryButton
+                icon={<FaPencilAlt />}
+                onClick={() => {
+                  setEditingSkills(true);
+                }}
+              />
+            )}
+            {editProfile && editingSkills && (
+              <>
+                <textarea
+                  className="text-primary text-sm border border-border rounded-lg w-full p-3"
+                  id="skills"
+                  placeholder="Skills"
+                  value={(newSkills ?? []).join(", ")}
+                  onChange={(e) => {
+                    setNewSkills(e.target.value.split(", "));
+                  }}
+                />
+                <PrimaryButton
+                  text="Save"
+                  onClick={async () => {
+                    const updatedUser = { ...user, skills: newSkills ?? [] };
+                    const newUser = await updateUser(updatedUser);
+                    setEditingSkills(false);
+                    setUser(newUser);
+                  }}
+                />
+                <PrimaryButton
+                  text="Cancel"
+                  onClick={() => {
+                    setNewSkills(user.skills);
+                    setEditingSkills(false);
+                  }}
+                />
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
-      <ProjectFeed projects={examplesFrank.projects} />
+      {user && <ProjectFeed projects={user.projects} />}
     </div>
   );
 }
