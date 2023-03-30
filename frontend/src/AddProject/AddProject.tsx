@@ -12,6 +12,7 @@ import { addProject } from "src/services/project-service";
 import { useNavigate } from "react-router";
 import SearchStatus from "src/Types/SearchStatus";
 import statusDisplay from "src/Components/StatusDisplay";
+import { BsFillPlusCircleFill, BsPlus, BsPlusCircle } from "react-icons/bs";
 
 export default function AddProject() {
   const [link, setLink] = useState<string>("");
@@ -31,6 +32,10 @@ export default function AddProject() {
     setLanguages(newRepo.languages.map((lang) => lang.name));
     setDescription(newRepo.description);
   };
+
+  function disableAdd(): boolean {
+    return title === "" && description === "";
+  }
 
   return (
     <div className="relative">
@@ -83,7 +88,9 @@ export default function AddProject() {
         <ImageSelector />
         <div className="m-auto mb-10">
           <PrimaryButton
-            text="Add"
+            disabled={disableAdd()}
+            icon={<BsFillPlusCircleFill />}
+            text="Add Project"
             onClick={async () => {
               const newProject = {
                 _id: new Date().getTime() + "",
