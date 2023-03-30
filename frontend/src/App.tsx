@@ -27,7 +27,7 @@ export default function App() {
           />
           <Route
             path="/details"
-            element={<ProjectDetails projectLink={""} />}
+            element={<ProjectDetails />}
           />
           <Route path="/add" element={<AddProject />} />
           <Route path="/company/:cid" element={<CompanyPage />} />
@@ -35,6 +35,7 @@ export default function App() {
             path="/recruiter"
             element={<RecruiterPage recruiter={examplesRecruiters[1]} />}
           />
+          <Route path="/projects/:pid" element={<ProjectDetails/>} />
         </Routes>
       </BrowserRouter>
     </div>

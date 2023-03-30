@@ -97,7 +97,7 @@ export default function AddProject() {
               setStatus(SearchStatus.Loading);
               await addProject(newProject);
               setStatus(SearchStatus.Success);
-              navigate("/" + newProject._id);
+              navigate("/projects/" + newProject._id);
             }}
           />
         </div>
