@@ -26,7 +26,7 @@ export default function ProjectDetails() {
 
   return (
     <div className="flex gap-4 md:flex-row flex-col justify-start md:items-start items-center ml-0 md:ml-4">
-      <div className="w-11/12 flex flex-col justify-start text-primary max-w-none md:max-w-xl md:border-r-2 md:pr-4">
+      <div className="md:w-5/12 w-11/12 flex flex-col justify-start text-primary max-w-none md:max-w-xl md:border-r-2 md:pr-4">
         {user && (
           <div className="bg-white border border-border-neutral rounded-lg flex p-2">
             <img
@@ -38,7 +38,7 @@ export default function ProjectDetails() {
           </div>
         )}
         {user && project && (
-          <div className="flex justify-between items-center">
+          <div className="flex flex-wrap justify-between items-center">
             <a
               href={`mailto:${user.contact_info.email}`}
               className="italic text-accent hover:underline"
