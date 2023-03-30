@@ -77,7 +77,7 @@ const findGithub = async (req, res) => {
 
 const add = (req, res) => {
   const newProject = req.body;
-  // newProject._id = new Date().getTime() + "";
+  newProject._id = new Date().getTime() + "";
   projects.push(newProject);
   console.log(projects)
   res.json(newProject);

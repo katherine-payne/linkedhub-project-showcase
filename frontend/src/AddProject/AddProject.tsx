@@ -95,9 +95,9 @@ export default function AddProject() {
                 tags: tags,
               };
               setStatus(SearchStatus.Loading);
-              await addProject(newProject);
+              const r = await addProject(newProject);
               setStatus(SearchStatus.Success);
-              navigate("/projects/" + newProject._id);
+              navigate("/projects/" + r._id);
             }}
           />
         </div>
