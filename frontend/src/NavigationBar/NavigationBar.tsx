@@ -4,8 +4,9 @@ import {
   FaSearch,
   FaPlus,
   FaHome,
-  FaPencilRuler,
   FaDoorOpen,
+  FaUser,
+  FaPencilAlt,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "src/Components/Inputs/InputField";
@@ -83,10 +84,17 @@ export default function NavigationBar() {
 
         <div className="group">
           <div className="absolute w-auto min-w-max right-4 scale-0 group-hover:scale-100 transition-all duration-100 bg-slate-100 rounded-lg mt-10 mr-10 shadow flex flex-col p-2 gap-2">
+          <Link to="/profile">
+              <PrimaryButton
+                text={"My Profile"}
+                icon={<FaUser />}
+                onClick={() => {}}
+              />
+            </Link>
             <Link to="/profile/edit">
               <PrimaryButton
                 text={"Edit Profile"}
-                icon={<FaPencilRuler />}
+                icon={<FaPencilAlt />}
                 onClick={() => {}}
               />
             </Link>

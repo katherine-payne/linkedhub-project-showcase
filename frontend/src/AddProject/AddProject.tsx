@@ -12,7 +12,7 @@ import { addProject } from "src/services/project-service";
 import { useNavigate } from "react-router";
 import SearchStatus from "src/Types/SearchStatus";
 import statusDisplay from "src/Components/StatusDisplay";
-import { BsFillPlusCircleFill, BsPlus, BsPlusCircle } from "react-icons/bs";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 
 export default function AddProject() {
   const [link, setLink] = useState<string>("");

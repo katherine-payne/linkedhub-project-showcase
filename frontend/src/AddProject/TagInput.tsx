@@ -47,9 +47,10 @@ export default function TagInput({ name, tagType, tags, setTags }: Props) {
           value={newTag}
           onChange={(e) => setNewTag(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              if (!(tags.map((s:string) => s.toUpperCase())).includes(newTag.toUpperCase())) {
-                setTags([...tags, newTag]);
+            if (e.key === "Enter" || e.key === " " || e.key === ",") {
+              const nt = newTag.replace(" ", "").replace(",", "")
+              if (nt && !(tags.map((s:string) => (s.toUpperCase())).includes(newTag.toUpperCase()))) {
+                setTags([...tags, nt]);
               }
               setNewTag("");
             } else if (e.key === "Backspace") {

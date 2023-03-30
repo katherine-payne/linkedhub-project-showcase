@@ -10,12 +10,14 @@ type Props = {
 export default function LanguageTag({ text, canDelete, onDelete }: Props) {
   return (
     <button
+      className={`${
+        canDelete ? "cursor-pointer" : "cursor-text"
+      } flex flex-row justify-center group rounded-full  text-white bg-neutral group-hover:bg-neutral-hover px-2 py-1 mr-1 my-1`}
       onClick={() => {
         if (canDelete) {
           onDelete();
         }
       }}
-      className="flex flex-row justify-center group rounded-full  text-white bg-neutral group-hover:bg-neutral-hover px-2 py-1 mr-1 my-1"
     >
       <BsXCircleFill
         className={`mt-0.5 mr-1 hidden ${
