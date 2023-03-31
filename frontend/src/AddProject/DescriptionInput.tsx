@@ -7,12 +7,14 @@ type Props = {
   description: string;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   titleSize: string;
+  hidePreview?: boolean;
 };
 
 export default function DescriptionInput({
   description,
   setDescription,
   titleSize,
+  hidePreview,
 }: Props) {
   return (
     <div>
@@ -34,9 +36,11 @@ export default function DescriptionInput({
         details={""}
         id={"description"}
       />
-      <div className="px-1 py-2">
-        <FormattedDescription description={description} />
-      </div>
+      {!hidePreview && (
+        <div className="px-1 py-2">
+          <FormattedDescription description={description} />
+        </div>
+      )}
     </div>
   );
 }

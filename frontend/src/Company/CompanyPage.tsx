@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import CompanyDetailsCard from "../Components/CompanyDetailsCard";
 import { BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
@@ -13,6 +13,8 @@ export default function CompanyPage() {
   const { cid } = useParams();
 
   const [company, setCompany] = useState<Company | null>(null);
+
+const navigate = useNavigate();
 
   useEffect(() => {
     if (cid) {
@@ -86,31 +88,39 @@ export default function CompanyPage() {
       <div className="flex flex-col gap-4">
         {company && <CompanyDetailsCard company={company} />}
 
-        <div className="max-w-xl bg-white shadow-md border border-border-neutral p-4 rounded-lg">
-          <p className="text-xl text-primary font-semibold pb-3">Recruiters</p>
-          <ul>
-            {company &&
-              company.recruiters.map((recruiter: Recruiter, index: number) => {
-                // TODO: this should link to the recruiter's page on click, but we should wait for node.js to be setup
-                return (
-                  <li
-                    key={index}
-                    className="flex flex-row justify-between rounded-lg bg-gray-100 hover:shadow p-3 my-2 hover:cursor-pointer"
-                  >
-                    <div>{recruiter.name}</div>
-                    {recruiter.email_shown && (
-                      <a
-                        href={`mailto:${recruiter.email}`}
-                        className="italic text-accent hover:underline"
+        {(company?.recruiters.length ?? 0) > 0 && (
+          <div className="max-w-xl bg-white shadow-md border border-border-neutral p-4 rounded-lg">
+            <p className="text-xl text-primary font-semibold pb-3">
+              Recruiters
+            </p>
+            <ul>
+              {company &&
+                company.recruiters.map(
+                  (recruiter: Recruiter, index: number) => {
+                    return (
+                      <li
+                        key={index}
+                        onClick={() => {
+                          navigate("/recruiters/" + recruiter._id)
+                        }}
+                        className="flex flex-row justify-between rounded-lg bg-gray-100 hover:shadow p-3 my-2 hover:cursor-pointer"
                       >
-                        {recruiter.email}
-                      </a>
-                    )}
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
+                        <div>{recruiter.name}</div>
+                        {recruiter.email_shown && (
+                          <a
+                            href={`mailto:${recruiter.email}`}
+                            className="italic text-accent hover:underline"
+                          >
+                            {recruiter.email}
+                          </a>
+                        )}
+                      </li>
+                    );
+                  }
+                )}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

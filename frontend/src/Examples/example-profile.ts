@@ -50,7 +50,7 @@ export const examplesFrank: User = {
   ],
   projects: [
     {
-      _id: "p0",
+      _id: "0",
       name: "Cool Project",
       hearts: 100,
       description:
@@ -59,7 +59,7 @@ export const examplesFrank: User = {
       tags: ["My Stuff", "Cool Projects", "Design", "Startup"],
     },
     {
-      _id: "p1",
+      _id: "1",
       name: "My First Project",
       hearts: 100,
       description:

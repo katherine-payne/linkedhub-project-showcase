@@ -3,11 +3,23 @@ import { examplesBCG } from "../Examples/example-company.js";
 let companies = [examplesBCG];
 
 const CompanyController = (app) => {
+  app.get("/api/companies", findAll);
   app.get("/api/companies/:cid", find);
+  app.get("/api/companies/recruiters/:rid", findForRecruiter);
   app.post("/api/companies", add);
   app.put("/api/companies/:cid", edit);
   app.delete("/api/companies/:cid", remove);
 };
+
+const findAll = (req, res) => {
+  res.json(companies);
+}
+
+const findForRecruiter = (req, res) => {
+  const rid = req.params.rid;
+  const company = companies.find((c) => c.recruiters.map((r) => r._id).includes(rid))
+  res.json(company)
+}
 
 const find = (req, res) => {
   const cid = req.params.cid;

@@ -20,7 +20,8 @@ export default function HeartButton({
     <button
       className={`flex 
         ${hearted ? "text-heart" : "text-neutral"} text-xl ml-auto font-mono`}
-      onClick={async () => {
+      onClick={async (e) => {
+        e.stopPropagation();
         let updatedProject = { ...project };
         if (hearted) {
           updatedProject.hearts -= 1;

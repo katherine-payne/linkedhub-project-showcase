@@ -13,7 +13,6 @@ const ProjectController = (app) => {
 const find = (req, res) => {
   const pid = req.params.pid;
   const project = projects.find((p) => p._id === pid);
-  console.log(projects)
   res.json(project);
 };
 
@@ -79,7 +78,6 @@ const add = (req, res) => {
   const newProject = req.body;
   newProject._id = new Date().getTime() + "";
   projects.push(newProject);
-  console.log(projects)
   res.json(newProject);
 };
 

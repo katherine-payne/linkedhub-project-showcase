@@ -5,9 +5,7 @@ import BASE_URL from "./service-helper";
 const PROJECTS_API = BASE_URL + "projects";
 
 export const getProject = async (pid: string) => {
-  console.log("pid", pid)
   const response = await axios.get(PROJECTS_API + "/" + pid);
-  console.log("response", response)
   return response.data;
 };
 

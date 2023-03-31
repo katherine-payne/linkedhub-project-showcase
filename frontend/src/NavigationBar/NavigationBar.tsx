@@ -7,6 +7,13 @@ import {
   FaDoorOpen,
   FaUser,
   FaPencilAlt,
+  FaUserFriends,
+  FaBuilding,
+  FaUserPlus,
+  FaCartPlus,
+  FaDraftingCompass,
+  FaRProject,
+  FaPencilRuler,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "src/Components/Inputs/InputField";
@@ -36,7 +43,7 @@ export default function NavigationBar() {
 
         <label
           htmlFor="search"
-          className="transition-all group flex items-center justify-center text-sm text-secondary hover:text-secondary-hover border border-border-neutral rounded-lg mr-2 xs:mr-4 sm:mr-8 p-2 cursor-text hover:bg-gray-100 hover:shadow"
+          className="transition-all group flex items-center justify-center text-sm text-secondary hover:text-secondary-hover border border-border-neutral rounded-lg mr-2 xs:mr-4 sm:mr-4 p-2 cursor-text hover:bg-gray-100 hover:shadow"
         >
           <PrimaryButton
             hoverShadow=""
@@ -69,29 +76,55 @@ export default function NavigationBar() {
             required={true}
           />
         </label>
+
+        <PrimaryButton
+          bgClass="mr-4"
+          icon={<FaUserFriends />}
+          text={"Recruiters"}
+          textClass={"hidden md:block"}
+          onClick={() => navigate("/recruiters")}
+        />
+
+        <PrimaryButton
+          bgClass="mr-4"
+          icon={<FaBuilding />}
+          text={"Companies"}
+          textClass={"hidden md:block"}
+          onClick={() => navigate("/companies")}
+        />
       </li>
 
       <li className="flex items-center justify-center">
         <PrimaryButton
-          bgClass="mx-4"
-          text={"Add Project"}
-          textClass={"hidden sm:block"}
-          icon={<FaPlus />}
+          bgClass="mr-4"
+          text={"Add Company"}
+          textClass={"hidden lg:block"}
+          icon={<FaDraftingCompass />}
           onClick={() => {
-            navigate("/add");
+            navigate("/add/company");
+          }}
+        />
+
+        <PrimaryButton
+          bgClass="mr-4"
+          text={"Add Project"}
+          textClass={"hidden lg:block"}
+          icon={<FaPencilRuler />}
+          onClick={() => {
+            navigate("/add/project");
           }}
         />
 
         <div className="group">
           <div className="absolute w-auto min-w-max right-4 scale-0 group-hover:scale-100 transition-all duration-100 bg-slate-100 rounded-lg mt-10 mr-10 shadow flex flex-col p-2 gap-2">
-          <Link to="/profile">
+            <Link to="/profile/0">
               <PrimaryButton
                 text={"My Profile"}
                 icon={<FaUser />}
                 onClick={() => {}}
               />
             </Link>
-            <Link to="/profile/edit">
+            <Link to="/profile/0/edit">
               <PrimaryButton
                 text={"Edit Profile"}
                 icon={<FaPencilAlt />}

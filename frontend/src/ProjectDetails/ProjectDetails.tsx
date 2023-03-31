@@ -4,7 +4,7 @@ import FormattedDescription from "../Components/FormattedDescription";
 import LanguageTag from "src/Components/LanguageTag";
 import TopicTag from "src/Components/TopicTag";
 import HeartButton from "src/Components/Inputs/HeartButton";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getProject } from "src/services/project-service";
 import Project from "src/Types/Project";
 import User from "src/Types/User";
@@ -24,11 +24,16 @@ export default function ProjectDetails() {
     fetchData();
   }, [pid]);
 
+  const navigate = useNavigate();
+
   return (
     <div className="flex gap-4 md:flex-row flex-col justify-start md:items-start items-center ml-0 md:ml-4">
       <div className="md:w-5/12 w-11/12 flex flex-col justify-start text-primary max-w-none md:max-w-xl md:border-r-2 md:pr-4">
         {user && (
-          <div className="bg-white border border-border-neutral rounded-lg flex flex-wrap p-2">
+          <div
+            className="bg-white border cursor-pointer border-border-neutral rounded-lg flex flex-wrap p-2"
+            onClick={() => navigate("/users/" + user._id)}
+          >
             <img
               className="w-20 h-20 mr-4 rounded-full lh-profile-image object-cover"
               src="https://picsum.photos/400"

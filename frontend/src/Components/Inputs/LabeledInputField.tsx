@@ -7,6 +7,7 @@ export default function LabeledInputField({
   inputField,
   details,
   id,
+  wrapperClass,
 }: {
   title: string;
   titleSize: string;
@@ -14,9 +15,10 @@ export default function LabeledInputField({
   inputField: ReactNode;
   details: string;
   id: string;
+  wrapperClass?: string;
 }) {
   return (
-    <div>
+    <div className={wrapperClass ?? ""}>
       <label
         htmlFor={id}
         className={`block my-${innerSpacing} ${titleSize} font-medium text-primary px-1`}

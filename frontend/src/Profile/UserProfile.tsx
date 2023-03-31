@@ -98,7 +98,7 @@ export default function UserProfile({ editProfile = false }) {
   };
 
   return (
-    <div className="flex md:flex-row flex-col justify-center">
+    <div className="flex md:flex-row flex-col justify-center mb-8">
       {user && (
         <div
           id="infoFeed"
@@ -106,13 +106,19 @@ export default function UserProfile({ editProfile = false }) {
         >
           <p className="text-3xl font-semibold">{user.name}</p>
           <p>
-            <a href={"mailto:" + user.contact_info.email}>
+            <a
+              className={"italic text-accent hover:underline"}
+              href={"mailto:" + user.contact_info.email}
+            >
               {user.contact_info.email}
             </a>
           </p>
           <p className="flex items-center gap-1">
             {(!editProfile || (editProfile && !editingPhone)) && (
-              <a href={"tel:" + user.contact_info.phone}>
+              <a
+                href={"tel:" + user.contact_info.phone}
+                className="italic text-accent hover:underline"
+              >
                 {user.contact_info.phone}
               </a>
             )}
@@ -204,9 +210,9 @@ export default function UserProfile({ editProfile = false }) {
                         job.start + " - " + (job.end ? job.end : "Present")
                       }
                     />
-                    <p className="whitespace-pre-wrap">
+                    <div className="whitespace-pre-wrap">
                       <FormattedDescription description={job.description} />
-                    </p>
+                    </div>
                   </>
                 )}
                 {editProfile && isEditingExperience(job) && (

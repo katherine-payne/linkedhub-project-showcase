@@ -4,8 +4,18 @@ import BASE_URL from "./service-helper";
 
 const COMPANIES_API = BASE_URL + "companies";
 
+export const getCompanies = async () => {
+  const response = await axios.get(COMPANIES_API);
+  return response.data
+}
+
 export const getCompany = async (cid: string) => {
   const response = await axios.get(COMPANIES_API + "/" + cid);
+  return response.data;
+};
+
+export const getCompanyForRID = async (rid: string) => {
+  const response = await axios.get(COMPANIES_API + "/recruiters/" + rid);
   return response.data;
 };
 

@@ -97,8 +97,6 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
           .then((response) => response.json())
           .then((json) => {
             let out: Array<Language> = [];
-            console.log(Object.keys(json));
-
             Object.keys(json).forEach((key) => {
               const next: Language = { name: key, lines: json[key] };
               out.push(next);
@@ -106,8 +104,6 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
 
             return out;
           });
-        console.log(found.languages);
-
         found.name = found.name
           .split("-")
           .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
