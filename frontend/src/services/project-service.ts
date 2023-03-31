@@ -9,8 +9,8 @@ export const getProject = async (pid: string) => {
   return response.data;
 };
 
-export const getProjects = async () => {
-  const response = await axios.get(PROJECTS_API);
+export const getFeed = async () => {
+  const response = await axios.get(BASE_URL + "home");
   return response.data
 }
 

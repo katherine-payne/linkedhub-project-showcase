@@ -9,6 +9,15 @@ const ProjectController = (app) => {
   app.post("/api/projects", add);
   app.put("/api/projects/:pid", edit);
   app.delete("/api/projects/:pid", remove);
+  app.get("/api/home", home);
+};
+
+const home = (req, res) => {
+  res.json(
+    projects.sort((p1, p2) => {
+      return p2.hearts - p1.hearts;
+    })
+  );
 };
 
 const findAll = (req, res) => {

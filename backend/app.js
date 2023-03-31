@@ -9,7 +9,6 @@ import TagController from "./controllers/tag-controller.js";
 import LanguageController from "./controllers/language-controller.js";
 import SearchController from "./controllers/search-controller.js";
 import UserController from "./controllers/user-controller.js";
-import HomeController from "./controllers/home-controller.js";
 
 const app = express();
 app.use(cors())
@@ -23,6 +22,5 @@ TagController(app);
 LanguageController(app);
 SearchController(app);
 UserController(app);
-HomeController(app);
 
 app.listen(4000);
