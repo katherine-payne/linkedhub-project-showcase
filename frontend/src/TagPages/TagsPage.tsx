@@ -20,6 +20,7 @@ export default function TagsPage() {
 
   return (
     <div>
+      {/* // TODO: Add Tag title */}
       <ProjectFeed projects={projects} />
     </div>
   );

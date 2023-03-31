@@ -9,6 +9,11 @@ export const getProject = async (pid: string) => {
   return response.data;
 };
 
+export const getProjects = async () => {
+  const response = await axios.get(PROJECTS_API);
+  return response.data
+}
+
 export const getProjectsForLanguage = async (language: string) => {
   const response = await axios.get(BASE_URL + "languages/" + language);
   return response.data;
