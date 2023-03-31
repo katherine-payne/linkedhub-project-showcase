@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function PrimaryButton({
   text,
@@ -20,21 +20,28 @@ export default function PrimaryButton({
   textClass?: string;
   iconClass?: string;
   onClick: () => void;
-  disabled?: () => boolean;
+  disabled?: boolean;
   buttonBgHoverColor?: string;
   buttonBgColor?: string;
   buttonBorderColor?: string;
   shadow?: string;
   hoverShadow?: string;
 }) {
-  const buttonAttributes = `group transition-all flex items-center justify-center text-sm text-secondary ${buttonBorderColor === "" || buttonBorderColor === "none" ? "" : "border " + buttonBorderColor ?? "border border-border-neutral"} ${shadow ?? ""} ${hoverShadow ?? "hover:shadow"} ${buttonBgColor ?? "bg-white"} hover:${buttonBgHoverColor ?? "bg-gray-100"} rounded-lg p-2`;
+  const buttonAttributes = `${disabled ? "cursor-not-allowed" : ""} group transition-all flex items-center justify-center text-sm text-secondary ${buttonBorderColor === "" || buttonBorderColor === "none" ? "" : "border " + buttonBorderColor ?? "border border-border-neutral"} ${shadow ?? ""} ${hoverShadow ?? "hover:shadow"} ${buttonBgColor ?? (disabled ? "bg-gray-100" : "bg-white")} hover:${buttonBgHoverColor ?? "bg-gray-100"} rounded-lg p-2`;
   const textAttributes = "transition-all text-secondary group-hover:text-secondary-hover p-2";
+
+  const [loading, setLoading] = useState(false)
 
   return (
     <button
-      disabled={(disabled ?? (() => {return false}))()}
+      disabled={(disabled ?? false) || loading}
       className={`${buttonAttributes} ${bgClass ?? ""}`}
-      onClick={onClick}
+      onClick={ () => {
+        setLoading(true)
+        onClick()
+        setLoading(false)
+      }
+      }
     >
       {icon ? (
         <span className={`${textAttributes} ${iconClass}`}>{icon}</span>

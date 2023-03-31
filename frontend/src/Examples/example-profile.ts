@@ -1,6 +1,7 @@
 import User from "src/Types/User";
 
 export const examplesFrank: User = {
+  _id: "u0",
   name: "Frank Anderson",
   contact_info: {
     email: "anderson.f@northeastern.edu",
@@ -49,6 +50,7 @@ export const examplesFrank: User = {
   ],
   projects: [
     {
+      _id: "0",
       name: "Cool Project",
       hearts: 100,
       description:
@@ -57,6 +59,7 @@ export const examplesFrank: User = {
       tags: ["My Stuff", "Cool Projects", "Design", "Startup"],
     },
     {
+      _id: "1",
       name: "My First Project",
       hearts: 100,
       description:

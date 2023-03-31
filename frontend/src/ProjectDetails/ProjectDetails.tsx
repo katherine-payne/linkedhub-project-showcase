@@ -1,74 +1,104 @@
-import React, { useState } from "react";
-import { FaHeart } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
 import { examplesFrank } from "../Examples/example-profile";
 import FormattedDescription from "../Components/FormattedDescription";
 import LanguageTag from "src/Components/LanguageTag";
 import TopicTag from "src/Components/TopicTag";
-import PrimaryButton from "src/Components/Inputs/PrimaryButton";
+import HeartButton from "src/Components/Inputs/HeartButton";
+import { useNavigate, useParams } from "react-router";
+import { getProject } from "src/services/project-service";
+import Project from "src/Types/Project";
+import User from "src/Types/User";
 
-export default function ProjectDetails({
-  projectLink,
-}: {
-  projectLink: string;
-}) {
-  //   const [repo, setRepo] = useState();
-  const [user, setUser] = useState(examplesFrank);
-  const [project, setProject] = useState(examplesFrank.projects[0]);
+export default function ProjectDetails() {
+  const [user, setUser] = useState<User | null>(examplesFrank);
+  const [project, setProject] = useState<Project | null>(null);
   const [hearted, setHearted] = useState(false);
 
+  const { pid } = useParams();
+  useEffect(() => {
+    async function fetchData() {
+      const r: Project = await getProject(pid ?? "");
+      setProject(r);
+      setUser(examplesFrank); // TODO: get user for project
+    }
+    fetchData();
+  }, [pid]);
+
+  const navigate = useNavigate();
+
   return (
-    <div className="flex md:flex-row flex-col justify-center">
-      <div className="text-primary max-w-none md:max-w-xl border-r-2 p-4 pt-2">
-        <div className="bg-white border border-border-neutral rounded-lg flex w-100 p-2 mb-2">
-          <img
-            className="w-20 h-20 rounded-full m-2 lh-profile-image object-cover"
-            src="https://picsum.photos/400"
-            alt="Rounded avatar"
-          />
-          <p className="text-3xl font-semibold p-2">{user.name}</p>
-        </div>
-        <div className="flex justify-between">
-          <PrimaryButton
-            text="Email"
-            onClick={() => {
-              window.open(`mailto:${user.contact_info.email}`);
-            }}
-          />
-          <FaHeart
-            className={`${
-              hearted ? "text-heart" : "text-neutral"
-            } text-3xl mt-2 mr-1`}
-            onClick={() => setHearted(!hearted)}
-          />
-        </div>
+    <div className="flex gap-4 md:flex-row flex-col justify-start md:items-start items-center ml-0 md:ml-4">
+      <div className="md:w-5/12 w-11/12 flex flex-col justify-start text-primary max-w-none md:max-w-xl md:border-r-2 md:pr-4">
+        {user && (
+          <div
+            className="bg-white border cursor-pointer border-border-neutral rounded-lg flex flex-wrap p-2"
+            onClick={() => navigate("/users/" + user._id)}
+          >
+            <img
+              className="w-20 h-20 mr-4 rounded-full lh-profile-image object-cover"
+              src="https://picsum.photos/400"
+              alt="Rounded avatar"
+            />
+            <div className="flex flex-col">
+              <p className="text-3xl font-semibold">{user.name}</p>
+              <a
+                href={`mailto:${user.contact_info.email}`}
+                className="italic text-accent hover:underline"
+              >
+                {user.contact_info.email}
+              </a>
+            </div>
+          </div>
+        )}
+        {user && project && (
+          <div className="flex flex-wrap justify-between items-center mt-2">
+            <HeartButton
+              hearted={hearted}
+              setHearted={setHearted}
+              project={project}
+              setProject={
+                setProject as React.Dispatch<React.SetStateAction<Project>>
+              }
+            />
+          </div>
+        )}
       </div>
 
-      <div className="pl-2">
-        <div className="bg-white border border-border-neutral rounded-lg p-2 m-2">
-          <p className="text-3xl font-semibold pb-2">{project.name}</p>
-          <FormattedDescription description={project.description} />
+      {project && (
+        <div className="flex flex-col gap-2 md:items-start items-center">
+          <div className="w-11/12 bg-white border border-border-neutral rounded-lg p-2">
+            <p className="text-3xl font-semibold">{project.name}</p>
+            <FormattedDescription description={project.description} />
+          </div>
+          <div className="flex flex-col gap-0 w-11/12">
+            <div className="flex flex-wrap">
+              {project.languages.map((x, i) => (
+                <LanguageTag
+                  text={x}
+                  canDelete={false}
+                  onDelete={() => {}}
+                  key={i}
+                />
+              ))}
+            </div>
+            <div className="flex flex-wrap">
+              {project.tags.map((x, i) => (
+                <TopicTag
+                  text={x}
+                  canDelete={false}
+                  onDelete={() => {}}
+                  key={i}
+                />
+              ))}
+            </div>
+          </div>
+          <img
+            src="https://picsum.photos/1200/600"
+            alt="project interface screenshot"
+            className="w-11/12 aspect-auto rounded-lg object-cover"
+          ></img>
         </div>
-        <div className="flex flex-wrap p-2 pb-0">
-          {project.languages.map((x, i) => (
-            <LanguageTag
-              text={x}
-              canDelete={false}
-              onDelete={() => {}}
-              key={i}
-            />
-          ))}
-        </div>
-        <div className="flex flex-wrap p-2 pt-0">
-          {project.tags.map((x, i) => (
-            <TopicTag text={x} canDelete={false} onDelete={() => {}} key={i} />
-          ))}
-        </div>
-        <img
-          src="https://picsum.photos/600"
-          alt="project interface screenshot"
-          className="w-full h-80 rounded-lg object-cover m-2"
-        ></img>
-      </div>
+      )}
     </div>
   );
 }

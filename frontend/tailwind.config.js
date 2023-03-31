@@ -13,6 +13,7 @@ module.exports = {
         secondary: "#6b7280", // gray-500
         "secondary-hover": "#374151", // gray-700
         heart: "#ec4899", // pink-500
+        "heart-hover": "#be185d", // pink-700
         "border-neutral": "#e5e7eb", // gray-200
         "background-neutral": "#f8fafc", // slate-50
       },

@@ -1,4 +1,5 @@
 import React from "react";
+import { BsXCircleFill } from "react-icons/bs";
 
 type Props = {
   text: string;
@@ -8,17 +9,23 @@ type Props = {
 
 export default function LanguageTag({ text, canDelete, onDelete }: Props) {
   return (
-    <span
-      className={`rounded-full text-sm text-white bg-neutral px-2 py-1 mr-1 my-1 ${
-        canDelete ? "hover:bg-neutral-hover" : ""
-      }`}
+    <button
+      className={`${
+        canDelete ? "cursor-pointer" : "cursor-text"
+      } flex flex-row justify-center group rounded-full  text-white bg-neutral group-hover:bg-neutral-hover px-2 py-1 mr-1 my-1`}
       onClick={() => {
         if (canDelete) {
           onDelete();
         }
       }}
     >
-      {text}
-    </span>
+      <BsXCircleFill
+        className={`mt-0.5 mr-1 hidden ${
+          canDelete ? "group-hover:inline" : ""
+        }`}
+      />
+
+      <span className={`text-sm ${canDelete ? "" : ""}`}>{text}</span>
+    </button>
   );
 }

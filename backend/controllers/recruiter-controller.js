@@ -3,10 +3,15 @@ import { examplesRecruiters } from "../Examples/examples-recruiters.js";
 let recruiters = examplesRecruiters;
 
 const RecruiterController = (app) => {
+  app.get("/api/recruiters", findAll);
   app.get("/api/recruiters/:rid", find);
   app.post("/api/recruiters", add);
   app.put("/api/recruiters/:rid", edit);
   app.delete("/api/recruiters/:rid", remove);
+};
+
+const findAll = (req, res) => {
+  res.json(recruiters);
 };
 
 const find = (req, res) => {
@@ -25,10 +30,11 @@ const add = (req, res) => {
 const edit = (req, res) => {
   const rid = req.params["rid"];
   const updates = req.body;
-  recruiters = recruiters.map((r) => {
-    r._id === rid ? { ...r, updates } : r;
-  });
-  res.sendStatus(200);
+  recruiters = recruiters.map((r) =>
+    r._id === rid ? { ...r, ...updates } : r
+  );
+  const updated = recruiters.find((r) => r._id === rid);
+  res.json(updated);
 };
 
 const remove = (req, res) => {

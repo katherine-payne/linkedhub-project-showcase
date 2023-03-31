@@ -67,7 +67,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
   //  - fail: show red x
   //  - success: show green x, populate content of page
   async function searchWithURL() {
-    if (link && searchStatus == SearchStatus.Waiting) {
+    if (link && searchStatus === SearchStatus.Waiting) {
       setSearchStatus(SearchStatus.Loading);
 
       const { owner, repo }: { owner: string; repo: string } =
@@ -97,8 +97,6 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
           .then((response) => response.json())
           .then((json) => {
             let out: Array<Language> = [];
-            console.log(Object.keys(json));
-
             Object.keys(json).forEach((key) => {
               const next: Language = { name: key, lines: json[key] };
               out.push(next);
@@ -106,8 +104,6 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
 
             return out;
           });
-        console.log(found.languages);
-
         found.name = found.name
           .split("-")
           .map((str) => str.charAt(0).toUpperCase() + str.slice(1))
@@ -120,7 +116,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
       }
     }
     setSearchStatus(
-      searchStatus == SearchStatus.Success
+      searchStatus === SearchStatus.Success
         ? SearchStatus.Success
         : SearchStatus.Failed
     );
@@ -209,7 +205,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
 
       <PrimaryButton
         bgClass="disabled:cursor-not-allowed"
-        disabled={() => !link || searchStatus != SearchStatus.Waiting}
+        disabled={!link || searchStatus != SearchStatus.Waiting}
         onClick={() => {
           searchWithURL();
         }}

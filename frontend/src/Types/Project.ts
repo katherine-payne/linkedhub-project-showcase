@@ -1,4 +1,5 @@
 type Project = {
+  _id: string;
   name: string;
   hearts: number;
   description: string;

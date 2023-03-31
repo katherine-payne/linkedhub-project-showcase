@@ -85,7 +85,8 @@ const edit = (req, res) => {
   const pid = req.params.pid;
   const updates = req.body;
   projects = projects.map((p) => (p._id === pid ? { ...p, ...updates } : p));
-  res.sendStatus(200);
+  const updated = projects.find((p) => p._id === pid);
+  res.json(updated);
 };
 
 const remove = (req, res) => {

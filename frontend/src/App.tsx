@@ -10,8 +10,9 @@ import AddProject from "./AddProject/AddProject";
 import ProjectDetails from "./ProjectDetails/ProjectDetails";
 import CompanyPage from "./Company/CompanyPage";
 import RecruiterPage from "./Recruiter/RecruiterPage";
-import examplesBCG from "./Examples/example-company";
-import examplesRecruiters from "./Examples/examples-recruiters";
+import CompaniesListPage from "./Company/CompaniesListPage";
+import RecruitersListPage from "./Recruiter/RecruitersListPage";
+import AddCompany from "./AddCompany/AddCompany";
 
 export default function App() {
   return (
@@ -21,24 +22,19 @@ export default function App() {
         <Routes>
           <Route index element={<MainFeed />} />
           <Route path="/search/:query" element={<SearchFeed />} />
-          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/profile/:pid" element={<UserProfile />} />
           <Route
-            path="/profile/edit"
+            path="/profile/:pid/edit"
             element={<UserProfile editProfile={true} />}
           />
-          <Route
-            path="/details"
-            element={<ProjectDetails projectLink={""} />}
-          />
-          <Route path="/add" element={<AddProject />} />
-          <Route
-            path="/company"
-            element={<CompanyPage company={examplesBCG} />}
-          />
-          <Route
-            path="/recruiter"
-            element={<RecruiterPage recruiter={examplesRecruiters[1]} />}
-          />
+          <Route path="/add/project" element={<AddProject />} />
+          <Route path="/add/company" element={<AddCompany />} />
+          <Route path="/companies/:cid" element={<CompanyPage />} />
+          <Route path="/companies" element={<CompaniesListPage />} />
+          <Route path="/recruiters/:rid" element={<RecruiterPage />} />
+          <Route path="/recruiters" element={<RecruitersListPage />} />
+          <Route path="/projects/:pid" element={<ProjectDetails />} />
+          <Route path="/users/:uid" element={<UserProfile />} />
         </Routes>
       </BrowserRouter>
     </div>

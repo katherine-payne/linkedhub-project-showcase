@@ -42,14 +42,22 @@ export default function TagInput({ name, tagType, tags, setTags }: Props) {
           )
         )}
         <input
-          className="px-2 text-sm"
+          className="px-2 text-sm outline-none border-none"
           placeholder="New Tag"
           value={newTag}
           onChange={(e) => setNewTag(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              setTags([...tags, newTag]);
+            if (e.key === "Enter" || e.key === " " || e.key === ",") {
+              const nt = newTag.replace(" ", "").replace(",", "")
+              if (nt && !(tags.map((s:string) => (s.toUpperCase())).includes(newTag.toUpperCase()))) {
+                setTags([...tags, nt]);
+              }
               setNewTag("");
+            } else if (e.key === "Backspace") {
+              if (newTag === "") {
+                const t = tags.pop()
+                setTags(tags.filter((tag: string) => t !== tag))
+              }
             }
           }}
         />

@@ -3,6 +3,7 @@ import Experience from "./Experience";
 import Project from "./Project";
 
 type User = {
+  _id: string;
   name: string;
   contact_info: {
     email: string;
