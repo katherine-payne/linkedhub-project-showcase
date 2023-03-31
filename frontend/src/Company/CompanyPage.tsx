@@ -14,7 +14,7 @@ export default function CompanyPage() {
 
   const [company, setCompany] = useState<Company | null>(null);
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (cid) {
@@ -101,7 +101,7 @@ const navigate = useNavigate();
                       <li
                         key={index}
                         onClick={() => {
-                          navigate("/recruiters/" + recruiter._id)
+                          navigate("/recruiters/" + recruiter._id);
                         }}
                         className="flex flex-row justify-between rounded-lg bg-gray-100 hover:shadow p-3 my-2 hover:cursor-pointer"
                       >
