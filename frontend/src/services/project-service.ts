@@ -9,6 +9,21 @@ export const getProject = async (pid: string) => {
   return response.data;
 };
 
+export const getProjects = async () => {
+  const response = await axios.get(PROJECTS_API);
+  return response.data
+}
+
+export const getProjectsForLanguage = async (language: string) => {
+  const response = await axios.get(BASE_URL + "languages/" + language);
+  return response.data;
+};
+
+export const getProjectsForTag = async (tag: string) => {
+  const response = await axios.get(BASE_URL + "tags/" + tag)
+  return response.data
+}
+
 export const addProject = async (project: Project) => {
   const response = await axios.post(PROJECTS_API, project);
   return response.data;

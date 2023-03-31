@@ -3,11 +3,17 @@ import { examplesFrank } from "../Examples/example-profile.js";
 let projects = examplesFrank.projects;
 
 const ProjectController = (app) => {
+  app.get("/api/projects", findAll);
   app.get("/api/projects/:pid", find);
   app.get("/api/projects/:user/:repo", findGithub);
   app.post("/api/projects", add);
   app.put("/api/projects/:pid", edit);
   app.delete("/api/projects/:pid", remove);
+};
+
+const findAll = (req, res) => {
+  const project = projects;
+  res.json(project);
 };
 
 const find = (req, res) => {

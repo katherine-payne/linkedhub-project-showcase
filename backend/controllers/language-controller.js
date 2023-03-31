@@ -8,7 +8,7 @@ const LanguageController = (app) => {
 
 const find = (req, res) => {
   const name = req.params.name;
-  const languageProjects = projects.filter((p) => p.languages.includes(name));
+  const languageProjects = projects.filter((p) => p.languages.map((l) => l.toLowerCase()).includes(name.toLowerCase()));
   res.json(languageProjects);
 };
 

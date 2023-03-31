@@ -1,5 +1,6 @@
 import React from "react";
 import { BsXCircleFill } from "react-icons/bs";
+import { useNavigate } from "react-router";
 
 type Props = {
   text: string;
@@ -8,14 +9,19 @@ type Props = {
 };
 
 export default function LanguageTag({ text, canDelete, onDelete }: Props) {
+
+  const nav = useNavigate();
+
   return (
     <button
-      className={`${
-        canDelete ? "cursor-pointer" : "cursor-text"
-      } flex flex-row justify-center group rounded-full  text-white bg-neutral group-hover:bg-neutral-hover px-2 py-1 mr-1 my-1`}
-      onClick={() => {
+      className={`
+        cursor-pointer flex flex-row justify-center group rounded-full  text-white bg-neutral group-hover:bg-neutral-hover px-2 py-1 mr-1 my-1`}
+      onClick={(e) => {
+        e.stopPropagation();
         if (canDelete) {
           onDelete();
+        } else {
+          nav("/languages/" + text)
         }
       }}
     >

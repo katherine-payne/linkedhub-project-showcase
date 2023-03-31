@@ -54,7 +54,7 @@ export const examplesFrank = {
       description:
         "This is my project!\nYou should check it out.\nIt's awesome!",
       languages: ["HTML", "CSS", "JavaScript", "Python"],
-      tags: ["My Stuff", "Cool Projects", "Design", "Startup"],
+      tags: ["MyStuff", "Cool", "Design", "Startup"],
       username: "githubUser",
       repo: "cool-project",
     },
@@ -65,7 +65,7 @@ export const examplesFrank = {
       description:
         "This is my project!\nYou should check it out.\nIt's awesome!",
       languages: ["HTML", "CSS", "JavaScript", "Python"],
-      tags: ["My Stuff", "Cool Projects", "Design", "Startup"],
+      tags: ["MyStuff", "CoolProjects", "Design", "Startup"],
       username: "githubUser",
       repo: "first-project",
     },

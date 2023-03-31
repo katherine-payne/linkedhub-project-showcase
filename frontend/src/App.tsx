@@ -13,6 +13,8 @@ import RecruiterPage from "./Recruiter/RecruiterPage";
 import CompaniesListPage from "./Company/CompaniesListPage";
 import RecruitersListPage from "./Recruiter/RecruitersListPage";
 import AddCompany from "./AddCompany/AddCompany";
+import LanguagesPage from "./TagPages/LanguagesPage";
+import TagsPage from "./TagPages/TagsPage";
 
 export default function App() {
   return (
@@ -35,6 +37,8 @@ export default function App() {
           <Route path="/recruiters" element={<RecruitersListPage />} />
           <Route path="/projects/:pid" element={<ProjectDetails />} />
           <Route path="/users/:uid" element={<UserProfile />} />
+          <Route path="/languages/:lang" element={<LanguagesPage />} />
+          <Route path="/tags/:tag" element={<TagsPage />} />
         </Routes>
       </BrowserRouter>
     </div>
