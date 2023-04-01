@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const schemaRecruiters = mongoose.Schema({
    "name": String,
    "image_url": String,

@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const schemaProjects = mongoose.Schema({
    "name": String,
    "hearts": Number,

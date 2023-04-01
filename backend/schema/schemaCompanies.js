@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const schemaCompanies = mongoose.Schema({
    "name": String,
    "summary": String,

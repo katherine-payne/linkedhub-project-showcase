@@ -1,4 +1,4 @@
-import * as projectsDao from "../dao/daoProjects";
+import * as projectsDao from "../dao/daoProjects.js";
 
 const ProjectController = (app) => {
   app.get("/api/projects", findAll);

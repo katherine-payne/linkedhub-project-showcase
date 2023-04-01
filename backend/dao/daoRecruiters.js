@@ -1,4 +1,4 @@
-import modelRecruiters from "../models/modelRecruiters";
+import modelRecruiters from "../models/modelRecruiters.js";
 
 export const findAllRecruiters = () => modelRecruiters.find();
 export const findRecruiter = (rid) => modelRecruiters.findById(rid);
