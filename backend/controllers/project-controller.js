@@ -1,6 +1,4 @@
-import { examplesFrank } from "../Examples/example-profile.js";
-
-let projects = examplesFrank.projects;
+import * as projectsDao from "../dao/daoProjects";
 
 const ProjectController = (app) => {
   app.get("/api/projects", findAll);
@@ -10,24 +8,21 @@ const ProjectController = (app) => {
   app.put("/api/projects/:pid", edit);
   app.delete("/api/projects/:pid", remove);
   app.get("/api/home", home);
+  app.get("/api/tags/:name", findByTag);
+  app.get("/api/languages/:name", findByLanguage);
 };
 
-const home = (req, res) => {
-  res.json(
-    projects.sort((p1, p2) => {
-      return p2.hearts - p1.hearts;
-    })
-  );
+const home = async (req, res) => {
+  res.json(await projectsDao.home());
 };
 
-const findAll = (req, res) => {
-  const project = projects;
-  res.json(project);
+const findAll = async (req, res) => {
+  res.json(await projectsDao.findAll());
 };
 
-const find = (req, res) => {
+const find = async (req, res) => {
   const pid = req.params.pid;
-  const project = projects.find((p) => p._id === pid);
+  const project = await projectsDao.find(pid);
   res.json(project);
 };
 
@@ -75,9 +70,7 @@ async function searchGithub(owner, repo) {
 const findGithub = async (req, res) => {
   const username = req.params.user;
   const repo = req.params.repo;
-  const localProjects = projects.filter(
-    (p) => p.username === username && p.repo === repo
-  );
+  const localProjects = await projectsDao.findGithub(username, repo)
   if (localProjects.length > 0) {
     res.json(localProjects);
   } else {
@@ -89,25 +82,35 @@ const findGithub = async (req, res) => {
   res.sendStatus(404);
 };
 
-const add = (req, res) => {
+const add = async (req, res) => {
   const newProject = req.body;
-  newProject._id = new Date().getTime() + "";
-  projects.push(newProject);
-  res.json(newProject);
+  const p = await projectsDao.add(newProject)
+  res.json(p);
 };
 
-const edit = (req, res) => {
+const edit = async (req, res) => {
   const pid = req.params.pid;
   const updates = req.body;
-  projects = projects.map((p) => (p._id === pid ? { ...p, ...updates } : p));
-  const updated = projects.find((p) => p._id === pid);
+  const updated = await projectsDao.edit(pid, updates);
   res.json(updated);
 };
 
-const remove = (req, res) => {
+const remove = async (req, res) => {
   const pid = req.params.pid;
-  projects = projects.filter((p) => p._id !== pid);
-  res.sendStatus(200);
+  const status = await projectsDao.remove(pid)
+  res.json(status);
 };
+
+const findByTag = async (req, res) => {
+  const name = req.params.name;
+  const projects = await projectsDao.findByTag(name);
+  res.json(projects);
+};
+
+const findByLanguage = async (req, res) => {
+  const name = req.params.name;
+  const projects = await projectsDao.findByLanguage(name)
+  res.json(projects)
+}
 
 export default ProjectController;

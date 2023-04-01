@@ -1,4 +1,5 @@
 import { examplesRecruiters } from "../Examples/examples-recruiters.js";
+import * as dao from "../dao/daoRecruiters.js";
 
 let recruiters = examplesRecruiters;
 
@@ -10,37 +11,33 @@ const RecruiterController = (app) => {
   app.delete("/api/recruiters/:rid", remove);
 };
 
-const findAll = (req, res) => {
-  res.json(recruiters);
+const findAll = async (req, res) => {
+  res.json(await dao.findAllRecruiters());
 };
 
-const find = (req, res) => {
+const find = async (req, res) => {
   const rid = req.params.rid;
-  const recruiter = recruiters.find((r) => r._id === rid);
+  const recruiter = await dao.findRecruiter(rid)
   res.json(recruiter);
 };
 
-const add = (req, res) => {
+const add = async (req, res) => {
   const newRecruiter = req.body;
-  newRecruiter._id = new Date().getTime() + "";
-  recruiters.push(newRecruiter);
-  res.json(newRecruiter);
+  const r = await dao.createRecruiter(newRecruiter);
+  res.json(r);
 };
 
-const edit = (req, res) => {
-  const rid = req.params["rid"];
-  const updates = req.body;
-  recruiters = recruiters.map((r) =>
-    r._id === rid ? { ...r, ...updates } : r
-  );
-  const updated = recruiters.find((r) => r._id === rid);
-  res.json(updated);
+const edit = async (req, res) => {
+  const rid = req.params["rid"]
+  const updates = req.params.body
+  const r = await dao.updateRecruiter(rid, updates)
+  res.json(r);
 };
 
-const remove = (req, res) => {
+const remove = async (req, res) => {
   const rid = req.params["rid"];
-  recruiters = recruiters.filter((r) => r._id !== rid);
-  res.sendStatus(200);
+  const status = await dao.deleteRecruiter(rid)
+  res.json(status);
 };
 
 export default RecruiterController;
