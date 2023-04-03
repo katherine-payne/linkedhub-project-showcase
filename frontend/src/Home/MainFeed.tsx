@@ -4,21 +4,22 @@ import { examplesFrank } from "../Examples/example-profile";
 import React, { useEffect, useState } from "react";
 import { getFeed } from "src/services/project-service";
 
-export default function HomeFeed() {
-  const [projects, setProjects] = useState<Array<Project>>([]);
+export default function MainFeed() {
 
-  useEffect(() => {
-    async function fetchData() {
-      const r = await getFeed();
-      setProjects(r);
-    }
-    fetchData();
-    console.log(projects)
-  }, []);
+   const [projects, setProjects] = useState<Array<Project>>([])
 
-  return (
-    <>
+   useEffect(() => {
+        async function fetchData() {
+            const r = await getFeed();
+            setProjects(r);
+        }
+        fetchData();
+      
+    }, []);
+
+   return (
+      <>
       <ProjectFeed projects={projects} />
-    </>
-  );
+      </>
+   );
 }

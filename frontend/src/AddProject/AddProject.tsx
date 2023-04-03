@@ -93,11 +93,10 @@ export default function AddProject() {
             text="Add Project"
             onClick={async () => {
               const newProject = {
+                _id: new Date().getTime() + "",
                 name: title,
                 link: link,
                 hearts: 0,
-                username: repo?.name,
-                repo: repo?.link,
                 description: description,
                 languages: languages,
                 tags: tags,

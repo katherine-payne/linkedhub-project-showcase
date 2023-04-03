@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BsPlus } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import DescriptionInput from "src/AddProject/DescriptionInput";
@@ -74,6 +75,7 @@ export default function AddCompany() {
         </p>
         <CompanyDetailsCard
           company={{
+            _id: "-1",
             name: companyName ? companyName : "Placeholder",
             summary: description
               ? description
@@ -91,6 +93,7 @@ export default function AddCompany() {
               icon={<FaPlus />}
               onClick={async () => {
                 const c: Company = {
+                  _id: new Date().getSeconds() + "",
                   name: companyName,
                   summary: description,
                   image_url: imageURL,

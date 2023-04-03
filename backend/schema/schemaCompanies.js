@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-import schemaRecruiters from "./schemaRecruiters.js";
-
 const schemaCompanies = mongoose.Schema({
    "name": String,
    "summary": String,

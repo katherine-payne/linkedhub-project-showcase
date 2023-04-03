@@ -1,4 +1,6 @@
-import * as dao from "../dao/daoCompanies.js";
+import { examplesBCG } from "../Examples/example-company.js";
+
+let companies = [examplesBCG];
 
 const CompanyController = (app) => {
   app.get("/api/companies", findAll);
@@ -9,37 +11,41 @@ const CompanyController = (app) => {
   app.delete("/api/companies/:cid", remove);
 };
 
-const findAll = async (req, res) => {
-  res.json(await dao.findAll());
+const findAll = (req, res) => {
+  res.json(companies);
 }
 
-const findForRecruiter = async (req, res) => {
+const findForRecruiter = (req, res) => {
   const rid = req.params.rid;
-  const company = await dao.findForRecruiter(rid)
+  const company = companies.find((c) => c.recruiters.map((r) => r._id).includes(rid))
   res.json(company)
 }
 
-const find = async (req, res) => {
+const find = (req, res) => {
   const cid = req.params.cid;
-  const company = await dao.find(cid);
+  const company = companies.find((c) => c._id === cid);
   res.json(company);
 };
 
-const add = async (req, res) => {
+const add = (req, res) => {
   const newCompany = req.body;
-  res.json(await dao.add(newCompany));
+  newCompany._id = new Date().getTime() + "";
+  companies.push(newCompany);
+  res.json(newCompany);
 };
 
-const edit = async (req, res) => {
+const edit = (req, res) => {
   const cid = req.params["cid"];
   const updates = req.body;
-  res.json(await dao.edit(cid, updates));
+  companies = companies.map((c) => (c._id === cid ? { ...c, ...updates } : c));
+  const updated = companies.find((c) => c._id === cid);
+  res.json(updated);
 };
 
-const remove = async (req, res) => {
+const remove = (req, res) => {
   const cid = req.params["cid"];
-  const status = await dao.delete(cid)
-  res.sendStatus(status);
+  companies = companies.filter((c) => c._id !== cid);
+  res.sendStatus(200);
 };
 
 export default CompanyController;

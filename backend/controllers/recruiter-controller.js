@@ -1,4 +1,7 @@
+import { examplesRecruiters } from "../Examples/examples-recruiters.js";
 import * as dao from "../dao/daoRecruiters.js";
+
+let recruiters = examplesRecruiters;
 
 const RecruiterController = (app) => {
   app.get("/api/recruiters", findAll);
