@@ -7,7 +7,8 @@ const schemaProjects = mongoose.Schema({
    "username": {type: String, required: true},
    "description": String,
    "languages": [String],
-   "tags": [String]
+   "tags": [String],
+   "images": [String]
 }, {collection: 'projects'})
 
 export default schemaProjects;

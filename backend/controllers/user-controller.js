@@ -1,6 +1,4 @@
-import { examplesFrank } from "../Examples/example-profile.js";
-
-let users = [examplesFrank];
+import * as dao from "../dao/daoUsers.js";
 
 const UserController = (app) => {
   app.get("/api/users/:uid", find);
@@ -9,31 +7,29 @@ const UserController = (app) => {
   app.delete("/api/users/:uid", remove);
 };
 
-const find = (req, res) => {
+const find = async (req, res) => {
   const uid = req.params.uid;
-  const user = users.find((u) => u._id === uid);
+  const user = await dao.findUser(uid);
   res.json(user);
 };
 
-const add = (req, res) => {
+const add = async (req, res) => {
   const newUser = req.body;
-  newUser._id = new Date().getTime() + "";
-  users.push(newUser);
-  res.json(newUser);
+  const u = await dao.createUser(newUser);
+  res.json(u);
 };
 
-const edit = (req, res) => {
+const edit = async (req, res) => {
   const uid = req.params["uid"];
   const updates = req.body;
-  users = users.map((u) => (u._id === uid ? { ...u, ...updates } : u));
-  const updated = users.find((u) => u._id === uid);
-  res.json(updated);
+  const u = await dao.updateUser(uid, updates);
+  res.json(u);
 };
 
-const remove = (req, res) => {
+const remove = async (req, res) => {
   const uid = req.params["uid"];
-  users = users.filter((u) => u._id !== uid);
-  res.sendStatus(200);
+  const status = await dao.deleteUser(uid);
+  res.json(status);
 };
 
 export default UserController;

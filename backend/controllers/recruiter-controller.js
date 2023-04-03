@@ -1,7 +1,4 @@
-import { examplesRecruiters } from "../Examples/examples-recruiters.js";
 import * as dao from "../dao/daoRecruiters.js";
-
-let recruiters = examplesRecruiters;
 
 const RecruiterController = (app) => {
   app.get("/api/recruiters", findAll);
@@ -17,7 +14,7 @@ const findAll = async (req, res) => {
 
 const find = async (req, res) => {
   const rid = req.params.rid;
-  const recruiter = await dao.findRecruiter(rid)
+  const recruiter = await dao.findRecruiter(rid);
   res.json(recruiter);
 };
 
@@ -28,15 +25,15 @@ const add = async (req, res) => {
 };
 
 const edit = async (req, res) => {
-  const rid = req.params["rid"]
-  const updates = req.params.body
-  const r = await dao.updateRecruiter(rid, updates)
+  const rid = req.params["rid"];
+  const updates = req.params.body;
+  const r = await dao.updateRecruiter(rid, updates);
   res.json(r);
 };
 
 const remove = async (req, res) => {
   const rid = req.params["rid"];
-  const status = await dao.deleteRecruiter(rid)
+  const status = await dao.deleteRecruiter(rid);
   res.json(status);
 };
 

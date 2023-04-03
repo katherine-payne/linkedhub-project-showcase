@@ -57,6 +57,7 @@ export const examplesFrank = {
       tags: ["MyStuff", "Cool", "Design", "Startup"],
       username: "githubUser",
       repo: "cool-project",
+      images: [],
     },
     {
       _id: "1",
@@ -68,6 +69,7 @@ export const examplesFrank = {
       tags: ["MyStuff", "CoolProjects", "Design", "Startup"],
       username: "githubUser",
       repo: "first-project",
+      images: [],
     },
   ],
 };
