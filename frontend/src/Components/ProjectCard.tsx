@@ -24,11 +24,13 @@ export default function ProjectCard({p}: Props) {
         />
       </div>
       <div className="w-2/5 m-2 ml-auto">
+        {project.images.length > 0 && 
         <img
-          src="https://picsum.photos/600"
+          src={project.images[0]}
           alt="project interface screenshot"
           className="w-full h-36 rounded-lg object-cover"
-        ></img>
+        />
+}
         <HeartButton hearted={hearted} setHearted={setHearted} project={project} setProject={setProject} />
       </div>
     </div>

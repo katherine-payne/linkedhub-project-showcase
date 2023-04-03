@@ -14,11 +14,13 @@ export default function ProjectCardSpotlight({p}: Props) {
 
   return (
     <div className="bg-white text-primary m-4">
+{project.images.length > 0 && 
       <img
-        src="https://picsum.photos/600"
+        src={project.images[0]}
         alt="project interface screenshot"
         className="w-full h-80 rounded-t-lg object-cover"
       ></img>
+      }
       <div className="flex justify-start content-center shadow-md border border-t-0 border-border-neutral p-2 rounded-b-lg">
         <ProjectCardText
           name={project.name}
