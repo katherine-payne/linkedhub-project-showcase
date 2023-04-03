@@ -7,15 +7,20 @@ type Props = {
   text: string;
   canDelete: boolean;
   onDelete: () => void;
+  fontSize?: string;
 };
 
-export default function TopicTag({ text, canDelete, onDelete }: Props) {
-
+export default function TopicTag({
+  text,
+  canDelete,
+  onDelete,
+  fontSize = "text-sm",
+}: Props) {
   const nav = useNavigate();
 
   return (
     <button
-      className={`rounded-full text-sm text-white flex shrink-0 bg-contrast px-2 py-1 mr-1 my-1 group ${
+      className={`rounded-full ${fontSize} text-white flex shrink-0 bg-contrast px-2 py-1 mr-1 my-1 group ${
         canDelete ? "hover:bg-contrast-hover" : ""
       } cursor-pointer`}
       onClick={(e) => {
@@ -23,12 +28,18 @@ export default function TopicTag({ text, canDelete, onDelete }: Props) {
         if (canDelete) {
           onDelete();
         } else {
-          nav("/tags/" + text)
+          nav("/tags/" + text);
         }
       }}
     >
-      <FaHashtag className={`mt-0.5 mr-1 ${canDelete ? "group-hover:hidden" : ""}`} />
-      <BsXCircleFill className={`mt-0.5 mr-1 hidden ${canDelete ? "group-hover:inline" : ""}`} />
+      <FaHashtag
+        className={`mt-0.5 mr-1 ${canDelete ? "group-hover:hidden" : ""}`}
+      />
+      <BsXCircleFill
+        className={`mt-0.5 mr-1 hidden ${
+          canDelete ? "group-hover:inline" : ""
+        }`}
+      />
       {text}
     </button>
   );
