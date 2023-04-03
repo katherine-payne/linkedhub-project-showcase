@@ -53,6 +53,7 @@ export const examplesFrank: User = {
       _id: "0",
       name: "Cool Project",
       hearts: 100,
+      images: [],
       description:
         "This is my project!\nYou should check it out.\nIt's awesome!",
       languages: ["HTML", "CSS", "JavaScript", "Python"],
@@ -62,6 +63,7 @@ export const examplesFrank: User = {
       _id: "1",
       name: "My First Project",
       hearts: 100,
+      images: [],
       description:
         "This is my project!\nYou should check it out.\nIt's awesome!",
       languages: ["HTML", "CSS", "JavaScript", "Python"],

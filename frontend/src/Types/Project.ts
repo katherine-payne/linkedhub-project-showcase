@@ -5,6 +5,7 @@ type Project = {
   description: string;
   languages: Array<string>;
   tags: Array<string>;
+  images: Array<string>
 };
 
 export default Project
