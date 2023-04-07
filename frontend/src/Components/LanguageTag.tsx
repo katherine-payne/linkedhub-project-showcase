@@ -6,22 +6,27 @@ type Props = {
   text: string;
   canDelete: boolean;
   onDelete: () => void;
+  fontSize?: string;
 };
 
-export default function LanguageTag({ text, canDelete, onDelete }: Props) {
-
+export default function LanguageTag({
+  text,
+  canDelete,
+  onDelete,
+  fontSize = "text-sm",
+}: Props) {
   const nav = useNavigate();
 
   return (
     <button
       className={`
-        cursor-pointer flex flex-row justify-center group rounded-full  text-white bg-neutral group-hover:bg-neutral-hover px-2 py-1 mr-1 my-1`}
+        cursor-pointer flex flex-row justify-center group rounded-full text-white bg-neutral group-hover:bg-neutral-hover px-2 py-1 mr-1 my-1`}
       onClick={(e) => {
         e.stopPropagation();
         if (canDelete) {
           onDelete();
         } else {
-          nav("/languages/" + text)
+          nav("/languages/" + text);
         }
       }}
     >
@@ -31,7 +36,7 @@ export default function LanguageTag({ text, canDelete, onDelete }: Props) {
         }`}
       />
 
-      <span className={`text-sm ${canDelete ? "" : ""}`}>{text}</span>
+      <span className={`${fontSize}`}>{text}</span>
     </button>
   );
 }

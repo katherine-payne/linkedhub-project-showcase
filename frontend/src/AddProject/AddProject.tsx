@@ -21,6 +21,7 @@ export default function AddProject() {
   const [tags, setTags] = useState([] as string[]);
   const [languages, setLanguages] = useState([] as string[]);
   const [description, setDescription] = useState("");
+  const [images, setImages] = useState<Array<string>>([])
   const [status, setStatus] = useState(SearchStatus.Waiting);
 
   const navigate = useNavigate();
@@ -85,8 +86,8 @@ export default function AddProject() {
           setDescription={setDescription}
           titleSize="text-xl"
         />
-        <ImageSelector />
-        <div className="m-auto mb-10">
+        <ImageSelector get={images} set={setImages} />
+        <div className="m-auto my-10 mb-20">
           <PrimaryButton
             disabled={disableAdd()}
             icon={<BsFillPlusCircleFill />}
@@ -96,6 +97,7 @@ export default function AddProject() {
                 _id: new Date().getTime() + "",
                 name: title,
                 link: link,
+                images: images,
                 hearts: 0,
                 description: description,
                 languages: languages,
