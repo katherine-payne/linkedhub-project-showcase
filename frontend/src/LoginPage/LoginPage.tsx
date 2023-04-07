@@ -1,21 +1,18 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { FaUserPlus } from "react-icons/fa";
 import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
-import BASE_URL from "src/services/service-helper";
+import { registerUser } from "src/services/user-service";
 
 export default function LoginPage() {
-  const api = axios.create({ withCredentials: true });
-
-  const [type, setType] = useState("poster");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [role, setRole] = useState<"poster" | "recruiter" | "admin">("poster");
 
   const labelClass = (value: string) =>
     `p-2 rounded-lg flex flex-row justify-center w-full gap-1 ${
-      type === value ? "bg-sky-100 outline outline-sky-300" : ""
+      role === value ? "bg-sky-100 outline outline-sky-300" : ""
     }`;
 
   return (
@@ -38,7 +35,7 @@ export default function LoginPage() {
           <button
             className={labelClass("poster")}
             onClick={() => {
-              setType("poster");
+              setRole("poster");
             }}
           >
             <span>Poster</span>
@@ -46,7 +43,7 @@ export default function LoginPage() {
           <button
             className={labelClass("recruiter")}
             onClick={() => {
-              setType("recruiter");
+              setRole("recruiter");
             }}
           >
             <span>Recruiter</span>
@@ -54,7 +51,7 @@ export default function LoginPage() {
           <button
             className={labelClass("admin")}
             onClick={() => {
-              setType("admin");
+              setRole("admin");
             }}
           >
             <span>Admin</span>
@@ -92,11 +89,12 @@ export default function LoginPage() {
           const newUser = {
             name: name,
             password: pass,
+            role: role,
             contact_info: {
               email: email,
             },
           };
-          api.post(BASE_URL + "/register", newUser);
+          registerUser(newUser);
         }}
       />
     </div>
