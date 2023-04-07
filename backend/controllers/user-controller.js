@@ -2,21 +2,17 @@ import * as dao from "../dao/daoUsers.js";
 
 const UserController = (app) => {
   app.get("/api/users/:uid", find);
-  app.post("/api/users", add);
   app.put("/api/users/:uid", edit);
   app.delete("/api/users/:uid", remove);
+  app.post("/api/users/register", register);
+  app.post("/api/users/login", login);
+  app.post("/api/users/logout", logout);
 };
 
 const find = async (req, res) => {
   const uid = req.params.uid;
   const user = await dao.findUser(uid);
   res.json(user);
-};
-
-const add = async (req, res) => {
-  const newUser = req.body;
-  const u = await dao.createUser(newUser);
-  res.json(u);
 };
 
 const edit = async (req, res) => {
@@ -30,6 +26,35 @@ const remove = async (req, res) => {
   const uid = req.params["uid"];
   const status = await dao.deleteUser(uid);
   res.json(status);
+};
+
+const register = async (req, res) => {
+  const newUser = req.body;
+  const existingUser = await dao.findUserByEmail(req.body.contact_info.email);
+  if (existingUser) {
+    res.sendStatus(403);
+    return;
+  } else {
+    const u = await dao.createUser(newUser);
+    req.session.currentUser = u;
+    res.json(req.session);
+  }
+};
+
+const login = async (req, res) => {
+  const user = req.body;
+  const existingUser = await dao.findUserByEmail(req.body.contact_info.email);
+  if (existingUser && user.password === existingUser.password) {
+    req.session.currentUser = user;
+    res.send(req.session);
+  } else {
+    res.sendStatus(401);
+  }
+};
+
+const logout = async (req, res) => {
+  req.session.destroy();
+  res.sendStatus(200);
 };
 
 export default UserController;

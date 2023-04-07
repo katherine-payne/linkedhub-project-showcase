@@ -1,12 +1,9 @@
-import axios from "axios";
 import React, { useState } from "react";
 import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
-import BASE_URL from "src/services/service-helper";
+import { registerUser } from "src/services/user-service";
 
 export default function LoginPage() {
-  const api = axios.create({ withCredentials: true });
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
@@ -41,7 +38,7 @@ export default function LoginPage() {
               email: email,
             },
           };
-          api.post(BASE_URL + "/register", newUser);
+          registerUser(newUser);
         }}
       />
     </div>
