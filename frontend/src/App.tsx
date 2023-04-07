@@ -15,6 +15,7 @@ import RecruitersListPage from "./Recruiter/RecruitersListPage";
 import AddCompany from "./AddCompany/AddCompany";
 import LanguagesPage from "./TagPages/LanguagesPage";
 import TagsPage from "./TagPages/TagsPage";
+import RegisterPage from "./LoginPage/RegisterPage";
 import LoginPage from "./LoginPage/LoginPage";
 
 export default function App() {
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="/users/:uid" element={<UserProfile />} />
           <Route path="/languages/:lang" element={<LanguagesPage />} />
           <Route path="/tags/:tag" element={<TagsPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
