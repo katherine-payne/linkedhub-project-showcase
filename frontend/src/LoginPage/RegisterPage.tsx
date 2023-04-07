@@ -40,6 +40,7 @@ export default function RegisterPage() {
           >
             <span>Poster</span>
           </button>
+          <div className={`${role === "poster" ? "opacity-0" : ""} w-1 bg-gray-200 my-2`} />
           <button
             className={labelClass("recruiter")}
             onClick={() => {
@@ -48,6 +49,7 @@ export default function RegisterPage() {
           >
             <span>Recruiter</span>
           </button>
+          <div className={`${role === "recruiter" ? "opacity-0" : ""} w-1 bg-gray-200 my-2`} />
           <button
             className={labelClass("admin")}
             onClick={() => {
