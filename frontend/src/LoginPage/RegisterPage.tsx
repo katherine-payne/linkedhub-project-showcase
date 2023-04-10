@@ -6,6 +6,7 @@ import { registerUser } from "src/services/user-service";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
+  const [image, setImage] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [role, setRole] = useState<"poster" | "recruiter" | "admin">("poster");
@@ -27,6 +28,18 @@ export default function RegisterPage() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <div className="w-4/12">
+        <label className="font-medium" htmlFor="name">
+          Profile Picture URL:{" "}
+        </label>
+        <InputField
+          id="name"
+          placeholder="URL"
+          type="text"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
         />
       </div>
       <div className="w-4/12">
