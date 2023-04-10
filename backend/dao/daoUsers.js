@@ -11,3 +11,5 @@ export const updateUser = (uid, user) =>
       new: true,
     }
   );
+export const findUserByEmail = (email) =>
+  modelUsers.findOne({ contact_info: { email } });

@@ -7,17 +7,20 @@ const schemaUsers = mongoose.Schema(
     password: String,
     profile_image_url: String,
     contact_info: {
-      email: {type: String, unique: true, required: true},
+      email: { type: String, unique: true, required: true },
       phone: String,
     },
-    experience: [{
-      role: String,
-      company: String,
-      location: String,
-      start: String,
-      end: String,
-      description: String
-    }],
+    password: String,
+    experience: [
+      {
+        role: String,
+        company: String,
+        location: String,
+        start: String,
+        end: String,
+        description: String,
+      },
+    ],
     education: [
       {
         university: String,
