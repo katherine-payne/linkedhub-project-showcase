@@ -11,6 +11,7 @@ const schemaUsers = mongoose.Schema(
       phone: String,
     },
     password: String,
+    profile_image_url: String,
     experience: [
       {
         role: String,
