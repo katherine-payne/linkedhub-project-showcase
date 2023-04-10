@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import { FaUserPlus } from "react-icons/fa";
 import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
@@ -19,6 +20,8 @@ export default function RegisterPage() {
   return (
     <div className="flex flex-col w-full items-center gap-4 mx-auto">
       <div className="w-4/12">
+        <p className="font-serif text-3xl font-bold mb-4">Register</p>
+
         <label className="font-medium" htmlFor="name">
           Name:{" "}
         </label>
@@ -30,17 +33,26 @@ export default function RegisterPage() {
           onChange={(e) => setName(e.target.value)}
         />
       </div>
-      <div className="w-4/12">
-        <label className="font-medium" htmlFor="name">
-          Profile Picture URL:{" "}
-        </label>
-        <InputField
-          id="name"
-          placeholder="URL"
-          type="text"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        />
+      <div className="flex w-4/12 flex-row justify-between">
+        <div className="flex flex-col flex-1 mr-6">
+          <label className="font-medium" htmlFor="name">
+            Profile Picture:{" "}
+          </label>
+          <InputField
+            id="name"
+            placeholder="URL"
+            type="text"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-0 w-24 h-24">
+          <img
+            className="w-24 h-24 aspect-square rounded-full object-cover shadow-md"
+            alt="Rounded avatar"
+            src={image}
+          />
+        </div>
       </div>
       <div className="w-4/12">
         <label className="font-medium">Role: </label>
@@ -53,7 +65,11 @@ export default function RegisterPage() {
           >
             <span>Poster</span>
           </button>
-          <div className={`${role === "poster" ? "opacity-0" : ""} w-1 bg-gray-200 my-2`} />
+          <div
+            className={`${
+              role === "poster" ? "opacity-0" : ""
+            } w-1 bg-gray-200 my-2`}
+          />
           <button
             className={labelClass("recruiter")}
             onClick={() => {
@@ -62,7 +78,11 @@ export default function RegisterPage() {
           >
             <span>Recruiter</span>
           </button>
-          <div className={`${role === "recruiter" ? "opacity-0" : ""} w-1 bg-gray-200 my-2`} />
+          <div
+            className={`${
+              role === "recruiter" ? "opacity-0" : ""
+            } w-1 bg-gray-200 my-2`}
+          />
           <button
             className={labelClass("admin")}
             onClick={() => {
