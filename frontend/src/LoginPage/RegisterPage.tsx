@@ -103,6 +103,7 @@ export default function RegisterPage() {
         onClick={() => {
           const newUser = {
             name: name,
+            profile_image_url: image,
             password: pass,
             role: role,
             contact_info: {
