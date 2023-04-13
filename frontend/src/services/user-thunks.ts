@@ -1,9 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as userService from "./user-service";
+import User from "src/Types/User";
 
 export const loginThunk = createAsyncThunk(
   "users/login",
-  async (user, thunkAPI) => await userService.loginUser(user)
+  async (user: any, thunkAPI) => await userService.loginUser(user)
 );
 
 export const logoutThunk = createAsyncThunk(
@@ -18,7 +19,7 @@ export const registerThunk = createAsyncThunk(
 
 export const profileThunk = createAsyncThunk(
   "users/profile",
-  async (user, thunkAPI) => {
+  async (user: User, thunkAPI) => {
     return await userService.getUser(user._id);
   }
 );

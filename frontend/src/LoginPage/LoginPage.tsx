@@ -4,16 +4,19 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
+import { AppDispatch } from "src/redux/store";
+import { loginThunk } from "src/services/user-thunks";
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
   const nav = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const handleLogin = async () => {
     try {
-      await dispatch(loginThunk({email, pass}));
+      dispatch(loginThunk({email, pass}));
       nav("/profile");
     } catch (e) {
       alert(e);
