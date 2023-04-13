@@ -16,7 +16,8 @@ export default function LoginPage() {
   const dispatch = useDispatch<AppDispatch>()
   const handleLogin = async () => {
     try {
-      dispatch(loginThunk({email, pass}));
+      await dispatch(loginThunk({email, pass}));
+      console.log("thunked");
       nav("/profile");
     } catch (e) {
       alert(e);
