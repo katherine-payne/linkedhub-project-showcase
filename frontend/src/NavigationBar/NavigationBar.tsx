@@ -117,14 +117,14 @@ export default function NavigationBar() {
 
         <div className="group">
           <div className="absolute w-auto min-w-max right-4 scale-0 group-hover:scale-100 transition-all duration-100 bg-slate-100 rounded-lg mt-10 mr-10 shadow flex flex-col p-2 gap-2">
-            <Link to="/profile/0">
+            <Link to="/profile">
               <PrimaryButton
                 text={"My Profile"}
                 icon={<FaUser />}
                 onClick={() => {}}
               />
             </Link>
-            <Link to="/profile/0/edit">
+            <Link to="/profile/edit">
               <PrimaryButton
                 text={"Edit Profile"}
                 icon={<FaPencilAlt />}

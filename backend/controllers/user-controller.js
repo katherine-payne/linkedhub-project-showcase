@@ -1,6 +1,7 @@
 import * as dao from "../dao/daoUsers.js";
 
 const UserController = (app) => {
+  app.get("/api/users", find);
   app.get("/api/users/:uid", find);
   app.put("/api/users/:uid", edit);
   app.delete("/api/users/:uid", remove);
