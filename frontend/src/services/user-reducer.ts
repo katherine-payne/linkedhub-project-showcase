@@ -23,7 +23,7 @@ const usersSlice = createSlice({
     builder.addCase(loginThunk.fulfilled, (state: State, action: PayloadAction<User>) => {
       state.currentUser = action.payload;
     })
-    builder.addCase(loginThunk.fulfilled, (state: State, action: PayloadAction<User>) => {
+    builder.addCase(logoutThunk.fulfilled, (state: State, action: PayloadAction<User>) => {
       state.currentUser = null;
     })
     builder.addCase(registerThunk.fulfilled, (state: State, action: PayloadAction<User>) => {
