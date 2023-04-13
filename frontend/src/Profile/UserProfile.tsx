@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { FaPencilAlt, FaPlus, FaTimes } from "react-icons/fa";
 import Education from "src/Types/Education";
@@ -13,15 +14,17 @@ import EditEducation from "./EditEducation";
 import EditExperience from "./EditExperience";
 import { getUser, updateUser } from "src/services/user-service";
 import User from "src/Types/User";
+import { RootState } from "src/redux/store";
 
 export default function UserProfile({ editProfile = false }) {
   const { uid } = useParams();
+  const { currentUser } = useSelector((state: RootState) => state.users);
 
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     async function fetchData() {
-      const r = await getUser(uid ?? "u0"); // TODO: Replace with logged in user id after login is implemented
+      const r = uid ? await getUser(uid) : currentUser; // TODO: Replace with logged in user id after login is implemented
       setUser(r);
 
       setNewPhone(r.contact_info.phone);
