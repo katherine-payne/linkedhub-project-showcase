@@ -12,8 +12,11 @@ const UserController = (app) => {
 
 const find = async (req, res) => {
   const uid = req.params.uid;
-  if (!uid) {
+  if (!uid && req.session.currentUser) {
     uid = req.session.currentUser._id;
+  }
+  if (!uid) {
+    res.json(null);
   }
   const user = await dao.findUser(uid);
   res.json(user);
