@@ -16,7 +16,7 @@ const find = async (req, res) => {
     uid = req.session.currentUser._id;
   }
   if (!uid) {
-    res.json(null);
+    res.json({});
     return;
   }
   const user = await dao.findUser(uid);

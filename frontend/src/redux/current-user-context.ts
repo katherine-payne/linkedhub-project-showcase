@@ -6,7 +6,8 @@ import { AppDispatch } from "./store";
 function CurrentUserContext({ children }: any) {
   const dispatch = useDispatch<AppDispatch>();
   const getProfile = async () => {
-    dispatch(profileThunk());
+    await dispatch(profileThunk());
+    console.log("cUser")
   };
   useEffect(() => {
     getProfile();

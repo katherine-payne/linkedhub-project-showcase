@@ -21,6 +21,7 @@ const usersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loginThunk.fulfilled, (state: State, action: PayloadAction<User>) => {
+      console.log("fulfilled")
       state.currentUser = action.payload;
     })
     builder.addCase(logoutThunk.fulfilled, (state: State, action: PayloadAction<User>) => {
@@ -30,7 +31,10 @@ const usersSlice = createSlice({
       state.currentUser = action.payload;
     });
     builder.addCase(profileThunk.fulfilled, (state: State, action: PayloadAction<User>) => {
-      state.currentUser = action.payload;
+      if (action.payload) {
+        state.currentUser = action.payload;
+      }
+      return
     });
   },
 });
