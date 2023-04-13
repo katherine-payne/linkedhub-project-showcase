@@ -1,18 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
- loginThunk, logoutThunk, registerThunk,
- profileThunk, updateUserThunk,
-} from "../services/auth-thunks";
+  loginThunk,
+  profileThunk,
+  registerThunk,
+  logoutThunk,
+} from "../services/users-thunks";
 
+const initialState = {
+  currentUser: null,
+};
 
-const authSlice = createSlice({
- name: "auth",
- initialState: { currentUser: null },
- reducers: {},
- extraReducers: {
-   [loginThunk.fulfilled]: (state, { payload }) => {
-     state.currentUser = payload;
-   },
- },
+const usersSlice = createSlice({
+  name: "users",
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [loginThunk.fulfilled]: (state, action) => {
+      state.currentUser = action.payload;
+    },
+    [logoutThunk.fulfilled]: (state, action) => {
+      state.currentUser = null;
+    },
+    [registerThunk.fulfilled]: (state, action) => {
+      state.currentUser = action.payload;
+    },
+    [profileThunk.fulfilled]: (state, action) => {
+      state.currentUser = action.payload;
+    },
+  },
 });
-export default userSlice.reducer;
+
+export default usersSlice.reducer;
