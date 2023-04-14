@@ -3,6 +3,7 @@ import schemaProjects from "./schemaProjects.js";
 
 const schemaUsers = mongoose.Schema(
   {
+    role: String,
     name: String,
     password: String,
     profile_image_url: String,
@@ -33,7 +34,15 @@ const schemaUsers = mongoose.Schema(
       },
     ],
     skills: [String],
-    projects: [schemaProjects],
+    projects: [
+      {type: mongoose.Schema.Types.ObjectId, ref: "ModelProjects"}
+    ],
+    liked: [
+      {type: mongoose.Schema.Types.ObjectId, ref: "ModelProjects"}
+    ],
+    following: [
+      {type: mongoose.Schema.Types.ObjectId, ref: "ModelUsers"}
+    ]
   },
   { collection: "users" }
 );

@@ -107,7 +107,6 @@ export default function AddProject() {
               if (currentUser !== null && repo !== null) {
                 console.log(currentUser["_id"]);
                 const newProject = {
-                  _id: new Date().getTime() + "",
                   uid: currentUser["_id"],
                   name: title,
                   link: link,
