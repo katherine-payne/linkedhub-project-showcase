@@ -24,7 +24,7 @@ export default function RegisterPage() {
       dispatch(registerThunk(newUser));
       nav("/profile");
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
   };
 

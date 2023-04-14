@@ -20,13 +20,14 @@ export default function LoginPage() {
   const handleLogin = async () => {
     try {
       await dispatch(loginThunk({ contact_info: { email }, password: pass }));
-      if (currentUser == null) { // FIXME + TODO: == null isn't blocking as intended
+      if (currentUser == null) {
+        // FIXME + TODO: == null isn't blocking as intended
         setLoginState("failed");
       } else {
         nav("/profile");
       }
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
   };
 
@@ -64,7 +65,7 @@ export default function LoginPage() {
           onChange={(e) => setPass(e.target.value)}
           onKeyDown={(e) => {
             if (e.key == "Enter") {
-              handleLogin()
+              handleLogin();
             }
           }}
         />

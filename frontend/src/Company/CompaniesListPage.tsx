@@ -26,7 +26,7 @@ export default function CompaniesListPage() {
           <div
             key={index}
             className="cursor-pointer mb-4 w-full"
-            onClick={() => navigate(c._id)}
+            onClick={() => navigate("/companies/" + c._id ?? "")}
           >
             <CompanyDetailsCard company={c} />
           </div>
