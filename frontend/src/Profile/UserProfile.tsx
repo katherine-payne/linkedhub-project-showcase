@@ -24,36 +24,38 @@ export default function UserProfile({ editProfile = false }) {
 
   useEffect(() => {
     async function fetchData() {
-      const r = uid ? await getUser(uid) : currentUser; // TODO: Replace with logged in user id after login is implemented
+      const r = uid !== undefined ? await getUser(uid) : currentUser;
       setUser(r);
 
-      setNewPhone(r.contact_info.phone ?? "");
-      setEditingEducation(
-        r.education.map((edu: Education) => {
-          return { education: edu, editing: false };
-        })
-      );
-      setEditingExperience(
-        r.experience.map((job: Experience) => {
-          return { experience: job, editing: false };
-        })
-      );
-      setNewSkills(r.skills);
+      if (r && r !== undefined && r.contact_info) {
+        setNewPhone(r.contact_info?.phone ?? "");
+        setEditingEducation(
+          r.education?.map((edu: Education) => {
+            return { education: edu, editing: false };
+          }) ?? []
+        );
+        setEditingExperience(
+          r.experience?.map((job: Experience) => {
+            return { experience: job, editing: false };
+          }) ?? []
+        );
+        setNewSkills(r.skills);
+      }
     }
     fetchData();
   }, [uid, currentUser]);
 
   const [editingPhone, setEditingPhone] = useState(false);
-  const [newPhone, setNewPhone] = useState(user?.contact_info.phone ?? "");
+  const [newPhone, setNewPhone] = useState(user?.contact_info?.phone ?? "");
   const [addingEducation, setAddingEducation] = useState(false);
   const [editingEducation, setEditingEducation] = useState(
-    user?.education.map((edu) => {
+    user?.education?.map((edu) => {
       return { education: edu, editing: false };
     }) ?? undefined
   );
   const [addingExperience, setAddingExperience] = useState(false);
   const [editingExperience, setEditingExperience] = useState(
-    user?.experience.map((job) => {
+    user?.experience?.map((job) => {
       return { experience: job, editing: false };
     }) ?? undefined
   );
@@ -109,18 +111,18 @@ export default function UserProfile({ editProfile = false }) {
           <p>
             <a
               className={"italic text-accent hover:underline"}
-              href={"mailto:" + user.contact_info.email}
+              href={"mailto:" + user.contact_info?.email ?? ""}
             >
-              {user.contact_info.email}
+              {user.contact_info?.email ?? ""}
             </a>
           </p>
           <p className="flex items-center gap-1">
             {(!editProfile || (editProfile && !editingPhone)) && (
               <a
-                href={"tel:" + user.contact_info.phone ?? ""}
+                href={"tel:" + user.contact_info?.phone ?? ""}
                 className="italic text-accent hover:underline"
               >
-                {user.contact_info.phone ?? ""}
+                {user.contact_info?.phone ?? ""}
               </a>
             )}
             {editProfile && !editingPhone && (
@@ -167,7 +169,7 @@ export default function UserProfile({ editProfile = false }) {
           </p>
 
           <UserProfileHeading title="Experience" />
-          {user.experience.map((job, index) => {
+          {user.experience?.map((job, index) => {
             return (
               <div className="mb-4" key={index}>
                 <div className="flex items-center justify-between">
@@ -260,7 +262,7 @@ export default function UserProfile({ editProfile = false }) {
           )}
 
           <UserProfileHeading title="Education" />
-          {user.education.map((edu, index) => {
+          {user.education?.map((edu, index) => {
             return (
               <div className="mb-4" key={index}>
                 <div className="flex items-center justify-between">
@@ -349,7 +351,7 @@ export default function UserProfile({ editProfile = false }) {
           <UserProfileHeading title="Skills" />
           <div className="flex items-center gap-1">
             {(!editProfile || (editProfile && !editingSkills)) && (
-              <p>{user.skills.join(", ")}</p>
+              <p>{user.skills?.join(", ")}</p>
             )}
             {editProfile && !editingSkills && (
               <PrimaryButton
@@ -392,7 +394,7 @@ export default function UserProfile({ editProfile = false }) {
         </div>
       )}
 
-      {user && <ProjectFeed projects={user.projects} />}
+      {user && <ProjectFeed projects={user.projects ?? []} />}
     </div>
   );
 }

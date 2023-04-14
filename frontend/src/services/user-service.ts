@@ -7,7 +7,7 @@ const USERS_API = BASE_URL + "users";
 const api = axios.create({ withCredentials: true });
 
 export const getUser = async (uid: string) => {
-  const response = await axios.get(USERS_API + "/" + uid);
+  const response = await api.get(USERS_API + "/" + uid);
   return response.data;
 };
 
