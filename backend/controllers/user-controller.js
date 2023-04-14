@@ -53,7 +53,7 @@ const login = async (req, res) => {
   const user = req.body;
   const existingUser = await dao.findUserByEmail(req.body.contact_info.email);
   if (existingUser && user.password === existingUser.password) {
-    req.session.currentUser = user;
+    req.session.currentUser = existingUser;
     res.send(req.session);
   } else {
     res.sendStatus(401);

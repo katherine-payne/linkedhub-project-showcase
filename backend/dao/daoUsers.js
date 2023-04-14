@@ -12,4 +12,4 @@ export const updateUser = (uid, user) =>
     }
   );
 export const findUserByEmail = (email) =>
-  modelUsers.findOne({ contact_info: { email } });
+  modelUsers.findOne({ "contact_info.email": email });

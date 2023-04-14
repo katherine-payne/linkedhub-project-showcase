@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   FaSearch,
   FaPlus,
@@ -18,9 +19,12 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
+import { logoutThunk } from "src/services/user-thunks";
+import { AppDispatch } from "src/redux/store";
 
 export default function NavigationBar() {
   let [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -134,7 +138,10 @@ export default function NavigationBar() {
             <PrimaryButton
               text={"Log Out"}
               icon={<FaDoorOpen />}
-              onClick={() => {}}
+              onClick={() => {
+                dispatch(logoutThunk());
+                navigate("/");
+              }}
             />
           </div>
 

@@ -17,9 +17,9 @@ export default function LoginPage() {
   const { currentUser } = useSelector((state: RootState) => state.users);
   const handleLogin = async () => {
     try {
-      dispatch(loginThunk({ email, pass }));
+      dispatch(loginThunk({ contact_info: { email }, password: pass }));
       alert(currentUser);
-      // nav("/profile");
+      nav("/profile");
     } catch (e) {
       alert(e);
     }

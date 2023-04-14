@@ -9,12 +9,12 @@ export const loginThunk = createAsyncThunk(
 
 export const logoutThunk = createAsyncThunk(
   "users/logout",
-  async (user, thunkAPI) => await userService.logoutUser()
+  async (_, thunkAPI) => await userService.logoutUser()
 );
 
 export const registerThunk = createAsyncThunk(
   "users/register",
-  async (user, thunkAPI) => await userService.registerUser(user)
+  async (user: any, thunkAPI) => await userService.registerUser(user)
 );
 
 export const profileThunk = createAsyncThunk(

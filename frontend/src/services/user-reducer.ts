@@ -8,8 +8,8 @@ import {
 import User from "src/Types/User";
 
 type State = {
-  currentUser: User | null
-}
+  currentUser: User | null;
+};
 
 const initialState = {
   currentUser: null,
@@ -20,22 +20,33 @@ const usersSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(loginThunk.fulfilled, (state: State, action: PayloadAction<User>) => {
-      console.log("fulfilled")
-      state.currentUser = action.payload;
-    })
-    builder.addCase(logoutThunk.fulfilled, (state: State, action: PayloadAction<User>) => {
-      state.currentUser = null;
-    })
-    builder.addCase(registerThunk.fulfilled, (state: State, action: PayloadAction<User>) => {
-      state.currentUser = action.payload;
-    });
-    builder.addCase(profileThunk.fulfilled, (state: State, action: PayloadAction<User>) => {
-      if (action.payload) {
-        state.currentUser = action.payload;
+    builder.addCase(
+      loginThunk.fulfilled,
+      (state: State, action: PayloadAction<any>) => {
+        state.currentUser = action.payload.currentUser;
       }
-      return
-    });
+    );
+    builder.addCase(
+      logoutThunk.fulfilled,
+      (state: State, action: PayloadAction<User>) => {
+        state.currentUser = null;
+      }
+    );
+    builder.addCase(
+      registerThunk.fulfilled,
+      (state: State, action: PayloadAction<any>) => {
+        state.currentUser = action.payload.currentUser;
+      }
+    );
+    builder.addCase(
+      profileThunk.fulfilled,
+      (state: State, action: PayloadAction<User>) => {
+        if (action.payload) {
+          state.currentUser = action.payload;
+        }
+        return;
+      }
+    );
   },
 });
 

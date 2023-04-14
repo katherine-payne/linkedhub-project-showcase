@@ -7,7 +7,6 @@ function CurrentUserContext({ children }: any) {
   const dispatch = useDispatch<AppDispatch>();
   const getProfile = async () => {
     await dispatch(profileThunk());
-    console.log("cUser")
   };
   useEffect(() => {
     getProfile();

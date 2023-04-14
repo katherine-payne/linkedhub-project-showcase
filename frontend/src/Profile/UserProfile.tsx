@@ -27,7 +27,7 @@ export default function UserProfile({ editProfile = false }) {
       const r = uid ? await getUser(uid) : currentUser; // TODO: Replace with logged in user id after login is implemented
       setUser(r);
 
-      setNewPhone(r.contact_info.phone);
+      setNewPhone(r.contact_info.phone ?? "");
       setEditingEducation(
         r.education.map((edu: Education) => {
           return { education: edu, editing: false };
@@ -41,12 +41,10 @@ export default function UserProfile({ editProfile = false }) {
       setNewSkills(r.skills);
     }
     fetchData();
-  }, [uid]);
+  }, [uid, currentUser]);
 
   const [editingPhone, setEditingPhone] = useState(false);
-  const [newPhone, setNewPhone] = useState(
-    user?.contact_info.phone ?? undefined
-  );
+  const [newPhone, setNewPhone] = useState(user?.contact_info.phone ?? "");
   const [addingEducation, setAddingEducation] = useState(false);
   const [editingEducation, setEditingEducation] = useState(
     user?.education.map((edu) => {
@@ -119,10 +117,10 @@ export default function UserProfile({ editProfile = false }) {
           <p className="flex items-center gap-1">
             {(!editProfile || (editProfile && !editingPhone)) && (
               <a
-                href={"tel:" + user.contact_info.phone}
+                href={"tel:" + user.contact_info.phone ?? ""}
                 className="italic text-accent hover:underline"
               >
-                {user.contact_info.phone}
+                {user.contact_info.phone ?? ""}
               </a>
             )}
             {editProfile && !editingPhone && (
@@ -160,7 +158,7 @@ export default function UserProfile({ editProfile = false }) {
                 <PrimaryButton
                   text="Cancel"
                   onClick={() => {
-                    setNewPhone(user.contact_info.phone);
+                    setNewPhone(user.contact_info.phone ?? "");
                     setEditingPhone(false);
                   }}
                 />
