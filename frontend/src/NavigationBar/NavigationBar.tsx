@@ -145,13 +145,11 @@ export default function NavigationBar() {
             />
           </div>
 
-          <Link to="/profile">
-            <img
-              className="relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all lh-profile-image object-cover aspect-square"
-              src="https://picsum.photos/400"
-              alt="Rounded avatar"
-            />
-          </Link>
+          <img
+            className="relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all lh-profile-image object-cover aspect-square"
+            src="https://picsum.photos/400"
+            alt="Rounded avatar"
+          />
         </div>
       </li>
     </ul>
