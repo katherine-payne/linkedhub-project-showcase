@@ -110,6 +110,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
           .join(" ");
 
         found.link = link;
+        found.username = owner
 
         setRepo(found);
         return found;

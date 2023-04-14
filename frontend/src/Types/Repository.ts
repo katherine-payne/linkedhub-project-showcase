@@ -9,6 +9,7 @@ type Repository = {
   languages_url: string;
   languages: Array<Language>;
   topics: Array<string>;
+  username: string;
 };
 
 export default Repository

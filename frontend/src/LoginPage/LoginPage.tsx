@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FaUserCheck } from "react-icons/fa";
+import { BsSignal } from "react-icons/bs";
+import { FaExclamation, FaSign, FaUserCheck, FaXing } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
@@ -11,15 +12,19 @@ import { loginThunk } from "src/services/user-thunks";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [loginState, setLoginState] = useState("waiting");
 
   const nav = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { currentUser } = useSelector((state: RootState) => state.users);
   const handleLogin = async () => {
     try {
-      dispatch(loginThunk({ contact_info: { email }, password: pass }));
-      alert(currentUser);
-      nav("/profile");
+      await dispatch(loginThunk({ contact_info: { email }, password: pass }));
+      if (currentUser == null) { // FIXME + TODO: == null isn't blocking as intended
+        setLoginState("failed");
+      } else {
+        nav("/profile");
+      }
     } catch (e) {
       alert(e);
     }
@@ -27,7 +32,15 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col w-full items-center gap-4 mx-auto">
-      <div className="w-4/12">
+      <div className="max-w-sm w-full">
+        {loginState === "failed" && (
+          <div className="flex flex-row justify-center items-center gap-2 text-rose-400 bg-white border border-border p-2 rounded-lg shadow mb-4">
+            <span>
+              <FaExclamation />
+            </span>
+            Incorrect login details. Please try again.
+          </div>
+        )}
         <label className="font-medium" htmlFor="email">
           Email:{" "}
         </label>
@@ -39,7 +52,7 @@ export default function LoginPage() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <div className="w-4/12">
+      <div className="max-w-sm w-full">
         <label className="font-medium" htmlFor="password">
           Password:{" "}
         </label>
@@ -49,6 +62,11 @@ export default function LoginPage() {
           type="password"
           value={pass}
           onChange={(e) => setPass(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key == "Enter") {
+              handleLogin()
+            }
+          }}
         />
       </div>
       <PrimaryButton

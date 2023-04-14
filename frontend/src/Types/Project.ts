@@ -6,6 +6,7 @@ type Project = {
   languages: Array<string>;
   tags: Array<string>;
   images: Array<string>
+  uid: string
 };
 
 export default Project
