@@ -31,12 +31,12 @@ export default function App() {
             <Routes>
               <Route index element={<MainFeed />} />
               <Route path="/search/:query" element={<SearchFeed />} />
+              <Route path="/profile/:uid" element={<UserProfile />} />
               <Route path="/profile" element={<UserProfile />} />
               <Route
                 path="/profile/edit"
                 element={<UserProfile editProfile={true} />}
               />
-              <Route path="/profile/:pid" element={<UserProfile />} />
               <Route path="/add/project" element={<AddProject />} />
               <Route path="/add/company" element={<AddCompany />} />
               <Route path="/companies/:cid" element={<CompanyPage />} />
