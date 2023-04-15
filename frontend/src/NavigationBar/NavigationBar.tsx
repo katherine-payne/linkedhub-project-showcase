@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   FaSearch,
   FaPlus,
@@ -18,9 +19,12 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
+import { logoutThunk } from "src/services/user-thunks";
+import { AppDispatch } from "src/redux/store";
 
 export default function NavigationBar() {
   let [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -117,14 +121,14 @@ export default function NavigationBar() {
 
         <div className="group">
           <div className="absolute w-auto min-w-max right-4 scale-0 group-hover:scale-100 transition-all duration-100 bg-slate-100 rounded-lg mt-10 mr-10 shadow flex flex-col p-2 gap-2">
-            <Link to="/profile/0">
+            <Link to="/profile">
               <PrimaryButton
                 text={"My Profile"}
                 icon={<FaUser />}
                 onClick={() => {}}
               />
             </Link>
-            <Link to="/profile/0/edit">
+            <Link to="/profile/edit">
               <PrimaryButton
                 text={"Edit Profile"}
                 icon={<FaPencilAlt />}
@@ -134,17 +138,18 @@ export default function NavigationBar() {
             <PrimaryButton
               text={"Log Out"}
               icon={<FaDoorOpen />}
-              onClick={() => {}}
+              onClick={() => {
+                dispatch(logoutThunk());
+                navigate("/");
+              }}
             />
           </div>
 
-          <Link to="/profile">
-            <img
-              className="relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all lh-profile-image object-cover aspect-square"
-              src="https://picsum.photos/400"
-              alt="Rounded avatar"
-            />
-          </Link>
+          <img
+            className="relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all lh-profile-image object-cover aspect-square"
+            src="https://picsum.photos/400"
+            alt="Rounded avatar"
+          />
         </div>
       </li>
     </ul>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import RepoSelector from "./RepoSelector";
 import TagInput from "./TagInput";
@@ -13,6 +13,8 @@ import { useNavigate } from "react-router";
 import SearchStatus from "src/Types/SearchStatus";
 import statusDisplay from "src/Components/StatusDisplay";
 import { BsFillPlusCircleFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
 
 export default function AddProject() {
   const [link, setLink] = useState<string>("");
@@ -21,10 +23,13 @@ export default function AddProject() {
   const [tags, setTags] = useState([] as string[]);
   const [languages, setLanguages] = useState([] as string[]);
   const [description, setDescription] = useState("");
-  const [images, setImages] = useState<Array<string>>([])
+  const [images, setImages] = useState<Array<string>>([]);
   const [status, setStatus] = useState(SearchStatus.Waiting);
 
   const navigate = useNavigate();
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
 
   const setNewRepo = (newRepo: Repository) => {
     setRepo(newRepo);
@@ -33,6 +38,12 @@ export default function AddProject() {
     setLanguages(newRepo.languages.map((lang) => lang.name));
     setDescription(newRepo.description);
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      console.log(currentUser["_id"]);
+    }
+  }, [currentUser]);
 
   function disableAdd(): boolean {
     return title === "" && description === "";
@@ -93,20 +104,27 @@ export default function AddProject() {
             icon={<BsFillPlusCircleFill />}
             text="Add Project"
             onClick={async () => {
-              const newProject = {
-                _id: new Date().getTime() + "",
-                name: title,
-                link: link,
-                images: images,
-                hearts: 0,
-                description: description,
-                languages: languages,
-                tags: tags,
-              };
-              setStatus(SearchStatus.Loading);
-              const r = await addProject(newProject);
-              setStatus(SearchStatus.Success);
-              navigate("/projects/" + r._id);
+              if (currentUser !== null && repo !== null) {
+                console.log(currentUser["_id"]);
+                const newProject = {
+                  uid: currentUser["_id"],
+                  name: title,
+                  link: link,
+                  repo: repo.link,
+                  username: repo.username,
+                  images: images,
+                  hearts: 0,
+                  description: description,
+                  languages: languages,
+                  tags: tags,
+                };
+                setStatus(SearchStatus.Loading);
+                const r = await addProject(newProject);
+                setStatus(SearchStatus.Success);
+                navigate("/projects/" + r._id);
+              } else {
+                navigate("/login");
+              }
             }}
           />
         </div>

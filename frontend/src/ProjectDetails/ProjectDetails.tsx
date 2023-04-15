@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { examplesFrank } from "../Examples/example-profile";
+// import { examplesFrank } from "../Examples/example-profile";
 import FormattedDescription from "../Components/FormattedDescription";
 import LanguageTag from "src/Components/LanguageTag";
 import TopicTag from "src/Components/TopicTag";
@@ -8,18 +8,20 @@ import { useNavigate, useParams } from "react-router";
 import { getProject } from "src/services/project-service";
 import Project from "src/Types/Project";
 import User from "src/Types/User";
+import { getUser } from "src/services/user-service";
 
 export default function ProjectDetails() {
-  const [user, setUser] = useState<User | null>(examplesFrank);
+  const [user, setUser] = useState<User | null>(null);
   const [project, setProject] = useState<Project | null>(null);
   const [hearted, setHearted] = useState(false);
 
   const { pid } = useParams();
   useEffect(() => {
     async function fetchData() {
-      const r: Project = await getProject(pid ?? "");
-      setProject(r);
-      setUser(examplesFrank); // TODO: get user for project
+      const p: Project = await getProject(pid ?? "");
+      setProject(p);
+      const u: User = await getUser(p.uid);
+      setUser(u);
     }
     fetchData();
   }, [pid]);
@@ -34,11 +36,13 @@ export default function ProjectDetails() {
             className="bg-white border cursor-pointer border-border-neutral rounded-lg flex flex-wrap p-2"
             onClick={() => navigate("/users/" + user._id)}
           >
-            <img
-              className="w-20 h-20 mr-4 rounded-full lh-profile-image object-cover"
-              src="https://picsum.photos/400"
-              alt="Rounded avatar"
-            />
+            {user.profile_image_url && (
+              <img
+                className="w-20 h-20 mr-4 rounded-full lh-profile-image object-cover"
+                src={user.profile_image_url}
+                alt="Rounded avatar"
+              />
+            )}
             <div className="flex flex-col">
               <p className="text-3xl font-semibold">{user.name}</p>
               <a

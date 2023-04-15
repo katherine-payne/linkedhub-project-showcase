@@ -4,6 +4,7 @@ import Project from "./Project";
 
 type User = {
   _id: string;
+  profile_image_url: string;
   name: string;
   contact_info: {
     email: string;

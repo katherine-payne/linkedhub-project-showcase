@@ -1,6 +1,7 @@
 import * as dao from "../dao/daoUsers.js";
 
 const UserController = (app) => {
+  app.get("/api/users", find);
   app.get("/api/users/:uid", find);
   app.put("/api/users/:uid", edit);
   app.delete("/api/users/:uid", remove);
@@ -10,7 +11,14 @@ const UserController = (app) => {
 };
 
 const find = async (req, res) => {
-  const uid = req.params.uid;
+  let uid = req.params.uid;
+  if (!uid && req.session.currentUser) {
+    uid = req.session.currentUser._id;
+  }
+  if (!uid) {
+    res.json({});
+    return;
+  }
   const user = await dao.findUser(uid);
   res.json(user);
 };
@@ -45,7 +53,7 @@ const login = async (req, res) => {
   const user = req.body;
   const existingUser = await dao.findUserByEmail(req.body.contact_info.email);
   if (existingUser && user.password === existingUser.password) {
-    req.session.currentUser = user;
+    req.session.currentUser = existingUser;
     res.send(req.session);
   } else {
     res.sendStatus(401);

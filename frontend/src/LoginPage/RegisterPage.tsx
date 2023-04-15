@@ -1,9 +1,13 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import { FaUserPlus } from "react-icons/fa";
 import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
-import { registerUser } from "src/services/user-service";
+import { registerThunk } from "src/services/user-thunks";
+import { AppDispatch } from "src/redux/store";
+import User from "src/Types/User";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -11,6 +15,18 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [role, setRole] = useState<"poster" | "recruiter" | "admin">("poster");
+
+  const nav = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleRegister = async (newUser: any) => {
+    try {
+      dispatch(registerThunk(newUser));
+      nav("/profile");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const labelClass = (value: string) =>
     `p-2 rounded-lg flex flex-row justify-center w-full gap-1 ${
@@ -130,7 +146,7 @@ export default function RegisterPage() {
               email: email,
             },
           };
-          registerUser(newUser);
+          handleRegister(newUser);
         }}
       />
     </div>

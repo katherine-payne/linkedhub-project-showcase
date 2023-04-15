@@ -87,12 +87,11 @@ export default function AddCompany() {
         <div className="mt-4 flex flex-col items-center">
           <div>
             <PrimaryButton
-            disabled={!companyName || !description || !imageURL}
+              disabled={!companyName || !description || !imageURL}
               text={"Add Company"}
               icon={<FaPlus />}
               onClick={async () => {
                 const c: Company = {
-                  _id: new Date().getSeconds() + "",
                   name: companyName,
                   summary: description,
                   image_url: imageURL,

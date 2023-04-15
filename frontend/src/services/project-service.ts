@@ -4,6 +4,8 @@ import BASE_URL from "./service-helper";
 
 const PROJECTS_API = BASE_URL + "projects";
 
+const api = axios.create({ withCredentials: true });
+
 export const getProject = async (pid: string) => {
   const response = await axios.get(PROJECTS_API + "/" + pid);
   return response.data;
@@ -11,8 +13,8 @@ export const getProject = async (pid: string) => {
 
 export const getFeed = async () => {
   const response = await axios.get(BASE_URL + "home");
-  return response.data
-}
+  return response.data;
+};
 
 export const getProjectsForLanguage = async (language: string) => {
   const response = await axios.get(BASE_URL + "languages/" + language);
@@ -20,12 +22,12 @@ export const getProjectsForLanguage = async (language: string) => {
 };
 
 export const getProjectsForTag = async (tag: string) => {
-  const response = await axios.get(BASE_URL + "tags/" + tag)
-  return response.data
-}
+  const response = await axios.get(BASE_URL + "tags/" + tag);
+  return response.data;
+};
 
 export const addProject = async (project: Project) => {
-  const response = await axios.post(PROJECTS_API, project);
+  const response = await api.post(PROJECTS_API, project);
   return response.data;
 };
 
