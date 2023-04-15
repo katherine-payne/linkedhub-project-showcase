@@ -13,4 +13,4 @@ export const updateUser = (uid, user) =>
     }
   );
 export const findUserByEmail = (email) =>
-  modelUsers.findOne({ "email": email });
+  modelUsers.findOne({ email });

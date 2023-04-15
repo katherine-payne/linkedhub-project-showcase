@@ -1,31 +1,34 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FaSearch,
-  FaPlus,
   FaHome,
   FaDoorOpen,
   FaUser,
   FaPencilAlt,
   FaUserFriends,
   FaBuilding,
-  FaUserPlus,
-  FaCartPlus,
   FaDraftingCompass,
-  FaRProject,
   FaPencilRuler,
+  FaUserSecret,
+  FaUserAstronaut,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import { logoutThunk } from "src/services/user-thunks";
-import { AppDispatch } from "src/redux/store";
+import { AppDispatch, RootState } from "src/redux/store";
 
 export default function NavigationBar() {
   let [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
+
+  console.log(currentUser)
 
   const handleSearch = () => {
     navigate(`/search/${searchQuery}`);
@@ -145,11 +148,19 @@ export default function NavigationBar() {
             />
           </div>
 
-          <img
-            className="relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all lh-profile-image object-cover aspect-square"
-            src="https://picsum.photos/400"
-            alt="Rounded avatar"
-          />
+          <div className="flex flex-col justify-center items-center border border-border relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all object-cover aspect-square">
+            {currentUser?.profile_image_url ? (
+              <img src={currentUser.profile_image_url} alt="Rounded avatar" />
+            ): currentUser?.email ? (
+              <div className="text-2xl text-secondary-hover">
+                <FaUserAstronaut />
+              </div>
+            ) : (
+              <div className="text-2xl text-secondary">
+                <FaUserSecret />
+              </div>
+            )}
+          </div>
         </div>
       </li>
     </ul>

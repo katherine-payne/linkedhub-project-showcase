@@ -43,7 +43,7 @@ export default function UserProfile({ editProfile = false }) {
       const r = uid !== undefined ? await getUser(uid) : currentUser;
       setUser(r);
 
-      if (r && r !== undefined && r.contact_info) {
+      if (r && r !== undefined && r.email) {
         setEditingEducation(
           r.education?.map((edu: Education) => {
             return { education: edu, editing: false };

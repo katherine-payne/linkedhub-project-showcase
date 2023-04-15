@@ -142,9 +142,7 @@ export default function RegisterPage() {
             profile_image_url: image,
             password: pass,
             role: role,
-            contact_info: {
-              email: email,
-            },
+            email: email,
           };
           handleRegister(newUser);
         }}

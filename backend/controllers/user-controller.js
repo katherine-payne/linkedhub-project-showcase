@@ -1,7 +1,7 @@
 import * as dao from "../dao/daoUsers.js";
 
 const UserController = (app) => {
-  app.get("/api/users/roles/:role", findAllByRole)
+  app.get("/api/users/roles/:role", findAllByRole);
   app.get("/api/users", find);
   app.get("/api/users/:uid", find);
   app.put("/api/users/:uid", edit);
@@ -12,9 +12,9 @@ const UserController = (app) => {
 };
 
 const findAllByRole = async (req, res) => {
-  const role = req.params["role"]
+  const role = req.params["role"];
   res.json(await dao.findAllByRole(role));
-}
+};
 
 const find = async (req, res) => {
   let uid = req.params.uid;
@@ -44,7 +44,7 @@ const remove = async (req, res) => {
 
 const register = async (req, res) => {
   const newUser = req.body;
-  const existingUser = await dao.findUserByEmail(req.body.contact_info.email);
+  const existingUser = await dao.findUserByEmail(req.body.email);
   if (existingUser) {
     res.sendStatus(403);
     return;
@@ -57,7 +57,9 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const user = req.body;
-  const existingUser = await dao.findUserByEmail(req.body.contact_info.email);
+  console.log(user)
+  const existingUser = await dao.findUserByEmail(user.email);
+  console.log(existingUser)
   if (existingUser && user.password === existingUser.password) {
     req.session.currentUser = existingUser;
     res.send(req.session);
