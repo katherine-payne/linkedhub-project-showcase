@@ -1,6 +1,7 @@
 import * as dao from "../dao/daoUsers.js";
 
 const UserController = (app) => {
+  app.get("/api/users/roles/:role", findAllByRole)
   app.get("/api/users", find);
   app.get("/api/users/:uid", find);
   app.put("/api/users/:uid", edit);
@@ -9,6 +10,11 @@ const UserController = (app) => {
   app.post("/api/users/login", login);
   app.post("/api/users/logout", logout);
 };
+
+const findAllByRole = async (req, res) => {
+  const role = req.params["role"]
+  res.json(await dao.findAllByRole(role));
+}
 
 const find = async (req, res) => {
   let uid = req.params.uid;
