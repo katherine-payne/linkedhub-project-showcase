@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { getRecruiters } from "src/services/recruiter-service";
-import Recruiter from "src/Types/Recruiter";
-import RecruiterPage from "./RecruiterPage";
+import User from "src/Types/User";
+import Role from "src/Types/Role";
+import { getUsersByRole } from "src/services/user-service";
 
 export default function RecruitersListPage() {
   const nav = useNavigate();
 
-  const [recruiters, setRecruiters] = useState<Array<Recruiter>>([]);
+  const [recruiters, setRecruiters] = useState<Array<User>>([]);
 
   useEffect(() => {
     async function fetchData() {
-      const r = await getRecruiters();
+      const r = await getUsersByRole(Role.Recruiter);
       setRecruiters(r);
     }
     fetchData();
@@ -21,7 +21,7 @@ export default function RecruitersListPage() {
     <div className="flex flex-col items-center">
       <div className="flex flex-col gap-4 items-start w-6/12 bg-white p-4 rounded-md shadow">
         <p className="font-serif font-bold text-3xl">Recruiters</p>
-        {recruiters.map((r: Recruiter, index) => {
+        {recruiters.map((r: User, index) => {
           return (
             <div
               key={index}
@@ -32,7 +32,7 @@ export default function RecruitersListPage() {
                 <img
                   className="w-16 h-16 rounded-full object-cover shadow-md aspect-square"
                   alt="Rounded avatar"
-                  src={r.image_url}
+                  src={r.profile_image_url}
                 />
                 <div className="flex flex-col">
                   <p className="text-2xl text-primary font-semibold">

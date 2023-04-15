@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import schemaProjects from "./schemaProjects.js";
 
 const schemaUsers = mongoose.Schema(
   {
@@ -7,12 +6,9 @@ const schemaUsers = mongoose.Schema(
     name: String,
     password: String,
     profile_image_url: String,
-    contact_info: {
-      email: { type: String, unique: true, required: true },
-      phone: String,
-    },
-    password: String,
-    profile_image_url: String,
+    email: { type: String, unique: true, required: true },
+    email_shown: Boolean,
+    summary: String,
     experience: [
       {
         role: String,

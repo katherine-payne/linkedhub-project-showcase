@@ -46,10 +46,10 @@ export default function ProjectDetails() {
             <div className="flex flex-col">
               <p className="text-3xl font-semibold">{user.name}</p>
               <a
-                href={`mailto:${user.contact_info.email}`}
+                href={`mailto:${user.email}`}
                 className="italic text-accent hover:underline"
               >
-                {user.contact_info.email}
+                {user.email}
               </a>
             </div>
           </div>

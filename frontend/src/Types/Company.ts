@@ -1,12 +1,10 @@
-import Recruiter from "./Recruiter";
-
 type Company = {
-  _id?: string;
+  _id: string;
   name: string;
-  summary: string; // limit to 150 characters
+  summary: string;
   image_url: string;
-  recruiters: Array<Recruiter>;
-  requests: Array<Recruiter>;
+  recruiters: Array<string>;
+  requests: Array<string>;
 };
 
 export default Company;

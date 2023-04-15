@@ -8,19 +8,35 @@ import UserProfileHeading from "./UserProfileHeading";
 import UserProfileLabeledEntry from "./UserProfileLabeledEntry";
 import ProjectFeed from "../Components/ProjectFeed";
 import FormattedDescription from "../Components/FormattedDescription";
-import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import EditEducation from "./EditEducation";
 import EditExperience from "./EditExperience";
 import { getUser, updateUser } from "src/services/user-service";
 import User from "src/Types/User";
 import { RootState } from "src/redux/store";
+import Project from "src/Types/Project";
+import { getProject } from "src/services/project-service";
 
 export default function UserProfile({ editProfile = false }) {
   const { uid } = useParams();
   const { currentUser } = useSelector((state: RootState) => state.users);
 
   const [user, setUser] = useState<User | null>(null);
+  const [projects, setProjects] = useState<Array<Project>>([]);
+
+  // TODO: check performance / if there is a better way to do this
+  // TODO: set loading indicator while project feed loads
+  useEffect(() => {
+    async function fetchData() {
+      if (user?.projects) {
+        user.projects.forEach(async (pid) => {
+          const project: Project = await getProject(pid);
+          setProjects([...projects, project]);
+        });
+      }
+    }
+    fetchData();
+  }, [user]);
 
   useEffect(() => {
     async function fetchData() {
@@ -28,7 +44,6 @@ export default function UserProfile({ editProfile = false }) {
       setUser(r);
 
       if (r && r !== undefined && r.contact_info) {
-        setNewPhone(r.contact_info?.phone ?? "");
         setEditingEducation(
           r.education?.map((edu: Education) => {
             return { education: edu, editing: false };
@@ -45,8 +60,6 @@ export default function UserProfile({ editProfile = false }) {
     fetchData();
   }, [uid, currentUser]);
 
-  const [editingPhone, setEditingPhone] = useState(false);
-  const [newPhone, setNewPhone] = useState(user?.contact_info?.phone ?? "");
   const [addingEducation, setAddingEducation] = useState(false);
   const [editingEducation, setEditingEducation] = useState(
     user?.education?.map((edu) => {
@@ -111,61 +124,10 @@ export default function UserProfile({ editProfile = false }) {
           <p>
             <a
               className={"italic text-accent hover:underline"}
-              href={"mailto:" + user.contact_info?.email ?? ""}
+              href={"mailto:" + user.email}
             >
-              {user.contact_info?.email ?? ""}
+              {user.email}
             </a>
-          </p>
-          <p className="flex items-center gap-1">
-            {(!editProfile || (editProfile && !editingPhone)) && (
-              <a
-                href={"tel:" + user.contact_info?.phone ?? ""}
-                className="italic text-accent hover:underline"
-              >
-                {user.contact_info?.phone ?? ""}
-              </a>
-            )}
-            {editProfile && !editingPhone && (
-              <PrimaryButton
-                icon={<FaPencilAlt />}
-                onClick={() => {
-                  setEditingPhone(true);
-                }}
-              />
-            )}
-            {editProfile && editingPhone && (
-              <>
-                <InputField
-                  type="tel"
-                  id="phone"
-                  placeholder="Phone Number"
-                  value={newPhone}
-                  onChange={(e) => setNewPhone(e.target.value)}
-                />
-                <PrimaryButton
-                  text="Save"
-                  onClick={async () => {
-                    const updatedUser = {
-                      ...user,
-                      contact_info: {
-                        ...user.contact_info,
-                        phone: newPhone ?? "",
-                      },
-                    };
-                    const newUser = await updateUser(updatedUser);
-                    setEditingPhone(false);
-                    setUser(newUser);
-                  }}
-                />
-                <PrimaryButton
-                  text="Cancel"
-                  onClick={() => {
-                    setNewPhone(user.contact_info.phone ?? "");
-                    setEditingPhone(false);
-                  }}
-                />
-              </>
-            )}
           </p>
 
           <UserProfileHeading title="Experience" />
@@ -394,7 +356,7 @@ export default function UserProfile({ editProfile = false }) {
         </div>
       )}
 
-      {user && <ProjectFeed projects={user.projects ?? []} />}
+      {user && <ProjectFeed projects={projects} />}
     </div>
   );
 }

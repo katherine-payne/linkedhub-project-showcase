@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import CompanyDetailsCard from "src/Components/CompanyDetailsCard";
-import Recruiter from "src/Types/Recruiter";
 import { useNavigate, useParams } from "react-router";
-import { getRecruiter } from "src/services/recruiter-service";
 import Company from "src/Types/Company";
 import { getCompanyForRID } from "src/services/company-service";
+import User from "src/Types/User";
+import { getUser } from "src/services/user-service";
 
 export default function RecruiterPage() {
   const { rid } = useParams();
 
-  const [recruiter, setRecruiter] = useState<Recruiter | null>(null);
+  const [recruiter, setRecruiter] = useState<User | null>(null);
   const [company, setCompany] = useState<Company | null>(null);
 
 const navigate = useNavigate();
@@ -18,7 +18,7 @@ const navigate = useNavigate();
     if (rid) {
       async function fetchData() {
         if (rid) {
-          const r: Recruiter = await getRecruiter(rid);
+          const r: User = await getUser(rid);
           const c: Company = await getCompanyForRID(rid);
           setRecruiter(r);
           setCompany(c);
@@ -38,7 +38,7 @@ const navigate = useNavigate();
             <img
               className="w-16 h-16 rounded-full object-cover shadow-md aspect-square"
               alt="Rounded avatar"
-              src={recruiter.image_url}
+              src={recruiter.profile_image_url}
             />
             <div className="flex flex-col">
               <p className="text-2xl text-primary font-semibold">

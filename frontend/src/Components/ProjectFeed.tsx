@@ -1,14 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import Project from "src/Types/Project";
 import ProjectCard from "./ProjectCard";
 import ProjectCardSpotlight from "./ProjectCardSpotlight";
+import Project from "src/Types/Project";
 
-type Props = {
-  projects: Array<Project>;
-};
-
-export default function ProjectFeed({ projects }: Props) {
+export default function ProjectFeed({ projects }: { projects: Array<Project> }) {
   const navigate = useNavigate();
 
   return (

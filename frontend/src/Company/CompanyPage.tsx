@@ -4,8 +4,9 @@ import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import CompanyDetailsCard from "../Components/CompanyDetailsCard";
 import { BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
 import Company from "src/Types/Company";
-import Recruiter from "src/Types/Recruiter";
 import { getCompany, updateCompany } from "src/services/company-service";
+import User from "src/Types/User";
+import { getUser } from "src/services/user-service";
 
 /* eslint-disable */
 
@@ -13,6 +14,36 @@ export default function CompanyPage() {
   const { cid } = useParams();
 
   const [company, setCompany] = useState<Company | null>(null);
+  const [recruiters, setRecruiters] = useState<Array<User>>([]);
+  const [requests, setRequests] = useState<Array<User>>([]);
+
+  // TODO: check performance / if there is a better way to do this
+  // TODO: set loading indicator while project feed loads
+  useEffect(() => {
+    async function fetchData() {
+      if (company?.recruiters) {
+        company.recruiters.forEach(async (rid) => {
+          const recruiter: User = await getUser(rid);
+          setRecruiters([...recruiters, recruiter]);
+        });
+      }
+    }
+    fetchData();
+  }, [company]);
+
+  // TODO: check performance / if there is a better way to do this
+  // TODO: set loading indicator while project feed loads
+  useEffect(() => {
+    async function fetchData() {
+      if (company?.requests) {
+        company.requests.forEach(async (rid) => {
+          const request: User = await getUser(rid);
+          setRequests([...requests, request]);
+        });
+      }
+    }
+    fetchData();
+  }, [company]);
 
   const navigate = useNavigate();
 
@@ -37,7 +68,7 @@ export default function CompanyPage() {
           <p className="text-xl text-primary font-semibold pb-1">Requests</p>
           <ul>
             {company &&
-              company.requests.map((recruiter: Recruiter, index: number) => {
+              requests.map((recruiter: User, index: number) => {
                 return (
                   <li
                     key={index}
@@ -51,9 +82,9 @@ export default function CompanyPage() {
                           let updatedCompany = { ...company };
                           updatedCompany.requests =
                             updatedCompany.requests.filter(
-                              (r) => r._id !== recruiter._id
+                              (r) => r !== recruiter._id
                             ); // remove from requests
-                          updatedCompany.recruiters.push(recruiter); // add to recruiters
+                          updatedCompany.recruiters.push(recruiter._id); // add to recruiters
                           const r: Company = await updateCompany(
                             updatedCompany
                           );
@@ -67,7 +98,7 @@ export default function CompanyPage() {
                           let updatedCompany = { ...company };
                           updatedCompany.requests =
                             updatedCompany.requests.filter(
-                              (r) => r._id !== recruiter._id
+                              (r) => r !== recruiter._id
                             ); // remove from requests
                           // updatedCompany.recruiters.push(recruiter) // add to recruiters
                           const r: Company = await updateCompany(
@@ -95,8 +126,8 @@ export default function CompanyPage() {
             </p>
             <ul>
               {company &&
-                company.recruiters.map(
-                  (recruiter: Recruiter, index: number) => {
+                recruiters.map(
+                  (recruiter: User, index: number) => {
                     return (
                       <li
                         key={index}

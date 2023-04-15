@@ -1,19 +1,21 @@
 import Education from "./Education";
 import Experience from "./Experience";
-import Project from "./Project";
 
 type User = {
   _id: string;
-  profile_image_url: string;
   name: string;
-  contact_info: {
-    email: string;
-    phone: string;
-  };
+  role: "admin" | "recruiter" | "poster";
+  password: string;
+  profile_image_url: string;
+  email: string;
+  email_shown: boolean;
+  summary: string;
   experience: Array<Experience>;
   education: Array<Education>;
   skills: Array<string>;
-  projects: Array<Project>;
+  projects: Array<string>;
+  liked: Array<string>;
+  following: Array<string>;
 };
 
 export default User
