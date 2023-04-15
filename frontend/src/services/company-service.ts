@@ -19,7 +19,7 @@ export const getCompanyForRID = async (rid: string) => {
   return response.data;
 };
 
-export const addCompany = async (company: Company) => {
+export const addCompany = async (company: Partial<Company>) => {
   const response = await axios.post(COMPANIES_API, company);
   return response.data;
 };

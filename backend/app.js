@@ -5,7 +5,6 @@ import session from "express-session";
 import dotenv from "dotenv";
 
 import CompanyController from "./controllers/company-controller.js";
-import RecruiterController from "./controllers/recruiter-controller.js";
 import ProjectController from "./controllers/project-controller.js";
 import SearchController from "./controllers/search-controller.js";
 import UserController from "./controllers/user-controller.js";
@@ -29,7 +28,6 @@ app.use(
 );
 
 CompanyController(app);
-RecruiterController(app);
 ProjectController(app);
 SearchController(app);
 UserController(app);

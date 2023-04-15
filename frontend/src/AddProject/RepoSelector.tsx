@@ -10,9 +10,9 @@ import {
 import InputField from "src/Components/Inputs/InputField";
 import LabeledInputField from "src/Components/Inputs/LabeledInputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
-import Language from "../Types/Language";
 import Repository from "../Types/Repository";
 import SearchStatus from "../Types/SearchStatus";
+import Language from "src/Types/Language";
 
 type Props = {
   getLink: string;
@@ -98,7 +98,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
           .then((json) => {
             let out: Array<Language> = [];
             Object.keys(json).forEach((key) => {
-              const next: Language = { name: key, lines: json[key] };
+              const next: {name: string, lines: number} = { name: key, lines: json[key] };
               out.push(next);
             });
 
@@ -206,7 +206,7 @@ export default function RepoSelector({ getLink, setLink, setRepo }: Props) {
 
       <PrimaryButton
         bgClass="disabled:cursor-not-allowed"
-        disabled={!link || searchStatus != SearchStatus.Waiting}
+        disabled={!link || searchStatus !== SearchStatus.Waiting}
         onClick={() => {
           searchWithURL();
         }}

@@ -1,6 +1,6 @@
 type Language = {
-   name: string;
-   lines: number;
- };
+  name: string;
+  lines: number;
+};
 
- export default Language
+export default Language;

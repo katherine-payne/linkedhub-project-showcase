@@ -91,7 +91,7 @@ export default function AddCompany() {
               text={"Add Company"}
               icon={<FaPlus />}
               onClick={async () => {
-                const c: Company = {
+                const c: Partial<Company> = {
                   name: companyName,
                   summary: description,
                   image_url: imageURL,

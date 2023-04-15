@@ -1,10 +1,16 @@
 import axios from "axios";
 import User from "src/Types/User";
 import BASE_URL from "./service-helper";
+import Role from "src/Types/Role";
 
 const USERS_API = BASE_URL + "users";
 
 const api = axios.create({ withCredentials: true });
+
+export const getUsersByRole = async (role: Role) => {
+  const response = await axios.get(USERS_API + "/roles/" + role);
+  return response.data;
+}
 
 export const getUser = async (uid: string) => {
   const response = await api.get(USERS_API + "/" + uid);

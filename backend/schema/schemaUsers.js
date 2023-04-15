@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import schemaProjects from "./schemaProjects.js";
 
 const schemaUsers = mongoose.Schema(
   {

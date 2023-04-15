@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import ProjectFeed from "src/Components/ProjectFeed";
 import Project from "src/Types/Project";
 import TopicTag from "src/Components/TopicTag";
