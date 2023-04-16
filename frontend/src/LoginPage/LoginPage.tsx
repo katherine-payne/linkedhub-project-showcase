@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BsSignal } from "react-icons/bs";
-import { FaExclamation, FaSign, FaUserCheck, FaXing } from "react-icons/fa";
+import { FaExclamation, FaUserCheck } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
@@ -24,7 +23,7 @@ export default function LoginPage() {
     if (currentUser?._id) {
       nav("/profile");
     }
-  }, [currentUser])
+  }, [currentUser, nav])
 
   const handleLogin = async () => {
     try {

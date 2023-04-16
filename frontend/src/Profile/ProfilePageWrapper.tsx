@@ -16,7 +16,7 @@ export default function ProfilePageWrapper() {
    if (!currentUser?._id) {
       nav("/register")
    }
-  }, [currentUser])
+  }, [currentUser, nav])
 
   return (
     <div>

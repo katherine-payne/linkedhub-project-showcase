@@ -7,7 +7,6 @@ import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import { registerThunk } from "src/services/user-thunks";
 import { AppDispatch } from "src/redux/store";
-import User from "src/Types/User";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");

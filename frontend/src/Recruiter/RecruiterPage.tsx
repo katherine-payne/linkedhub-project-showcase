@@ -24,7 +24,7 @@ export default function RecruiterPage() {
       setCompanies(c);
     }
     fetchData();
-  }, [rid]);
+  }, [rid, currentUser]);
 
   return (
     <div className="flex flex-col gap-12 items-center">
