@@ -20,6 +20,7 @@ import RegisterPage from "./LoginPage/RegisterPage";
 import LoginPage from "./LoginPage/LoginPage";
 import store from "./redux/store";
 import CurrentUserContext from "./redux/current-user-context";
+import ProfilePageWrapper from "./Profile/ProfilePageWrapper";
 
 export default function App() {
   return (
@@ -32,7 +33,7 @@ export default function App() {
               <Route index element={<MainFeed />} />
               <Route path="/search/:query" element={<SearchFeed />} />
               <Route path="/profile/:uid" element={<UserProfile />} />
-              <Route path="/profile" element={<UserProfile />} />
+              <Route path="/profile" element={<ProfilePageWrapper />} />
               <Route
                 path="/profile/edit"
                 element={<UserProfile editProfile={true} />}

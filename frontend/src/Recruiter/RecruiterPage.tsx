@@ -5,29 +5,25 @@ import Company from "src/Types/Company";
 import { getCompanyForRID } from "src/services/company-service";
 import User from "src/Types/User";
 import { getUser } from "src/services/user-service";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
 
 export default function RecruiterPage() {
   const { rid } = useParams();
-
+  const currentUser = useSelector((state: RootState) => state.users.currentUser);
   const [recruiter, setRecruiter] = useState<User | null>(null);
-  const [company, setCompany] = useState<Company | null>(null);
+  const [companies, setCompanies] = useState<Array<Company>>([]);
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (rid) {
-      async function fetchData() {
-        if (rid) {
-          const r: User = await getUser(rid);
-          const c: Company = await getCompanyForRID(rid);
-          setRecruiter(r);
-          setCompany(c);
-        }
-      }
-      fetchData();
-    } else {
-      console.log("Company ID not found in URL");
+    async function fetchData() {
+      const r: User = rid !== undefined ? await getUser(rid) : currentUser;
+      const c: Array<Company> = await getCompanyForRID(rid ?? r._id);
+      setRecruiter(r);
+      setCompanies(c);
     }
+    fetchData();
   }, [rid]);
 
   return (
@@ -58,11 +54,17 @@ const navigate = useNavigate();
         </div>
       )}
 
-      {company && (
-        <div className={"cursor-pointer"} onClick={() => {navigate("/companies/" + company._id)}}>
+      {companies.map((company, index) => (
+        <div
+          key={index}
+          className={"cursor-pointer"}
+          onClick={() => {
+            navigate("/companies/" + company._id);
+          }}
+        >
           <CompanyDetailsCard company={company} />
         </div>
-      )}
+      ))}
     </div>
   );
 }

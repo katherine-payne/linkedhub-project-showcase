@@ -93,7 +93,7 @@ export default function NavigationBar() {
           />
         )}
 
-        {currentUser?.role === Role.Admin || currentUser?.role === Role.Recruiter && (
+        {(currentUser?.role === Role.Admin || currentUser?.role === Role.Recruiter) && (
           <PrimaryButton
             bgClass="mr-4"
             icon={<FaBuilding />}

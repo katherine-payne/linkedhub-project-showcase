@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsSignal } from "react-icons/bs";
 import { FaExclamation, FaSign, FaUserCheck, FaXing } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -16,15 +16,21 @@ export default function LoginPage() {
 
   const nav = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { currentUser } = useSelector((state: RootState) => state.users);
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
+
+  useEffect(() => {
+    if (currentUser?._id) {
+      nav("/profile");
+    }
+  }, [currentUser])
+
   const handleLogin = async () => {
     try {
       await dispatch(loginThunk({ email, password }));
-      if (currentUser === null) {
-        // FIXME + TODO: === null isn't blocking as intended
+      if (!currentUser?._id) {
         setLoginState("failed");
-      } else {
-        nav("/profile");
       }
     } catch (e) {
       console.log(e);
