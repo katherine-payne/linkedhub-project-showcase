@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsSignal } from "react-icons/bs";
 import { FaExclamation, FaSign, FaUserCheck, FaXing } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -11,20 +11,26 @@ import { loginThunk } from "src/services/user-thunks";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPassword] = useState("");
   const [loginState, setLoginState] = useState("waiting");
 
   const nav = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { currentUser } = useSelector((state: RootState) => state.users);
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
+
+  useEffect(() => {
+    if (currentUser?._id) {
+      nav("/profile");
+    }
+  }, [currentUser])
+
   const handleLogin = async () => {
     try {
-      await dispatch(loginThunk({ contact_info: { email }, password: pass }));
-      if (currentUser == null) {
-        // FIXME + TODO: == null isn't blocking as intended
+      await dispatch(loginThunk({ email, password }));
+      if (!currentUser?._id) {
         setLoginState("failed");
-      } else {
-        nav("/profile");
       }
     } catch (e) {
       console.log(e);
@@ -61,10 +67,10 @@ export default function LoginPage() {
           id="password"
           placeholder="Password"
           type="password"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key == "Enter") {
+            if (e.key === "Enter") {
               handleLogin();
             }
           }}

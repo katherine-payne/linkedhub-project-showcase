@@ -18,21 +18,21 @@ import Project from "src/Types/Project";
 import { getProject } from "src/services/project-service";
 
 export default function UserProfile({ editProfile = false }) {
+
   const { uid } = useParams();
+  
   const { currentUser } = useSelector((state: RootState) => state.users);
 
   const [user, setUser] = useState<User | null>(null);
   const [projects, setProjects] = useState<Array<Project>>([]);
 
-  // TODO: check performance / if there is a better way to do this
-  // TODO: set loading indicator while project feed loads
   useEffect(() => {
     async function fetchData() {
       if (user?.projects) {
-        user.projects.forEach(async (pid) => {
-          const project: Project = await getProject(pid);
-          setProjects([...projects, project]);
-        });
+        const p = await Promise.all(
+          user.projects.map(async (pid) => await getProject(pid))
+        );
+        setProjects(p)
       }
     }
     fetchData();
@@ -43,7 +43,7 @@ export default function UserProfile({ editProfile = false }) {
       const r = uid !== undefined ? await getUser(uid) : currentUser;
       setUser(r);
 
-      if (r && r !== undefined && r.contact_info) {
+      if (r && r !== undefined && r.email) {
         setEditingEducation(
           r.education?.map((edu: Education) => {
             return { education: edu, editing: false };

@@ -11,7 +11,7 @@ type State = {
   currentUser: User | null;
 };
 
-const initialState = {
+const initialState: State = {
   currentUser: null,
 };
 

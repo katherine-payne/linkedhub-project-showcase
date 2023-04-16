@@ -34,7 +34,11 @@ export const registerUser = async (user: any) => {
 
 export const loginUser = async (user: User) => {
   const response = await api.post(USERS_API + "/login", user);
-  return response.data;
+  if (response.status === 401) {
+    return null;
+  } else {
+    return response.data;
+  }
 };
 
 export const logoutUser = async () => {
