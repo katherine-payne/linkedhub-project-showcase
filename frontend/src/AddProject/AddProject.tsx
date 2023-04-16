@@ -39,12 +39,6 @@ export default function AddProject() {
     setDescription(newRepo.description);
   };
 
-  useEffect(() => {
-    if (currentUser) {
-      console.log(currentUser["_id"]);
-    }
-  }, [currentUser]);
-
   function disableAdd(): boolean {
     return title === "" && description === "";
   }
@@ -105,9 +99,8 @@ export default function AddProject() {
             text="Add Project"
             onClick={async () => {
               if (currentUser !== null && repo !== null) {
-                console.log(currentUser["_id"]);
                 const newProject = {
-                  uid: currentUser["_id"],
+                  uid: currentUser._id,
                   name: title,
                   link: link,
                   repo: repo.link,

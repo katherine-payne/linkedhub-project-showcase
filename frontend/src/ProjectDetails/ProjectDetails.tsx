@@ -34,7 +34,7 @@ export default function ProjectDetails() {
         {user && (
           <div
             className="bg-white border cursor-pointer border-border-neutral rounded-lg flex flex-wrap p-2"
-            onClick={() => navigate("/users/" + user._id)}
+            onClick={() => navigate("/profile/" + user._id)}
           >
             {user.profile_image_url && (
               <img

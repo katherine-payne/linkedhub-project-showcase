@@ -19,7 +19,14 @@ export default function RegisterPage() {
   const nav = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleRegister = async (newUser: any) => {
+  const handleRegister = async () => {
+    const newUser = {
+      name: name,
+      profile_image_url: image,
+      password: pass,
+      role: role,
+      email: email,
+    };
     try {
       dispatch(registerThunk(newUser));
       nav("/profile");
@@ -55,7 +62,7 @@ export default function RegisterPage() {
             Profile Picture:{" "}
           </label>
           <InputField
-            id="name"
+            id="profile-pic"
             placeholder="URL"
             type="text"
             value={image}
@@ -130,22 +137,18 @@ export default function RegisterPage() {
           placeholder="Password"
           type="password"
           value={pass}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleRegister();
+            }
+          }}
           onChange={(e) => setPass(e.target.value)}
         />
       </div>
       <PrimaryButton
         icon={<FaUserPlus />}
         text="Register"
-        onClick={() => {
-          const newUser = {
-            name: name,
-            profile_image_url: image,
-            password: pass,
-            role: role,
-            email: email,
-          };
-          handleRegister(newUser);
-        }}
+        onClick={handleRegister}
       />
     </div>
   );

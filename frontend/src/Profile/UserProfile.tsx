@@ -31,7 +31,9 @@ export default function UserProfile({ editProfile = false }) {
       if (user?.projects) {
         user.projects.forEach(async (pid) => {
           const project: Project = await getProject(pid);
-          setProjects([...projects, project]);
+          if (!projects.includes(project)) {
+            setProjects([...projects, project]);
+          }
         });
       }
     }

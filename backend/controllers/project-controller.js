@@ -1,4 +1,5 @@
 import * as projectsDao from "../dao/daoProjects.js";
+import * as usersDao from "../dao/daoUsers.js";
 
 const ProjectController = (app) => {
   app.get("/api/projects", findAll);
@@ -85,6 +86,9 @@ const findGithub = async (req, res) => {
 const add = async (req, res) => {
   const newProject = req.body;
   const p = await projectsDao.add(newProject)
+  let u = await usersDao.findUser(p.uid)
+  u.projects = [...u.projects, p._id];
+  await usersDao.updateUser(u._id, u)
   res.json(p);
 };
 

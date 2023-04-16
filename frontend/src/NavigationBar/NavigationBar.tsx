@@ -19,6 +19,7 @@ import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import { logoutThunk } from "src/services/user-thunks";
 import { AppDispatch, RootState } from "src/redux/store";
+import Role from "src/Types/Role";
 
 export default function NavigationBar() {
   let [searchQuery, setSearchQuery] = useState("");
@@ -27,8 +28,6 @@ export default function NavigationBar() {
   const currentUser = useSelector(
     (state: RootState) => state.users.currentUser
   );
-
-  console.log(currentUser);
 
   const handleSearch = () => {
     navigate(`/search/${searchQuery}`);
@@ -84,43 +83,51 @@ export default function NavigationBar() {
           />
         </label>
 
-        <PrimaryButton
-          bgClass="mr-4"
-          icon={<FaUserFriends />}
-          text={"Recruiters"}
-          textClass={"hidden md:block"}
-          onClick={() => navigate("/recruiters")}
-        />
+        {currentUser?.role === Role.Admin && (
+          <PrimaryButton
+            bgClass="mr-4"
+            icon={<FaUserFriends />}
+            text={"Recruiters"}
+            textClass={"hidden md:block"}
+            onClick={() => navigate("/recruiters")}
+          />
+        )}
 
-        <PrimaryButton
-          bgClass="mr-4"
-          icon={<FaBuilding />}
-          text={"Companies"}
-          textClass={"hidden md:block"}
-          onClick={() => navigate("/companies")}
-        />
+        {currentUser?.role === Role.Admin || currentUser?.role === Role.Recruiter && (
+          <PrimaryButton
+            bgClass="mr-4"
+            icon={<FaBuilding />}
+            text={"Companies"}
+            textClass={"hidden md:block"}
+            onClick={() => navigate("/companies")}
+          />
+        )}
       </li>
 
       <li className="flex items-center justify-center">
-        <PrimaryButton
-          bgClass="mr-4"
-          text={"Add Company"}
-          textClass={"hidden lg:block"}
-          icon={<FaDraftingCompass />}
-          onClick={() => {
-            navigate("/add/company");
-          }}
-        />
+        {currentUser?.role === Role.Admin && (
+          <PrimaryButton
+            bgClass="mr-4"
+            text={"Add Company"}
+            textClass={"hidden lg:block"}
+            icon={<FaDraftingCompass />}
+            onClick={() => {
+              navigate("/add/company");
+            }}
+          />
+        )}
 
-        <PrimaryButton
-          bgClass="mr-4"
-          text={"Add Project"}
-          textClass={"hidden lg:block"}
-          icon={<FaPencilRuler />}
-          onClick={() => {
-            navigate("/add/project");
-          }}
-        />
+        {currentUser?.role === Role.Poster && (
+          <PrimaryButton
+            bgClass="mr-4"
+            text={"Add Project"}
+            textClass={"hidden lg:block"}
+            icon={<FaPencilRuler />}
+            onClick={() => {
+              navigate("/add/project");
+            }}
+          />
+        )}
 
         <div className="group">
           <div className="absolute w-auto min-w-max right-4 scale-0 group-hover:scale-100 transition-all duration-100 bg-slate-100 rounded-lg mt-10 mr-10 shadow flex flex-col p-2">
@@ -176,9 +183,9 @@ export default function NavigationBar() {
             )}
           </div>
 
-          <div className="flex flex-col justify-center items-center border border-border relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all object-cover aspect-square bg-white">
+          <div className="flex flex-col justify-center items-center border border-border relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all bg-white">
             {currentUser?.profile_image_url ? (
-              <img src={currentUser.profile_image_url} alt="Rounded avatar" />
+              <img className="rounded-full aspect-square  object-cover" src={currentUser.profile_image_url} alt="Rounded avatar" />
             ) : currentUser?.email ? (
               <div className="text-2xl text-secondary-hover">
                 <FaUserAstronaut />

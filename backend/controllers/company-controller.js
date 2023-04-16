@@ -34,7 +34,7 @@ const add = async (req, res) => {
 const edit = async (req, res) => {
   const cid = req.params["cid"];
   const updates = req.body;
-  const c = dao.updateCompany(cid, updates);
+  const c = await dao.updateCompany(cid, updates);
   res.json(c);
 };
 

@@ -57,9 +57,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const user = req.body;
-  console.log(user)
   const existingUser = await dao.findUserByEmail(user.email);
-  console.log(existingUser)
   if (existingUser && user.password === existingUser.password) {
     req.session.currentUser = existingUser;
     res.send(req.session);
