@@ -15,7 +15,6 @@ export default function HeartButton({
   const currentUser = useSelector(
     (state: RootState) => state.users.currentUser
   );
-  const hearted = currentUser?.liked.includes(project._id ?? "");
 
   return (
     <button
