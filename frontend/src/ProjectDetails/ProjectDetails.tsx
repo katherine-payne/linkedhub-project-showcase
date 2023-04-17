@@ -57,8 +57,8 @@ export default function ProjectDetails() {
 
   return (
     <div className="flex gap-4 md:flex-row flex-col justify-center md:items-start items-center ml-0 md:ml-4">
-      <div className="md:w-5/12 gap-4 w-11/12 flex flex-col justify-start text-primary max-w-none md:max-w-xl md:border-r-2 md:pr-4">
-        {users &&
+      <div className="md:w-5/12 gap-4 mx-4 w-11/12 flex flex-col justify-start text-primary max-w-none md:max-w-xl">
+        {users.length > 0 ? (
           users.map((user, index) => (
             <div
               key={index}
@@ -82,54 +82,63 @@ export default function ProjectDetails() {
                 </a>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <p className="bg-white border border-border p-4 rounded-lg italic text-secondary">
+            No users have added this project yet.
+          </p>
+        )}
       </div>
 
-      {projects &&
-        projects.map((project, index) => {
-          return (<div
-            key={index}
-            className="flex flex-col gap-4 md:items-start items-center"
-          >
-            <div className="w-11/12 bg-white border border-border-neutral rounded-lg p-2">
-              <p className="text-3xl font-semibold">{project.name}</p>
-              <FormattedDescription description={project.description} />
-            </div>
-            <div className="flex flex-col gap-0 w-11/12">
-              <div className="flex flex-wrap">
-                {project.languages &&
-                  project.languages.map((x, i) => (
-                    <LanguageTag
-                      text={x}
-                      canDelete={false}
-                      onDelete={() => {}}
+      <div className="md:border-l-2 md:pl-4 md:w-5/12 w-11/12">
+        {projects &&
+          projects.map((project, index) => {
+            return (
+              <div
+                key={index}
+                className="flex flex-col gap-4 md:items-start items-center"
+              >
+                <div className="w-11/12 bg-white border border-border-neutral rounded-lg p-2">
+                  <p className="text-3xl font-semibold">{project.name}</p>
+                  <FormattedDescription description={project.description} />
+                </div>
+                <div className="flex flex-col gap-0 w-11/12">
+                  <div className="flex flex-wrap">
+                    {project.languages &&
+                      project.languages.map((x, i) => (
+                        <LanguageTag
+                          text={x}
+                          canDelete={false}
+                          onDelete={() => {}}
+                          key={i}
+                        />
+                      ))}
+                  </div>
+                  <div className="flex flex-wrap">
+                    {project.tags &&
+                      project.tags.map((x, i) => (
+                        <TopicTag
+                          text={x}
+                          canDelete={false}
+                          onDelete={() => {}}
+                          key={i}
+                        />
+                      ))}
+                  </div>
+                </div>
+                {project.images &&
+                  project.images.map((img, i) => (
+                    <img
                       key={i}
-                    />
+                      src={img}
+                      alt="project interface screenshot"
+                      className="w-11/12 aspect-video rounded-lg object-scale-down bg-secondary"
+                    ></img>
                   ))}
               </div>
-              <div className="flex flex-wrap">
-                {project.tags &&
-                  project.tags.map((x, i) => (
-                    <TopicTag
-                      text={x}
-                      canDelete={false}
-                      onDelete={() => {}}
-                      key={i}
-                    />
-                  ))}
-              </div>
-            </div>
-            {project.images &&
-              project.images.map((img, i) => (
-                <img
-                  key={i}
-                  src={img}
-                  alt="project interface screenshot"
-                  className="w-11/12 aspect-video rounded-lg object-scale-down bg-secondary"
-                ></img>
-              ))}
-          </div>
-        )})}
+            );
+          })}
+      </div>
     </div>
   );
 }
