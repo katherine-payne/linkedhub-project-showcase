@@ -10,7 +10,7 @@ import { RootState } from "src/redux/store";
 
 export default function RecruiterPage() {
   const { rid } = useParams();
-  const currentUser = useSelector((state: RootState) => state.users.currentUser);
+  const { currentUser } = useSelector((state: RootState) => state.users);
   const [recruiter, setRecruiter] = useState<User | null>(null);
   const [companies, setCompanies] = useState<Array<Company>>([]);
 

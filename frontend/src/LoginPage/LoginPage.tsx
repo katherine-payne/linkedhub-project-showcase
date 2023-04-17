@@ -15,9 +15,7 @@ export default function LoginPage() {
 
   const nav = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const currentUser = useSelector(
-    (state: RootState) => state.users.currentUser
-  );
+  const { currentUser } = useSelector((state: RootState) => state.users);
 
   useEffect(() => {
     if (currentUser?._id) {
