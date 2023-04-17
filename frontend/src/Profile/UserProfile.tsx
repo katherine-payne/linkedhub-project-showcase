@@ -356,7 +356,7 @@ export default function UserProfile({ editProfile = false }) {
         </div>
       )}
 
-      {(user && projects) && <ProjectFeed projects={projects} />}
+      {user && <ProjectFeed projects={projects} />}
     </div>
   );
 }
