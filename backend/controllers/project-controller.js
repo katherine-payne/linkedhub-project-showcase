@@ -2,8 +2,8 @@ import * as projectsDao from "../dao/daoProjects.js";
 import * as usersDao from "../dao/daoUsers.js";
 
 const ProjectController = (app) => {
-  app.get("/api/projects/:owner/:repo", findProjects)
-  app.get("/api/projects/generate/:owner/:repo", generateProject)
+  app.get("/api/projects/:owner/:repo", findProjects);
+  app.get("/api/projects/generate/:owner/:repo", generateProject);
   app.get("/api/projects", findAll);
   app.get("/api/projects/:pid", find);
   app.post("/api/projects", add);
@@ -15,7 +15,20 @@ const ProjectController = (app) => {
 };
 
 const home = async (req, res) => {
-  res.json(await projectsDao.home());
+  let liked = [];
+  if (req.session.currentUser) {
+    liked = req.session.currentUser.liked;
+  }
+  const homePage = await projectsDao.home(liked);
+  if (liked.length) {
+    let userHomePage = homePage.filter((p) => liked.includes(p._id.toString()));
+    userHomePage = userHomePage.concat(
+      homePage.filter((p) => !liked.includes(p._id.toString()))
+    );
+    res.json(userHomePage);
+  } else {
+    res.json(homePage);
+  }
 };
 
 const findAll = async (req, res) => {
@@ -29,16 +42,16 @@ const find = async (req, res) => {
 };
 
 const findProjects = async (req, res) => {
-  const owner = req.params.owner
-  const repo = req.params.repo
-  const query = `https://github.com/${owner}/${repo}`
-  const projects = await projectsDao.findGithub(query)
-  res.json(projects)
-}
+  const owner = req.params.owner;
+  const repo = req.params.repo;
+  const query = `https://github.com/${owner}/${repo}`;
+  const projects = await projectsDao.findGithub(query);
+  res.json(projects);
+};
 
 async function generateProject(req, res) {
   // res.json("no")
-  const f = await searchGithub(req.params.owner, req.params.repo)
+  const f = await searchGithub(req.params.owner, req.params.repo);
   const r = {
     name: f.name ?? "",
     repo: req.params.repo ?? "",
@@ -46,8 +59,8 @@ async function generateProject(req, res) {
     description: f.description ?? "",
     languages: f.languages ?? [],
     tags: f.tags ?? [],
-  }
-  res.json(r)
+  };
+  res.json(r);
 }
 
 async function searchGithub(owner, repo) {
@@ -91,10 +104,10 @@ async function searchGithub(owner, repo) {
 
 const add = async (req, res) => {
   const newProject = req.body;
-  const p = await projectsDao.add(newProject)
-  let u = await usersDao.findUser(p.uid)
+  const p = await projectsDao.add(newProject);
+  let u = await usersDao.findUser(p.uid);
   u.projects = [...u.projects, p._id];
-  await usersDao.updateUser(u._id, u)
+  await usersDao.updateUser(u._id, u);
   res.json(p);
 };
 
@@ -107,7 +120,7 @@ const edit = async (req, res) => {
 
 const remove = async (req, res) => {
   const pid = req.params.pid;
-  const status = await projectsDao.remove(pid)
+  const status = await projectsDao.remove(pid);
   res.json(status);
 };
 
@@ -119,8 +132,8 @@ const findByTag = async (req, res) => {
 
 const findByLanguage = async (req, res) => {
   const name = req.params.name;
-  const projects = await projectsDao.findByLanguage(name)
-  res.json(projects)
-}
+  const projects = await projectsDao.findByLanguage(name);
+  res.json(projects);
+};
 
 export default ProjectController;
