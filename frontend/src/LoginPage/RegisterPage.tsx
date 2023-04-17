@@ -24,23 +24,31 @@ export default function RegisterPage() {
 
   useEffect(() => {
     if (currentUser?._id) {
-      nav("/profile");
+      nav("/profile/edit");
     }
-  }, [currentUser, nav])
+  }, [currentUser, nav]);
 
   const handleRegister = async () => {
-    const newUser = {
-      name: name,
-      profile_image_url: image,
-      password: pass,
-      role: role,
-      email: email,
-    };
-    try {
-      dispatch(registerThunk(newUser));
-      nav("/profile");
-    } catch (e) {
-      console.log(e);
+    if (
+      name === "" ||
+      image === "" ||
+      pass === "" ||
+      email === ""
+    ) {
+    } else {
+      const newUser = {
+        name: name,
+        profile_image_url: image,
+        password: pass,
+        role: role,
+        email: email,
+      };
+      try {
+        dispatch(registerThunk(newUser));
+        nav("/profile/edit");
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -157,6 +165,7 @@ export default function RegisterPage() {
       <PrimaryButton
         icon={<FaUserPlus />}
         text="Register"
+        disabled={email === "" || pass === "" || name === "" || image === ""}
         onClick={handleRegister}
       />
     </div>

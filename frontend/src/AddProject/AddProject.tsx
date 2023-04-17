@@ -40,7 +40,7 @@ export default function AddProject() {
   };
 
   function disableAdd(): boolean {
-    return title === "" && description === "";
+    return title === "" || description === "";
   }
 
   return (

@@ -23,16 +23,18 @@ export default function LoginPage() {
     if (currentUser?._id) {
       nav("/profile");
     }
-  }, [currentUser, nav])
+  }, [currentUser, nav]);
 
   const handleLogin = async () => {
-    try {
-      await dispatch(loginThunk({ email, password }));
-      if (!currentUser?._id) {
-        setLoginState("failed");
+    if (!(email === "" && password === "")) {
+      try {
+        await dispatch(loginThunk({ email, password }));
+        if (!currentUser?._id) {
+          setLoginState("failed");
+        }
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
     }
   };
 
@@ -78,6 +80,7 @@ export default function LoginPage() {
       <PrimaryButton
         icon={<FaUserCheck />}
         text="Login"
+        disabled={email === "" || password === ""}
         onClick={handleLogin}
       />
     </div>

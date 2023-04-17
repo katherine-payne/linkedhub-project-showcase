@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router";
-import { FaPencilAlt, FaPlus, FaTimes } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router";
+import { FaCheckCircle, FaPencilAlt, FaPlus, FaTimes } from "react-icons/fa";
 import Education from "src/Types/Education";
 import Experience from "src/Types/Experience";
 import UserProfileHeading from "./UserProfileHeading";
@@ -18,11 +18,12 @@ import Project from "src/Types/Project";
 import { getProject } from "src/services/project-service";
 
 export default function UserProfile({ editProfile = false }) {
-
   const { uid } = useParams();
-  
+
+  const navigate = useNavigate();
+
   const { currentUser } = useSelector((state: RootState) => state.users);
-  
+
   const [user, setUser] = useState<User | null>(null);
   const [projects, setProjects] = useState<Array<Project>>([]);
 
@@ -32,7 +33,7 @@ export default function UserProfile({ editProfile = false }) {
         const p = await Promise.all(
           user.projects.map(async (pid) => await getProject(pid))
         );
-        setProjects(p)
+        setProjects(p);
       }
     }
     fetchData();
@@ -129,6 +130,27 @@ export default function UserProfile({ editProfile = false }) {
               {user.email}
             </a>
           </p>
+          {currentUser?._id === user._id && <div className="mt-3">
+            {editProfile === false ? (
+              <PrimaryButton
+                bgClass="w-full"
+                text={"Edit Profile"}
+                icon={<FaPencilAlt />}
+                onClick={() => {
+                  navigate("edit");
+                }}
+              />
+            ) : (
+              <PrimaryButton
+                bgClass="w-full"
+                text={"Done"}
+                icon={<FaCheckCircle />}
+                onClick={() => {
+                  navigate("/profile");
+                }}
+              />
+            )}
+          </div>}
 
           <UserProfileHeading title="Experience" />
           {user.experience?.map((job, index) => {
@@ -356,7 +378,17 @@ export default function UserProfile({ editProfile = false }) {
         </div>
       )}
 
-      {user && <ProjectFeed projects={projects} />}
+      {projects.length > 0 ? (
+        <ProjectFeed projects={projects} />
+      ) : (
+        <p className="text-secondary max-w-sm italic p-10 text-center">
+          No projects yet. Click{" "}
+          <a className="text-accent hover:underline" href="/add/project">
+            Add Project
+          </a>{" "}
+          in the toolbar to populate your profile.
+        </p>
+      )}
     </div>
   );
 }
