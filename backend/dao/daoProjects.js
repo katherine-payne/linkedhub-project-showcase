@@ -2,8 +2,7 @@ import modelProjects from "../models/modelProjects.js";
 
 export const findAll = () => modelProjects.find();
 export const find = (pid) => modelProjects.findById(pid);
-export const findGithub = (username, repo) =>
-  modelProjects.find({ username, repo });
+export const findGithub = (repo) => modelProjects.find({ repo: repo });
 export const add = (project) => modelProjects.create(project);
 export const edit = (pid, project) =>
   modelProjects.findByIdAndUpdate(
@@ -13,7 +12,8 @@ export const edit = (pid, project) =>
       new: true,
     }
   );
-export const remove = (pid) => modelProjects.deleteOne({_id: pid});
-export const home = () => modelProjects.find().sort({hearts: "desc"});
-export const findByLanguage = (language) => modelProjects.find({languages: language});
-export const findByTag = (tag) => modelProjects.find({tags: tag});
+export const remove = (pid) => modelProjects.deleteOne({ _id: pid });
+export const home = () => modelProjects.find().sort({ hearts: "desc" });
+export const findByLanguage = (language) =>
+  modelProjects.find({ languages: language });
+export const findByTag = (tag) => modelProjects.find({ tags: tag });

@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { FaUserPlus } from "react-icons/fa";
 import InputField from "src/Components/Inputs/InputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import { registerThunk } from "src/services/user-thunks";
-import { AppDispatch } from "src/redux/store";
+import { AppDispatch, RootState } from "src/redux/store";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -17,6 +17,16 @@ export default function RegisterPage() {
 
   const nav = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
+
+  useEffect(() => {
+    if (currentUser?._id) {
+      nav("/profile");
+    }
+  }, [currentUser, nav])
 
   const handleRegister = async () => {
     const newUser = {

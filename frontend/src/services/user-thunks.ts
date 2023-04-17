@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as userService from "./user-service";
-import User from "src/Types/User";
 
 export const loginThunk = createAsyncThunk(
   "users/login",

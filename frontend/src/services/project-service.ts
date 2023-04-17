@@ -11,6 +11,19 @@ export const getProject = async (pid: string) => {
   return response.data;
 };
 
+// TODO: match in backend
+export const getProjects = async (owner: string, repo: string) => {
+  const query = PROJECTS_API + "/" + owner + "/" + repo
+  const response = await axios.get(query)
+  return response.data
+}
+
+export const getProjectForRepo = async (owner: string, repo: string) => {
+  const response = await axios.get(PROJECTS_API + "/generate/" + owner + "/" + repo)
+  console.log(response.data)
+  return response.data
+}
+
 export const getFeed = async () => {
   const response = await axios.get(BASE_URL + "home");
   return response.data;

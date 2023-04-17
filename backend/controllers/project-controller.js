@@ -2,9 +2,10 @@ import * as projectsDao from "../dao/daoProjects.js";
 import * as usersDao from "../dao/daoUsers.js";
 
 const ProjectController = (app) => {
+  app.get("/api/projects/:owner/:repo", findProjects)
+  app.get("/api/projects/generate/:owner/:repo", generateProject)
   app.get("/api/projects", findAll);
   app.get("/api/projects/:pid", find);
-  app.get("/api/projects/:user/:repo", findGithub);
   app.post("/api/projects", add);
   app.put("/api/projects/:pid", edit);
   app.delete("/api/projects/:pid", remove);
@@ -27,9 +28,30 @@ const find = async (req, res) => {
   res.json(project);
 };
 
+const findProjects = async (req, res) => {
+  const owner = req.params.owner
+  const repo = req.params.repo
+  const query = `https://github.com/${owner}/${repo}`
+  const projects = await projectsDao.findGithub(query)
+  res.json(projects)
+}
+
+async function generateProject(req, res) {
+  // res.json("no")
+  const f = await searchGithub(req.params.owner, req.params.repo)
+  const r = {
+    name: f.name ?? "",
+    repo: req.params.repo ?? "",
+    username: req.params.owner ?? "",
+    description: f.description ?? "",
+    languages: f.languages ?? [],
+    tags: f.tags ?? [],
+  }
+  res.json(r)
+}
+
 async function searchGithub(owner, repo) {
   const url = `https://api.github.com/repos/${owner}/${repo}`;
-
   const response = await fetch(url)
     .then((response) => {
       if (response.ok) {
@@ -63,25 +85,9 @@ async function searchGithub(owner, repo) {
       .join(" ");
 
     found.link = "https://github.com/" + owner + repo;
-
     return found;
   }
 }
-
-const findGithub = async (req, res) => {
-  const username = req.params.user;
-  const repo = req.params.repo;
-  const localProjects = await projectsDao.findGithub(username, repo)
-  if (localProjects.length > 0) {
-    res.json(localProjects);
-  } else {
-    const githubProject = await searchGithub(username, repo);
-    if (githubProject) {
-      res.json(githubProject);
-    }
-  }
-  res.sendStatus(404);
-};
 
 const add = async (req, res) => {
   const newProject = req.body;

@@ -28,7 +28,7 @@ export default function ProjectCard({p}: Props) {
         <img
           src={project.images[0]}
           alt="project interface screenshot"
-          className="w-full h-36 rounded-lg object-cover"
+          className="ml-2 w-full h-36 rounded-lg object-cover"
         />
 }
         <HeartButton hearted={hearted} setHearted={setHearted} project={project} setProject={setProject} />

@@ -45,6 +45,7 @@ export default function App() {
               <Route path="/recruiters/:rid" element={<RecruiterPage />} />
               <Route path="/recruiters" element={<RecruitersListPage />} />
               <Route path="/projects/:pid" element={<ProjectDetails />} />
+              <Route path="/projects/:owner/:repo" element={<ProjectDetails />} />
               <Route path="/languages/:lang" element={<LanguagesPage />} />
               <Route path="/tags/:tag" element={<TagsPage />} />
               <Route path="/register" element={<RegisterPage />} />
