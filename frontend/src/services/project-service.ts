@@ -12,10 +12,10 @@ export const getProject = async (pid: string) => {
 };
 
 export const getProjects = async (owner: string, repo: string) => {
-  const query = PROJECTS_API + "/" + owner + "/" + repo
-  const response = await axios.get(query)
-  return response.data
-}
+  const query = PROJECTS_API + "/" + owner + "/" + repo;
+  const response = await axios.get(query);
+  return response.data;
+};
 
 export const getProjectForRepo = async (owner: string, repo: string) => {
   const response = await axios.get(PROJECTS_API + "/generate/" + owner + "/" + repo)
@@ -23,7 +23,7 @@ export const getProjectForRepo = async (owner: string, repo: string) => {
 }
 
 export const getFeed = async () => {
-  const response = await axios.get(BASE_URL + "home");
+  const response = await api.get(BASE_URL + "home");
   return response.data;
 };
 

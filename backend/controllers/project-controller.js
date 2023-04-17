@@ -15,7 +15,20 @@ const ProjectController = (app) => {
 };
 
 const home = async (req, res) => {
-  res.json(await projectsDao.home());
+  let liked = [];
+  if (req.session.currentUser) {
+    liked = req.session.currentUser.liked;
+  }
+  const homePage = await projectsDao.home(liked);
+  if (liked.length) {
+    let userHomePage = homePage.filter((p) => liked.includes(p._id.toString()));
+    userHomePage = userHomePage.concat(
+      homePage.filter((p) => !liked.includes(p._id.toString()))
+    );
+    res.json(userHomePage);
+  } else {
+    res.json(homePage);
+  }
 };
 
 const findAll = async (req, res) => {
@@ -37,6 +50,7 @@ const findProjects = async (req, res) => {
 };
 
 async function generateProject(req, res) {
+
   const f = await searchGithub(req.params.owner, req.params.repo);
   // const f = {
   //   name: "Typed Out",
@@ -46,7 +60,7 @@ async function generateProject(req, res) {
   //   languages: [{name: "Swift", lines: 45}],
   //   tags: ["SwiftUI", "iOS"],
   // }
-
+  
   const r = {
     name: f.name ?? "",
     repo: req.params.repo ?? "",
