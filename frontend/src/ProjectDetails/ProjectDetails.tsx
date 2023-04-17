@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { examplesFrank } from "../Examples/example-profile";
 import FormattedDescription from "../Components/FormattedDescription";
 import LanguageTag from "src/Components/LanguageTag";
 import TopicTag from "src/Components/TopicTag";
@@ -16,8 +15,6 @@ import { getUser } from "src/services/user-service";
 export default function ProjectDetails() {
   const [users, setUsers] = useState<Array<User>>([]);
   const [projects, setProjects] = useState<Array<Project>>([]);
-
-  const [hearted, setHearted] = useState(false);
 
   const params = useParams();
   useEffect(() => {
@@ -60,87 +57,88 @@ export default function ProjectDetails() {
 
   return (
     <div className="flex gap-4 md:flex-row flex-col justify-center md:items-start items-center ml-0 md:ml-4">
-      <div className="md:w-5/12 gap-4 w-11/12 flex flex-col justify-start text-primary max-w-none md:max-w-xl md:border-r-2 md:pr-4">
-        {users && users.map((user, index) => (
-          <div
-            key={index}
-            className="bg-white border cursor-pointer border-border-neutral rounded-lg flex flex-wrap p-2"
-            onClick={() => navigate("/profile/" + user._id)}
-          >
-            {user.profile_image_url && (
-              <img
-                className="w-20 h-20 mr-4 rounded-full lh-profile-image object-cover"
-                src={user.profile_image_url}
-                alt="Rounded avatar"
-              />
-            )}
-            <div className="flex flex-col">
-              <p className="text-3xl font-semibold">{user.name}</p>
-              <a
-                href={`mailto:${user.email}`}
-                className="italic text-accent hover:underline"
-              >
-                {user.email}
-              </a>
+      <div className="md:w-5/12 gap-4 mx-4 w-11/12 flex flex-col justify-start text-primary max-w-none md:max-w-xl">
+        {users.length > 0 ? (
+          users.map((user, index) => (
+            <div
+              key={index}
+              className="bg-white border cursor-pointer border-border-neutral rounded-lg flex flex-wrap p-2"
+              onClick={() => navigate("/profile/" + user._id)}
+            >
+              {user.profile_image_url && (
+                <img
+                  className="w-20 h-20 mr-4 rounded-full lh-profile-image object-cover"
+                  src={user.profile_image_url}
+                  alt="Rounded avatar"
+                />
+              )}
+              <div className="flex flex-col">
+                <p className="text-3xl font-semibold">{user.name}</p>
+                <a
+                  href={`mailto:${user.email}`}
+                  className="italic text-accent hover:underline"
+                >
+                  {user.email}
+                </a>
+              </div>
             </div>
-          </div>
-        ))}
-        {/* {user && project && (
-          <div className="flex flex-wrap justify-between items-center mt-2">
-            <HeartButton
-              hearted={hearted}
-              setHearted={setHearted}
-              project={project}
-              setProject={
-                setProject as React.Dispatch<React.SetStateAction<Project>>
-              }
-            />
-          </div>
-          // TODO: Fix Heart button
-        )} */}
+          ))
+        ) : (
+          <p className="bg-white border border-border p-4 rounded-lg italic text-secondary">
+            No users have added this project yet.
+          </p>
+        )}
       </div>
 
-      {projects && projects.map((project, index) => (
-        <div
-          key={index}
-          className="flex flex-col gap-4 md:items-start items-center"
-        >
-          <div className="w-11/12 bg-white border border-border-neutral rounded-lg p-2">
-            <p className="text-3xl font-semibold">{project.name}</p>
-            <FormattedDescription description={project.description} />
-          </div>
-          <div className="flex flex-col gap-0 w-11/12">
-            <div className="flex flex-wrap">
-              {project.languages && project.languages.map((x, i) => (
-                <LanguageTag
-                  text={x}
-                  canDelete={false}
-                  onDelete={() => {}}
-                  key={i}
-                />
-              ))}
-            </div>
-            <div className="flex flex-wrap">
-              {project.tags && project.tags.map((x, i) => (
-                <TopicTag
-                  text={x}
-                  canDelete={false}
-                  onDelete={() => {}}
-                  key={i}
-                />
-              ))}
-            </div>
-          </div>
-          {project.images && project.images.map((img, i) => (
-            <img
-              key={i}
-              src={img}
-              alt="project interface screenshot"
-              className="w-11/12 aspect-video rounded-lg object-scale-down bg-secondary"
-            ></img>
-          ))}
-        </div>
-      ))}
+      <div className="md:border-l-2 md:pl-4 md:w-5/12 w-11/12">
+        {projects &&
+          projects.map((project, index) => {
+            return (
+              <div
+                key={index}
+                className="flex flex-col gap-4 md:items-start items-center"
+              >
+                <div className="w-11/12 bg-white border border-border-neutral rounded-lg p-2">
+                  <p className="text-3xl font-semibold">{project.name}</p>
+                  <FormattedDescription description={project.description} />
+                </div>
+                <div className="flex flex-col gap-0 w-11/12">
+                  <div className="flex flex-wrap">
+                    {project.languages &&
+                      project.languages.map((x, i) => (
+                        <LanguageTag
+                          text={x}
+                          canDelete={false}
+                          onDelete={() => {}}
+                          key={i}
+                        />
+                      ))}
+                  </div>
+                  <div className="flex flex-wrap">
+                    {project.tags &&
+                      project.tags.map((x, i) => (
+                        <TopicTag
+                          text={x}
+                          canDelete={false}
+                          onDelete={() => {}}
+                          key={i}
+                        />
+                      ))}
+                  </div>
+                </div>
+                {project.images &&
+                  project.images.map((img, i) => (
+                    <img
+                      key={i}
+                      src={img}
+                      alt="project interface screenshot"
+                      className="w-11/12 aspect-video rounded-lg object-scale-down bg-secondary"
+                    ></img>
+                  ))}
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 }

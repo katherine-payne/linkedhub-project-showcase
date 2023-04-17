@@ -7,16 +7,7 @@ import { updateUser } from "src/services/user-service";
 import { profileThunk } from "src/services/user-thunks";
 import Project from "src/Types/Project";
 
-type Props = {
-  hearted: boolean;
-  setHearted: React.Dispatch<React.SetStateAction<boolean>>;
-  project: Project;
-  setProject: React.Dispatch<React.SetStateAction<Project>>;
-};
-
 export default function HeartButton({
-  hearted,
-  setHearted,
   project,
   setProject,
 }: Props) {
@@ -53,7 +44,6 @@ export default function HeartButton({
           await dispatch(profileThunk());
         }
         setProject(updatedProject);
-        setHearted(!hearted);
       }}
     >
       <FaHeart className="mt-1 mr-1 hover:border hover:border-opacity-0 hover:border-slate-500" />
