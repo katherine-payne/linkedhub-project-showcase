@@ -22,7 +22,7 @@ export default function UserProfile({ editProfile = false }) {
   const { uid } = useParams();
   
   const { currentUser } = useSelector((state: RootState) => state.users);
-
+  
   const [user, setUser] = useState<User | null>(null);
   const [projects, setProjects] = useState<Array<Project>>([]);
 

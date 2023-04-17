@@ -50,14 +50,23 @@ const findProjects = async (req, res) => {
 };
 
 async function generateProject(req, res) {
-  // res.json("no")
+
   const f = await searchGithub(req.params.owner, req.params.repo);
+  // const f = {
+  //   name: "Typed Out",
+  //   repo: "http://github.com/fraander/typed-out",
+  //   username: "fraander",
+  //   description: "For typing things out when you can't talk.",
+  //   languages: [{name: "Swift", lines: 45}],
+  //   tags: ["SwiftUI", "iOS"],
+  // }
+  
   const r = {
     name: f.name ?? "",
     repo: req.params.repo ?? "",
     username: req.params.owner ?? "",
     description: f.description ?? "",
-    languages: f.languages ?? [],
+    languages: f.languages.map((lang) => lang.name) ?? [],
     tags: f.tags ?? [],
   };
   res.json(r);
