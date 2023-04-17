@@ -7,9 +7,17 @@ import { updateUser } from "src/services/user-service";
 import { profileThunk } from "src/services/user-thunks";
 import Project from "src/Types/Project";
 
+type Props = {
+  project : Project;
+  setProject : React.Dispatch<React.SetStateAction<Project>>
+  hearted: boolean;
+  setHearted : React.Dispatch<React.SetStateAction<boolean>>
+}
+
 export default function HeartButton({
   project,
   setProject,
+  hearted,
 }: Props) {
   const dispatch = useDispatch<AppDispatch>();
   const currentUser = useSelector(
