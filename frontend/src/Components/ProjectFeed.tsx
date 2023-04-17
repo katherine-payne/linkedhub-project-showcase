@@ -10,7 +10,7 @@ export default function ProjectFeed({ projects }: { projects: Array<Project> }) 
   return (
     <div id="projectFeed" className="flex justify-center">
       <div className="max-w-none md:max-w-xl">
-        {projects.map((p, index) => (
+        {projects.filter((p) => p !== null).map((p, index) => (
           <div
             className="cursor-pointer"
             key={index}

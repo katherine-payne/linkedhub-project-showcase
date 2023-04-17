@@ -19,31 +19,36 @@ export default function ProjectCard({ p }: Props) {
     heartEnabled && p._id ? currentUser.liked.includes(p._id) : false
   );
   const [project, setProject] = useState(p);
+  console.log(project);
 
   return (
     <div className="flex content-center bg-white text-primary shadow-md border border-border-neutral p-2 m-4 rounded-lg">
       <div className="w-3/5">
-        <ProjectCardText
-          name={p.name}
-          languageTags={p.languages}
-          topicTags={p.tags}
-          description={p.description}
-        />
+        {project && (
+          <ProjectCardText
+            name={p.name}
+            languageTags={p.languages}
+            topicTags={p.tags}
+            description={p.description}
+          />
+        )}
       </div>
       <div className="w-2/5 m-2 ml-auto">
-        {project.images.length > 0 && (
+        {project && project.images.length > 0 && (
           <img
             src={project.images[0]}
             alt="project interface screenshot"
             className="ml-2 w-full h-36 rounded-lg object-cover"
           />
         )}
-        <HeartButton
-          hearted={hearted}
-          setHearted={setHearted}
-          project={project}
-          setProject={setProject}
-        />
+        {project && (
+          <HeartButton
+            hearted={hearted}
+            setHearted={setHearted}
+            project={project}
+            setProject={setProject}
+          />
+        )}
       </div>
     </div>
   );
