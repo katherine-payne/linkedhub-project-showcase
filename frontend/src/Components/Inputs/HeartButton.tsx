@@ -9,24 +9,20 @@ import { profileThunk } from "src/services/user-thunks";
 import Project from "src/Types/Project";
 
 type Props = {
-  hearted: boolean;
-  setHearted: React.Dispatch<React.SetStateAction<boolean>>;
   project: Project;
   setProject: React.Dispatch<React.SetStateAction<Project>>;
 };
 
-export default function HeartButton({
-  hearted,
-  setHearted,
-  project,
-  setProject,
-}: Props) {
+export default function HeartButton({ project, setProject }: Props) {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const currentUser = useSelector(
-    (state: RootState) => state.users.currentUser
-  );
+  const { currentUser } = useSelector((state: RootState) => state.users);
   const heartEnabled = currentUser && currentUser?._id;
+
+  const hearted =
+    heartEnabled && project._id
+      ? currentUser.liked.includes(project._id)
+      : false;
 
   return (
     <button
@@ -55,7 +51,6 @@ export default function HeartButton({
             await dispatch(profileThunk());
           }
           setProject(updatedProject);
-          setHearted(!hearted);
         } else {
           navigate("/login");
         }

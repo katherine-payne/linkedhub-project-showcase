@@ -25,9 +25,7 @@ export default function NavigationBar() {
   let [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const currentUser = useSelector(
-    (state: RootState) => state.users.currentUser
-  );
+  const { currentUser } = useSelector((state: RootState) => state.users);
 
   const handleSearch = () => {
     navigate(`/search/${searchQuery}`);
@@ -93,7 +91,8 @@ export default function NavigationBar() {
           />
         )}
 
-        {(currentUser?.role === Role.Admin || currentUser?.role === Role.Recruiter) && (
+        {(currentUser?.role === Role.Admin ||
+          currentUser?.role === Role.Recruiter) && (
           <PrimaryButton
             bgClass="mr-4"
             icon={<FaBuilding />}
@@ -155,8 +154,8 @@ export default function NavigationBar() {
                   bgClass="w-full"
                   text={"Log Out"}
                   icon={<FaDoorOpen />}
-                  onClick={() => {
-                    dispatch(logoutThunk());
+                  onClick={async () => {
+                    await dispatch(logoutThunk());
                     navigate("/");
                   }}
                 />
@@ -185,7 +184,11 @@ export default function NavigationBar() {
 
           <div className="flex flex-col justify-center items-center border border-border relative group-hover:drop-shadow-md w-16 h-16 rounded-full transition-all bg-white">
             {currentUser?.profile_image_url ? (
-              <img className="rounded-full aspect-square  object-cover" src={currentUser.profile_image_url} alt="Rounded avatar" />
+              <img
+                className="rounded-full aspect-square  object-cover"
+                src={currentUser.profile_image_url}
+                alt="Rounded avatar"
+              />
             ) : currentUser?.email ? (
               <div className="text-2xl text-secondary-hover">
                 <FaUserAstronaut />

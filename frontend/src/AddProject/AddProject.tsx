@@ -27,9 +27,7 @@ export default function AddProject() {
   const [status, setStatus] = useState(SearchStatus.Waiting);
 
   const navigate = useNavigate();
-  const currentUser = useSelector(
-    (state: RootState) => state.users.currentUser
-  );
+  const { currentUser } = useSelector((state: RootState) => state.users);
 
   const setNewRepo = (newRepo: Repository) => {
     setRepo(newRepo);

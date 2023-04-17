@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "src/redux/store";
 import Project from "src/Types/Project";
 import HeartButton from "./Inputs/HeartButton";
 
@@ -11,13 +9,6 @@ type Props = {
 };
 
 export default function ProjectCard({ p }: Props) {
-  const currentUser = useSelector(
-    (state: RootState) => state.users.currentUser
-  );
-  const heartEnabled = currentUser && currentUser?._id;
-  const [hearted, setHearted] = useState(
-    heartEnabled && p._id ? currentUser.liked.includes(p._id) : false
-  );
   const [project, setProject] = useState(p);
 
   return (
@@ -38,12 +29,7 @@ export default function ProjectCard({ p }: Props) {
             className="ml-2 w-full h-36 rounded-lg object-cover"
           />
         )}
-        <HeartButton
-          hearted={hearted}
-          setHearted={setHearted}
-          project={project}
-          setProject={setProject}
-        />
+        <HeartButton project={project} setProject={setProject} />
       </div>
     </div>
   );

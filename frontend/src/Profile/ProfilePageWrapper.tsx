@@ -7,16 +7,14 @@ import RecruiterPage from "src/Recruiter/RecruiterPage";
 import { useNavigate } from "react-router";
 
 export default function ProfilePageWrapper() {
-  const currentUser = useSelector(
-    (state: RootState) => state.users.currentUser
-  );
+  const { currentUser } = useSelector((state: RootState) => state.users);
   const nav = useNavigate();
 
   useEffect(() => {
-   if (!currentUser?._id) {
-      nav("/register")
-   }
-  }, [currentUser, nav])
+    if (!currentUser?._id) {
+      nav("/register");
+    }
+  }, [currentUser, nav]);
 
   return (
     <div>
