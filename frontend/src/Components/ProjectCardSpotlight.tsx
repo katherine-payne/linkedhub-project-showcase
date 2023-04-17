@@ -9,7 +9,6 @@ type Props = {
 };
 
 export default function ProjectCardSpotlight({p}: Props) {
-  const [hearted, setHearted] = useState(false);
   const [project, setProject] = useState(p)
 
   return (
@@ -28,7 +27,7 @@ export default function ProjectCardSpotlight({p}: Props) {
           topicTags={project.tags}
           description={project.description}
         />
-        <HeartButton hearted={hearted} setHearted={setHearted} project={project} setProject={setProject} />
+        <HeartButton project={project} setProject={setProject} />
       </div>
     </div>
   );

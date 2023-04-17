@@ -1,21 +1,22 @@
 import React from "react";
 import { FaHeart } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
 import { updateProject } from "src/services/project-service";
 import Project from "src/Types/Project";
 
-type Props = {
-  hearted: boolean;
-  setHearted: React.Dispatch<React.SetStateAction<boolean>>;
-  project: Project;
-  setProject: React.Dispatch<React.SetStateAction<Project>>;
-};
-
 export default function HeartButton({
-  hearted,
-  setHearted,
   project,
   setProject,
-}: Props) {
+}: {
+  project: Project;
+  setProject: React.Dispatch<React.SetStateAction<Project>>;
+}) {
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
+  const hearted = currentUser?.liked.includes(project._id ?? "");
+
   return (
     <button
       className={`flex 
@@ -30,7 +31,6 @@ export default function HeartButton({
         }
         await updateProject(updatedProject);
         setProject(updatedProject);
-        setHearted(!hearted);
       }}
     >
       <FaHeart className="mt-1 mr-1 hover:border hover:border-opacity-0 hover:border-slate-500" />
