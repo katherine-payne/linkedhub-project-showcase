@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
 import { updateUser } from "src/services/user-service";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
+import UserProfileHeading from "../Profile/UserProfileHeading";
 
 export default function RecruiterPage({ editProfile = false }) {
   const { rid } = useParams();
@@ -124,6 +125,7 @@ export default function RecruiterPage({ editProfile = false }) {
               )}
             </div>
           )}
+          <UserProfileHeading title="Summary" />
           <div className="flex gap-1">
             {(!editProfile || (editProfile && !editingSummary)) &&
               recruiter.summary}

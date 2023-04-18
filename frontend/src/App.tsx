@@ -10,7 +10,6 @@ import React from "react";
 import AddProject from "./AddProject/AddProject";
 import ProjectDetails from "./ProjectDetails/ProjectDetails";
 import CompanyPage from "./Company/CompanyPage";
-import RecruiterPage from "./Recruiter/RecruiterPage";
 import CompaniesListPage from "./Company/CompaniesListPage";
 import RecruitersListPage from "./Recruiter/RecruitersListPage";
 import AddCompany from "./AddCompany/AddCompany";
@@ -42,7 +41,6 @@ export default function App() {
               <Route path="/add/company" element={<AddCompany />} />
               <Route path="/companies/:cid" element={<CompanyPage />} />
               <Route path="/companies" element={<CompaniesListPage />} />
-              <Route path="/recruiters/:rid" element={<RecruiterPage />} />
               <Route path="/recruiters" element={<RecruitersListPage />} />
               <Route path="/projects/:pid" element={<ProjectDetails />} />
               <Route

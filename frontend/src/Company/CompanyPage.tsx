@@ -155,9 +155,13 @@ export default function CompanyPage() {
                   }
                 }}
               />
-            ) : ((currentUser && company.requests.includes(currentUser._id)) ? (
-              <p className="text-secondary italic">Your request has been sent and is under review.</p>
-            ) : <></>)}
+            ) : currentUser && company.requests.includes(currentUser._id) ? (
+              <p className="text-secondary italic">
+                Your request has been sent and is under review.
+              </p>
+            ) : (
+              <></>
+            )}
           </>
         )}
 
@@ -173,7 +177,7 @@ export default function CompanyPage() {
                     <li
                       key={index}
                       onClick={() => {
-                        navigate("/recruiters/" + recruiter._id);
+                        navigate("/profile/" + recruiter._id);
                       }}
                       className="flex flex-row justify-between rounded-lg bg-gray-100 hover:shadow p-3 my-2 hover:cursor-pointer"
                     >
