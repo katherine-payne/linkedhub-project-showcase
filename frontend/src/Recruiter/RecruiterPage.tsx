@@ -13,7 +13,7 @@ import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import UserProfileHeading from "../Profile/UserProfileHeading";
 
 export default function RecruiterPage({ editProfile = false }) {
-  const { rid } = useParams();
+  const { uid } = useParams();
   const { currentUser } = useSelector((state: RootState) => state.users);
   const [recruiter, setRecruiter] = useState<User | null>(null);
   const [companies, setCompanies] = useState<Array<Company>>([]);
@@ -25,15 +25,15 @@ export default function RecruiterPage({ editProfile = false }) {
 
   useEffect(() => {
     async function fetchData() {
-      const r: User = rid !== undefined ? await getUser(rid) : currentUser;
-      const c: Array<Company> = await getCompanyForRID(rid ?? r._id);
+      const r: User = uid !== undefined ? await getUser(uid) : currentUser;
+      const c: Array<Company> = await getCompanyForRID(uid ?? r._id);
       setRecruiter(r);
       setCompanies(c);
       setNewSummary(r.summary ?? "");
       setEmailShown(r.email_shown ?? false);
     }
     fetchData();
-  }, [rid, currentUser]);
+  }, [uid, currentUser]);
 
   const labelClass = (value: boolean) =>
     `p-2 rounded-lg flex flex-row justify-center w-full gap-1 ${
@@ -141,7 +141,7 @@ export default function RecruiterPage({ editProfile = false }) {
           {editProfile && editingSummary && (
             <>
               <textarea
-                className="text-primary text-sm border border-border rounded-lg p-3"
+                className="text-primary text-md border border-border rounded-lg p-3"
                 id="summary"
                 placeholder="Summary"
                 value={newSummary}

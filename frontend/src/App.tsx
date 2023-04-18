@@ -31,7 +31,7 @@ export default function App() {
             <Routes>
               <Route index element={<MainFeed />} />
               <Route path="/search/:query" element={<SearchFeed />} />
-              <Route path="/profile/:uid" element={<UserProfile />} />
+              <Route path="/profile/:uid" element={<ProfilePageWrapper />} />
               <Route path="/profile" element={<ProfilePageWrapper />} />
               <Route
                 path="/profile/edit"
