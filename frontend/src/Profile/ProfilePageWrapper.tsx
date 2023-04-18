@@ -6,7 +6,7 @@ import UserProfile from "./UserProfile";
 import RecruiterPage from "src/Recruiter/RecruiterPage";
 import { useNavigate } from "react-router";
 
-export default function ProfilePageWrapper() {
+export default function ProfilePageWrapper({ editProfile = false }) {
   const { currentUser } = useSelector((state: RootState) => state.users);
   const nav = useNavigate();
 
@@ -18,9 +18,13 @@ export default function ProfilePageWrapper() {
 
   return (
     <div>
-      {currentUser?.role === Role.Poster && <UserProfile />}
+      {currentUser?.role === Role.Poster && (
+        <UserProfile editProfile={editProfile} />
+      )}
       {(currentUser?.role === Role.Recruiter ||
-        currentUser?.role === Role.Admin) && <RecruiterPage />}
+        currentUser?.role === Role.Admin) && (
+        <RecruiterPage editProfile={editProfile} />
+      )}
     </div>
   );
 }
