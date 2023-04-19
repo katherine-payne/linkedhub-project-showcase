@@ -25,7 +25,7 @@ export default function NavigationBar() {
   let [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { currentUser } = useSelector((state: RootState) => state.users);
+  const currentUser = useSelector((state: RootState) => state.users.currentUser);
 
   const handleSearch = () => {
     navigate(`/search/${searchQuery}`);

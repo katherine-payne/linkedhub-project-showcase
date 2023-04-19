@@ -29,6 +29,7 @@ export default function LoginPage() {
         await dispatch(loginThunk({ email, password }));
         if (!currentUser?._id) {
           setLoginState("failed");
+          setPassword("")
         }
       } catch (e) {
         console.log(e);
