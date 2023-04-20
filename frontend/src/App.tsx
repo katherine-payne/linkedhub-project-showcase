@@ -5,7 +5,6 @@ import "./App.css";
 import MainFeed from "./Home/MainFeed";
 import Toolbar from "./NavigationBar/NavigationBar";
 import SearchFeed from "./Search/SearchFeed";
-import UserProfile from "./Profile/UserProfile";
 import React from "react";
 import AddProject from "./AddProject/AddProject";
 import ProjectDetails from "./ProjectDetails/ProjectDetails";

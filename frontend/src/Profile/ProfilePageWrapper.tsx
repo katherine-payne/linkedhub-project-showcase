@@ -19,7 +19,7 @@ export default function ProfilePageWrapper({ editProfile = false }) {
     if (uid === undefined && !currentUser?._id) {
       nav("/register");
     }
-  }, [currentUser, nav]);
+  }, [uid, currentUser, nav]);
 
   useEffect(() => {
     async function fetchData() {
