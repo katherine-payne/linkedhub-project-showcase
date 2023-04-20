@@ -25,7 +25,7 @@ export default function RecruitersListPage() {
           return (
             <div
               key={index}
-              onClick={() => nav(r._id + "")}
+              onClick={() => nav("/profile/" + r._id)}
               className="flex flex-col gap-4 w-full font-serif bg-gray-100 hover:bg-gray-200 p-2 hover:shadow-md shadow rounded-md cursor-pointer"
             >
               <div className="flex flex-row items-center gap-4">
