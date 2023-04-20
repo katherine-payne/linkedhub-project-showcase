@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { FaPencilAlt, FaPlus, FaTimes } from "react-icons/fa";
 import Education from "src/Types/Education";
@@ -19,7 +19,6 @@ import { getProject } from "src/services/project-service";
 import LikedList from "src/Components/LikedList";
 import InputField from "src/Components/Inputs/InputField";
 import { BsCameraFill, BsCheckCircleFill, BsCursorText } from "react-icons/bs";
-import { useDispatch } from "react-redux";
 import { profileThunk } from "src/services/user-thunks";
 
 export default function UserProfile({ editProfile = false }) {
@@ -464,7 +463,7 @@ export default function UserProfile({ editProfile = false }) {
         )}
 
         {projects.length > 0 ? (
-          <ProjectFeed projects={projects} />
+          <ProjectFeed projects={projects} showDelete={editProfile} />
         ) : (
           <p className="text-secondary max-w-sm italic p-10 text-center">
             No projects yet. Click{" "}
