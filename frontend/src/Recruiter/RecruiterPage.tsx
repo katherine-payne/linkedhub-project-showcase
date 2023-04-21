@@ -110,7 +110,7 @@ export default function RecruiterPage({ editProfile = false }) {
                   text={"Edit Profile"}
                   icon={<FaPencilAlt />}
                   onClick={() => {
-                    navigate("edit");
+                    navigate("/profile/edit");
                   }}
                 />
               ) : (

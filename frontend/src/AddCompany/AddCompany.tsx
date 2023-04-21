@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import DescriptionInput from "src/AddProject/DescriptionInput";
 import CompanyDetailsCard from "src/Components/CompanyDetailsCard";
@@ -7,6 +8,8 @@ import InputField from "src/Components/Inputs/InputField";
 import LabeledInputField from "src/Components/Inputs/LabeledInputField";
 import PrimaryButton from "src/Components/Inputs/PrimaryButton";
 import Company from "src/Types/Company";
+import Role from "src/Types/Role";
+import { RootState } from "src/redux/store";
 import { addCompany } from "src/services/company-service";
 
 export default function AddCompany() {
@@ -15,6 +18,16 @@ export default function AddCompany() {
   const [imageURL, setImageURL] = useState("");
 
   const navigate = useNavigate();
+
+  const currentUser = useSelector(
+    (state: RootState) => state.users.currentUser
+  );
+
+  useEffect(() => {
+    if (currentUser?.role !== Role.Admin) {
+      navigate("/login");
+    }
+  }, [currentUser]);
 
   return (
     <div className="flex flex-row justify-center gap-4">

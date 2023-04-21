@@ -226,7 +226,7 @@ export default function UserProfile({ editProfile = false }) {
                       text={"Edit Profile"}
                       icon={<FaPencilAlt />}
                       onClick={() => {
-                        navigate("edit");
+                        navigate("/profile/edit");
                       }}
                     />
                   )}

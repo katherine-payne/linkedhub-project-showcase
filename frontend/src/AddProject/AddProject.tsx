@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import RepoSelector from "./RepoSelector";
 import TagInput from "./TagInput";
@@ -16,6 +16,7 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "src/redux/store";
 import { profileThunk } from "src/services/user-thunks";
+import Role from "src/Types/Role";
 
 export default function AddProject() {
   const [link, setLink] = useState<string>("");
@@ -30,6 +31,12 @@ export default function AddProject() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: RootState) => state.users);
+
+  useEffect(() => {
+    if (currentUser?.role !== Role.Poster) {
+      navigate("/login")
+    }
+  }, [currentUser])
 
   const setNewRepo = (newRepo: Repository) => {
     setRepo(newRepo);
