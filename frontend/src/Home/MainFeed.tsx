@@ -22,15 +22,19 @@ export default function MainFeed() {
 
   return (
     <div className="flex flex-col items-center justify-start">
-      <div className="flex flex-col items-start justify-start w-full">
+      <div className="flex flex-col items-center justify-start w-full">
         <p className="font-serif max-w-md text-secondary bg-white p-4 rounded-lg shadow-lg m-4 mb-8">
-          Welcome to <b>LinkedHub</b>! Share your projects alongside your resume and
-          connect with real recruiters from real companies. See the most liked
-          projects hit the home page to put your best foot forwards.
+          Welcome to <b>LinkedHub</b>! Share your projects alongside your resume
+          and connect with real recruiters from real companies. See the most
+          liked projects hit the home page to put your best foot forwards.
         </p>
       </div>
       <div className="flex md:flex-row flex-col items-center md:justify-center md:items-start">
-        <div className={`${currentUser?.liked ? "w-2/4" : "w-full"} flex items-center flex-col`}>
+        <div
+          className={`${
+            currentUser?.liked ? "w-2/4" : "w-full"
+          } flex items-center flex-col`}
+        >
           <p className="text-3xl font-bold font-serif">Top Projects</p>
           <ProjectFeed projects={projects} />
         </div>

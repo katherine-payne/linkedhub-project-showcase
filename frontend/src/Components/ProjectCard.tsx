@@ -3,12 +3,14 @@ import Project from "src/Types/Project";
 import HeartButton from "./Inputs/HeartButton";
 
 import ProjectCardText from "./ProjectCardText";
+import DeleteButton from "./Inputs/DeleteButton";
 
 type Props = {
   p: Project;
+  showDelete?: boolean;
 };
 
-export default function ProjectCard({ p }: Props) {
+export default function ProjectCard({ p, showDelete = false }: Props) {
   const [project, setProject] = useState(p);
 
   return (
@@ -31,6 +33,7 @@ export default function ProjectCard({ p }: Props) {
         )}
         <HeartButton project={project} setProject={setProject} />
       </div>
+      {showDelete && <DeleteButton p={p} />}
     </div>
   );
 }

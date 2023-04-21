@@ -3,12 +3,14 @@ import Project from "src/Types/Project";
 import HeartButton from "./Inputs/HeartButton";
 
 import ProjectCardText from "./ProjectCardText";
+import DeleteButton from "./Inputs/DeleteButton";
 
 type Props = {
   p: Project;
+  showDelete?: boolean;
 };
 
-export default function ProjectCardSpotlight({ p }: Props) {
+export default function ProjectCardSpotlight({ p, showDelete = false }: Props) {
   const [project, setProject] = useState(p);
 
   return (
@@ -28,6 +30,7 @@ export default function ProjectCardSpotlight({ p }: Props) {
           description={project.description}
         />
         <HeartButton project={project} setProject={setProject} />
+        {showDelete && <DeleteButton p={p} />}
       </div>
     </div>
   );

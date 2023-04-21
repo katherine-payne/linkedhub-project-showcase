@@ -27,18 +27,18 @@ export default function LikedList({ liked }: { liked?: Array<string> }) {
       }
     }
     fetchData();
-  }, [currentUser]);
+  }, [currentUser, liked]);
 
   return (
     <div>
       {projects.map((p, index) => {
-         return (
-            <div key={index}>
-               <Link to={"/projects/" + p._id}>
-                  <ProjectCard p={p} />
-               </Link>
-            </div>
-         );
+        return (
+          <div key={index}>
+            <Link to={"/projects/" + p._id}>
+              <ProjectCard p={p} />
+            </Link>
+          </div>
+        );
       })}
     </div>
   );

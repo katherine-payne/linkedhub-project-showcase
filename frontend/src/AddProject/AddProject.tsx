@@ -13,8 +13,9 @@ import { useNavigate } from "react-router";
 import SearchStatus from "src/Types/SearchStatus";
 import statusDisplay from "src/Components/StatusDisplay";
 import { BsFillPlusCircleFill } from "react-icons/bs";
-import { useSelector } from "react-redux";
-import { RootState } from "src/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "src/redux/store";
+import { profileThunk } from "src/services/user-thunks";
 
 export default function AddProject() {
   const [link, setLink] = useState<string>("");
@@ -26,6 +27,7 @@ export default function AddProject() {
   const [images, setImages] = useState<Array<string>>([]);
   const [status, setStatus] = useState(SearchStatus.Waiting);
 
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: RootState) => state.users);
 
@@ -113,6 +115,7 @@ export default function AddProject() {
                 const r = await addProject(newProject);
                 setStatus(SearchStatus.Success);
                 navigate("/projects/" + r._id);
+                await dispatch(profileThunk());
               } else {
                 navigate("/login");
               }
