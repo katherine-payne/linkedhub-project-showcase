@@ -50,7 +50,6 @@ const findProjects = async (req, res) => {
 };
 
 async function generateProject(req, res) {
-
   const f = await searchGithub(req.params.owner, req.params.repo);
   // const f = {
   //   name: "Typed Out",
@@ -60,7 +59,7 @@ async function generateProject(req, res) {
   //   languages: [{name: "Swift", lines: 45}],
   //   tags: ["SwiftUI", "iOS"],
   // }
-  
+
   const r = {
     name: f.name ?? "",
     repo: req.params.repo ?? "",
@@ -130,7 +129,10 @@ const edit = async (req, res) => {
 const remove = async (req, res) => {
   const pid = req.params.pid;
   const status = await projectsDao.remove(pid);
+  const status_user = await usersDao.removeProject(pid);
+  console.log(status_user)
   res.json(status);
+  // res.json([status, status_user]);
 };
 
 const findByTag = async (req, res) => {

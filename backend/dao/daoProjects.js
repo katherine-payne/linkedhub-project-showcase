@@ -1,4 +1,5 @@
 import modelProjects from "../models/modelProjects.js";
+import modelUsers from "../models/modelUsers.js";
 
 export const findAll = () => modelProjects.find();
 export const find = (pid) => modelProjects.findById(pid);

@@ -13,4 +13,7 @@ export const updateUser = (uid, user) =>
     }
   );
 
+export const removeProject = (pid) =>
+  modelUsers.updateMany({liked: pid}, { $pull: { liked: [pid] } }, { multi: true });
+
 export const findUserByEmail = (email) => modelUsers.findOne({ email });

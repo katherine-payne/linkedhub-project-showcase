@@ -31,7 +31,8 @@ export default function LikedList({ liked }: { liked?: Array<string> }) {
 
   return (
     <div>
-      {projects.map((p, index) => {
+      {projects.filter((p) => p !== null).length > 0 ?
+      projects.filter((p) => p !== null).map((p, index) => {
         return (
           <div key={index}>
             <Link to={"/projects/" + p._id}>
@@ -39,7 +40,7 @@ export default function LikedList({ liked }: { liked?: Array<string> }) {
             </Link>
           </div>
         );
-      })}
+      }) : <p className="text-secondary font-serif mb-4">You have no liked projects yet. View the homepage to see user submissions!</p>}
     </div>
   );
 }
