@@ -10,7 +10,7 @@ import Project from "src/Types/Project";
 
 type Props = {
   project: Project;
-  setProject: React.Dispatch<React.SetStateAction<Project>>;
+  setProject: (updatedProject: Project) => void;
 };
 
 export default function HeartButton({ project, setProject }: Props) {

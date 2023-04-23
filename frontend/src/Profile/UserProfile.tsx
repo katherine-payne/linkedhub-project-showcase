@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import { FaPencilAlt, FaPlus, FaTimes } from "react-icons/fa";
 import Education from "src/Types/Education";
 import Experience from "src/Types/Experience";
@@ -21,9 +21,8 @@ import InputField from "src/Components/Inputs/InputField";
 import { BsCameraFill, BsCheckCircleFill, BsCursorText } from "react-icons/bs";
 import { profileThunk } from "src/services/user-thunks";
 
-export default function UserProfile({ editProfile = false }) {
+export default function UserProfile({editProfile}: {editProfile: boolean}) {
   const { uid } = useParams();
-
   const navigate = useNavigate();
 
   const { currentUser } = useSelector((state: RootState) => state.users);
@@ -128,11 +127,11 @@ export default function UserProfile({ editProfile = false }) {
 
   return (
     <div className="flex flex-col items-center justify-start">
-      <div className="flex md:flex-row flex-col justify-center mb-8">
+      <div className="flex md:flex-row flex-col w-full justify-center md:items-start items-center mb-8">
         {user && (
           <div
             id="infoFeed"
-            className="font-serif text-primary max-w-none md:max-w-xl border-r-2 ml-4 p-4"
+            className="font-serif text-primary md:w-1/2 max-w-none md:max-w-xl md:border-r-2 border-r-0 ml-4 p-4"
           >
             <p className="text-3xl font-semibold">{user.name}</p>
             {currentUser?._id && (
@@ -264,7 +263,7 @@ export default function UserProfile({ editProfile = false }) {
                   </div>
 
                   {(!editProfile || !isEditingExperience(job)) && (
-                    <>
+                    <div className="w-full">
                       <UserProfileLabeledEntry
                         label="Company"
                         entry={job.company}
@@ -282,7 +281,7 @@ export default function UserProfile({ editProfile = false }) {
                       <div className="whitespace-pre-wrap">
                         <FormattedDescription description={job.description} />
                       </div>
-                    </>
+                    </div>
                   )}
                   {editProfile && isEditingExperience(job) && (
                     <EditExperience
@@ -462,17 +461,19 @@ export default function UserProfile({ editProfile = false }) {
           </div>
         )}
 
-        {projects.length > 0 ? (
-          <ProjectFeed projects={projects} showDelete={editProfile} />
-        ) : (
-          <p className="text-secondary max-w-sm italic p-10 text-center">
-            No projects yet. Click{" "}
-            <a className="text-accent hover:underline" href="/add/project">
-              Add Project
-            </a>{" "}
-            in the toolbar to populate your profile.
-          </p>
-        )}
+        <div className="w-1/2">
+          {projects.length > 0 ? (
+            <ProjectFeed projects={projects} showDelete={editProfile} />
+          ) : (
+            <p className="text-secondary md:w-1/2 max-w-sm italic p-10 text-center mx-auto">
+              No projects yet. Click{" "}
+              <a className="text-accent hover:underline" href="/add/project">
+                Add Project
+              </a>{" "}
+              in the toolbar to populate your profile.
+            </p>
+          )}
+        </div>
       </div>
       {currentUser?._id && (
         <div>

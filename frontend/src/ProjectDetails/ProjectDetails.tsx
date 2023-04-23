@@ -11,6 +11,7 @@ import {
 import Project from "src/Types/Project";
 import User from "src/Types/User";
 import { getUser } from "src/services/user-service";
+import HeartButton from "src/Components/Inputs/HeartButton";
 
 export default function ProjectDetails() {
   const [users, setUsers] = useState<Array<User>>([]);
@@ -102,7 +103,12 @@ export default function ProjectDetails() {
                   <p className="text-3xl font-semibold">{project.name}</p>
                   <FormattedDescription description={project.description} />
                 </div>
-                <div className="flex flex-col gap-0 w-11/12">
+                <div className="flex flex-col w-11/12">
+                  <HeartButton project={project} setProject={(updatedProject) => {
+                    let updatedProjects = [...projects]
+                    updatedProjects[index] = updatedProject
+                    setProjects(updatedProjects)
+                  }} />
                   <div className="flex flex-wrap">
                     {project.languages &&
                       project.languages.map((x, i) => (
