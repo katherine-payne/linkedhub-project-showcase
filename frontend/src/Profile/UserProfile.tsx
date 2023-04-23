@@ -21,7 +21,7 @@ import InputField from "src/Components/Inputs/InputField";
 import { BsCameraFill, BsCheckCircleFill, BsCursorText } from "react-icons/bs";
 import { profileThunk } from "src/services/user-thunks";
 
-export default function UserProfile({editProfile}: {editProfile: boolean}) {
+export default function UserProfile({ editProfile }: { editProfile: boolean }) {
   const { uid } = useParams();
   const navigate = useNavigate();
 
@@ -174,12 +174,14 @@ export default function UserProfile({editProfile}: {editProfile: boolean}) {
                       />
                     </div>
                   ) : (
-                    <PrimaryButton
-                      bgClass="w-44 h-12"
-                      text="Edit Name"
-                      icon={<BsCursorText />}
-                      onClick={() => setEditingName(true)}
-                    />
+                    <div className="font-mono">
+                      <PrimaryButton
+                        bgClass="w-44 h-12"
+                        text="Edit Name"
+                        icon={<BsCursorText />}
+                        onClick={() => setEditingName(true)}
+                      />
+                    </div>
                   ))}
                 {editProfile === true && editingImage ? (
                   <div className="mt-3 flex flex-row gap-2 h-12">
@@ -210,12 +212,20 @@ export default function UserProfile({editProfile}: {editProfile: boolean}) {
                   </div>
                 ) : (
                   editProfile === true && (
-                    <PrimaryButton
-                      bgClass="w-44 mt-3 h-12"
-                      text="Edit Image"
-                      icon={<BsCameraFill />}
-                      onClick={() => setEditingImage(true)}
-                    />
+                    <div className="font-mono">
+                      <PrimaryButton
+                        bgClass="w-44 mt-3 h-12"
+                        text="Edit Image"
+                        icon={<BsCameraFill />}
+                        onClick={() => setEditingImage(true)}
+                      />
+                      <PrimaryButton
+                        bgClass="border-2 border-contrast hover:bg-contrast w-44 mt-3 h-12"
+                        text="Done Editing"
+                        icon={<BsCheckCircleFill />}
+                        onClick={() => navigate("/profile")}
+                      />
+                    </div>
                   )
                 )}
                 <div className="mt-3">
