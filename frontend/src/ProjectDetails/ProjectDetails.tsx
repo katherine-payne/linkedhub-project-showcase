@@ -16,6 +16,7 @@ import HeartButton from "src/Components/Inputs/HeartButton";
 export default function ProjectDetails() {
   const [users, setUsers] = useState<Array<User>>([]);
   const [projects, setProjects] = useState<Array<Project>>([]);
+  const navigate = useNavigate();
 
   const params = useParams();
   useEffect(() => {
@@ -52,9 +53,7 @@ export default function ProjectDetails() {
       }
     }
     fetchData();
-  }, [params]);
-
-  const navigate = useNavigate();
+  }, [params, navigate]);
 
   return (
     <div className="flex gap-4 md:flex-row flex-col justify-center md:items-start items-center ml-0 md:ml-4">
@@ -104,11 +103,14 @@ export default function ProjectDetails() {
                   <FormattedDescription description={project.description} />
                 </div>
                 <div className="flex flex-col w-11/12">
-                  <HeartButton project={project} setProject={(updatedProject) => {
-                    let updatedProjects = [...projects]
-                    updatedProjects[index] = updatedProject
-                    setProjects(updatedProjects)
-                  }} />
+                  <HeartButton
+                    project={project}
+                    setProject={(updatedProject) => {
+                      let updatedProjects = [...projects];
+                      updatedProjects[index] = updatedProject;
+                      setProjects(updatedProjects);
+                    }}
+                  />
                   <div className="flex flex-wrap">
                     {project.languages &&
                       project.languages.map((x, i) => (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import RepoSelector from "./RepoSelector";
 import TagInput from "./TagInput";
@@ -16,7 +16,6 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "src/redux/store";
 import { profileThunk } from "src/services/user-thunks";
-import Role from "src/Types/Role";
 
 export default function AddProject() {
   const [link, setLink] = useState<string>("");
@@ -32,18 +31,12 @@ export default function AddProject() {
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: RootState) => state.users);
 
-  useEffect(() => {
-    if (currentUser?.role !== Role.Poster) {
-      navigate("/login")
-    }
-  }, [currentUser])
-
   const setNewRepo = (newRepo: Repository) => {
     setRepo(newRepo);
     setTitle(newRepo.name);
     setTags(newRepo.topics);
     setLanguages(newRepo.languages.map((lang) => lang.name));
-    setDescription(newRepo.description);
+    setDescription(newRepo.description ?? "");
   };
 
   function disableAdd(): boolean {
@@ -105,6 +98,9 @@ export default function AddProject() {
             icon={<BsFillPlusCircleFill />}
             text="Add Project"
             onClick={async () => {
+              if (!currentUser?._id) {
+                navigate("/login")
+              }
               if (currentUser !== null && repo !== null) {
                 const newProject = {
                   uid: currentUser._id,

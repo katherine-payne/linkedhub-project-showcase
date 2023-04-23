@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { FaPencilAlt, FaPlus, FaTimes } from "react-icons/fa";
 import Education from "src/Types/Education";
 import Experience from "src/Types/Experience";

@@ -27,7 +27,7 @@ export default function AddCompany() {
     if (currentUser?.role !== Role.Admin) {
       navigate("/login");
     }
-  }, [currentUser]);
+  }, [currentUser, navigate]);
 
   return (
     <div className="flex flex-row justify-center gap-4">
