@@ -13,7 +13,7 @@ export default function DeleteButton({ p }: { p: Project }) {
 
   return (
     <BsFillXCircleFill
-      className="text-primary text-2xl pl-1"
+      className="text-secondary hover:text-secondary-hover text-2xl pl-1"
       onClick={async (e) => {
         e.stopPropagation();
         if (p._id) {

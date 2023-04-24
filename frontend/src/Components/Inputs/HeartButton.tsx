@@ -27,7 +27,7 @@ export default function HeartButton({ project, setProject }: Props) {
   return (
     <button
       className={`flex 
-        ${hearted ? "text-heart" : "text-neutral"} text-xl ml-auto font-mono`}
+        ${hearted ? "text-heart" : "text-secondary hover:text-secondary-hover"} text-xl ml-auto font-mono`}
       onClick={async (e) => {
         e.stopPropagation();
         if (heartEnabled) {

@@ -40,7 +40,7 @@ export default function LikedList({ liked }: { liked?: Array<string> }) {
             </Link>
           </div>
         );
-      }) : <p className="text-secondary font-serif mb-4">You have no liked projects yet. View the homepage to see user submissions!</p>}
+      }) : <p className="text-secondary font-serif mb-4 m-4 w-full">You have no liked projects yet. View the homepage to see user submissions!</p>}
     </div>
   );
 }
