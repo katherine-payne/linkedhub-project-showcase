@@ -175,11 +175,11 @@ export default function RecruiterPage({ editProfile = false }) {
 
           <UserProfileHeading title="Summary" />
           <div className="flex">
-            {(!editProfile || (editProfile && !editingSummary)) &&
-              recruiter.summary}
+            {(!editProfile || (editProfile && !editingSummary)) && (
+              <p className={`${recruiter.summary !== "" ? "mr-3" : ""}`}>{recruiter.summary}</p>
+            )}
             {editProfile && !editingSummary && (
               <PrimaryButton
-              bgClass="mx-3"
                 icon={<FaPencilAlt />}
                 onClick={() => {
                   setEditingSummary(true);
