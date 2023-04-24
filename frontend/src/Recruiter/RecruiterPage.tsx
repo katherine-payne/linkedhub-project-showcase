@@ -128,7 +128,7 @@ export default function RecruiterPage({ editProfile = false }) {
             </div>
           </div>
           {currentUser?._id === recruiter._id && (
-            <div className="mt-3 mb-3">
+            <div className="m-3">
               {editProfile === false ? (
                 <PrimaryButton
                   bgClass="w-full"
@@ -179,6 +179,7 @@ export default function RecruiterPage({ editProfile = false }) {
               recruiter.summary}
             {editProfile && !editingSummary && (
               <PrimaryButton
+              bgClass="mx-3"
                 icon={<FaPencilAlt />}
                 onClick={() => {
                   setEditingSummary(true);
