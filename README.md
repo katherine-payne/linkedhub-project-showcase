@@ -1,4 +1,4 @@
-# linkedhub-project-showcase
+# LinkedHub
 Course project for CS 4550 Web Development created by Frank Anderson and Katherine Payne.
 
 ## Tagline
